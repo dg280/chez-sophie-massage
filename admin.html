@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin – Chez Sophie Massage Tuina</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #3D5A3E; --sage: #7A9E7E; --gold: #D4AF37;
+      --cream: #F6F1E9; --dark: #1C1C1C; --white: #FDFAF5;
+      --red: #C0392B; --stone: #8C7B6B;
+    }
+    body { font-family: 'Lato', sans-serif; background: #1a1f1b; color: #e0e8e1; min-height: 100vh; }
+
+    /* ── Login ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1a1f1b 0%, #2c3e2d 100%);
+    }
+    .login-box {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; padding: 48px 40px; width: 100%; max-width: 380px;
+      backdrop-filter: blur(10px);
+    }
+    .login-box .panda { font-size: 3rem; text-align: center; margin-bottom: .5rem; }
+    .login-box h1 { font-family: 'Playfair Display', serif; text-align: center; font-size: 1.5rem; color: white; margin-bottom: .3rem; }
+    .login-box p { text-align: center; font-size: .82rem; color: rgba(255,255,255,.4); margin-bottom: 2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: .8rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: .4rem; }
+    .form-group input {
+      width: 100%; padding: .75rem 1rem; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.07);
+      color: white; font-size: .95rem; outline: none; transition: border-color .2s;
+    }
+    .form-group input:focus { border-color: var(--sage); }
+    .btn-login {
+      width: 100%; padding: .85rem; background: var(--green); color: white;
+      border: none; border-radius: 8px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-login:hover { background: var(--sage); }
+    .login-error { color: #ff7675; font-size: .82rem; text-align: center; margin-top: .5rem; display: none; }
+
+    /* ── Admin layout ── */
+    #admin-screen { display: none; min-height: 100vh; }
+    .admin-sidebar {
+      position: fixed; top: 0; left: 0; bottom: 0; width: 240px;
+      background: #111714; border-right: 1px solid rgba(255,255,255,.07);
+      padding: 24px 0; display: flex; flex-direction: column;
+    }
+    .sidebar-logo { padding: 0 20px 24px; border-bottom: 1px solid rgba(255,255,255,.07); margin-bottom: 12px; }
+    .sidebar-logo .panda { font-size: 1.5rem; }
+    .sidebar-logo h2 { font-family: 'Playfair Display', serif; font-size: .95rem; color: white; margin-top: .2rem; }
+    .sidebar-logo span { font-size: .72rem; color: rgba(255,255,255,.3); }
+    .sidebar-nav a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 20px; font-size: .87rem; color: rgba(255,255,255,.5);
+      transition: background .15s, color .15s; cursor: pointer;
+      text-decoration: none;
+    }
+    .sidebar-nav a:hover, .sidebar-nav a.active { background: rgba(255,255,255,.06); color: white; }
+    .sidebar-nav a .icon { font-size: 1rem; width: 20px; text-align: center; }
+    .sidebar-bottom { margin-top: auto; padding: 20px; }
+    .btn-visit, .btn-logout {
+      display: block; width: 100%; padding: .6rem; border-radius: 8px;
+      text-align: center; font-size: .82rem; cursor: pointer; margin-bottom: 8px;
+      border: none; font-weight: 700; transition: background .2s;
+    }
+    .btn-visit { background: rgba(122,158,126,.2); color: var(--sage); }
+    .btn-visit:hover { background: rgba(122,158,126,.35); }
+    .btn-logout { background: rgba(192,57,43,.15); color: #ff7675; }
+    .btn-logout:hover { background: rgba(192,57,43,.3); }
+
+    .admin-main { margin-left: 240px; padding: 32px 36px; }
+    .admin-header { margin-bottom: 2rem; }
+    .admin-header h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: white; }
+    .admin-header p { color: rgba(255,255,255,.4); font-size: .88rem; margin-top: .3rem; }
+
+    /* ── Cards ── */
+    .admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+    .admin-card {
+      background: #1e2620; border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px; padding: 24px; transition: border-color .2s;
+    }
+    .admin-card:hover { border-color: rgba(122,158,126,.3); }
+    .admin-card h3 { font-size: 1rem; color: white; margin-bottom: .3rem; display: flex; align-items: center; gap: .5rem; }
+    .admin-card p { font-size: .82rem; color: rgba(255,255,255,.4); margin-bottom: 1.2rem; }
+
+    .img-preview {
+      width: 100%; aspect-ratio: 16/9; border-radius: 8px;
+      background: rgba(255,255,255,.05); border: 2px dashed rgba(255,255,255,.1);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin-bottom: 1rem; overflow: hidden; position: relative;
+      cursor: pointer; transition: border-color .2s;
+    }
+    .img-preview:hover { border-color: var(--sage); }
+    .img-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .img-preview .placeholder { color: rgba(255,255,255,.25); text-align: center; font-size: .8rem; }
+    .img-preview .placeholder .emoji { font-size: 2rem; margin-bottom: .4rem; }
+    .img-preview input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .img-actions { display: flex; gap: 8px; }
+    .btn-upload {
+      flex: 1; padding: .6rem; background: var(--green); color: white;
+      border: none; border-radius: 7px; font-size: .82rem; font-weight: 700;
+      cursor: pointer; transition: background .2s; text-align: center;
+    }
+    .btn-upload:hover { background: var(--sage); }
+    .btn-reset {
+      padding: .6rem .9rem; background: rgba(255,255,255,.06); color: rgba(255,255,255,.5);
+      border: none; border-radius: 7px; font-size: .82rem; cursor: pointer; transition: background .2s;
+    }
+    .btn-reset:hover { background: rgba(192,57,43,.2); color: #ff7675; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      background: var(--green); color: white; padding: .8rem 1.4rem;
+      border-radius: 8px; font-size: .87rem; font-weight: 700;
+      transform: translateY(60px); opacity: 0; transition: all .3s;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── Password change ── */
+    .change-pwd-form { display: flex; flex-direction: column; gap: .7rem; }
+    .change-pwd-form input {
+      width: 100%; padding: .65rem .9rem; border-radius: 7px;
+      border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05);
+      color: white; font-size: .87rem; outline: none;
+    }
+    .change-pwd-form input:focus { border-color: var(--sage); }
+
+    /* ── Status section ── */
+    .status-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
+    .status-item {
+      background: #1e2620; border-radius: 10px; padding: 16px;
+      border: 1px solid rgba(255,255,255,.07); text-align: center;
+    }
+    .status-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); }
+    .status-lbl { font-size: .72rem; color: rgba(255,255,255,.35); text-transform: uppercase; letter-spacing: 1px; }
+
+    @media (max-width: 768px) {
+      .admin-sidebar { display: none; }
+      .admin-main { margin-left: 0; padding: 20px; }
+      .status-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ LOGIN ════════════════════════════════════════════ -->
+  <div id="login-screen">
+    <div class="login-box">
+      <div class="panda">🐼</div>
+      <h1>Espace Admin</h1>
+      <p>Chez Sophie – Massage Tuina</p>
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input type="password" id="pwdInput" placeholder="••••••••" onkeydown="if(event.key==='Enter') login()" />
+      </div>
+      <button class="btn-login" onclick="login()">Se connecter</button>
+      <p class="login-error" id="loginError">Mot de passe incorrect</p>
+    </div>
+  </div>
+
+  <!-- ═══ ADMIN ════════════════════════════════════════════ -->
+  <div id="admin-screen">
+    <aside class="admin-sidebar">
+      <div class="sidebar-logo">
+        <span class="panda">🐼</span>
+        <h2>Chez Sophie</h2>
+        <span>Panneau d'administration</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="active" onclick="showTab('visuels')"><span class="icon">🖼️</span> Visuels</a>
+        <a onclick="showTab('infos')"><span class="icon">📝</span> Informations</a>
+        <a onclick="showTab('securite')"><span class="icon">🔒</span> Sécurité</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="btn-visit" onclick="window.open('index.html','_blank')">🌐 Voir le site</button>
+        <button class="btn-logout" onclick="logout()">⬅ Déconnexion</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- ── Tab: Visuels ── -->
+      <div id="tab-visuels">
+        <div class="admin-header">
+          <h1>🖼️ Gestion des visuels</h1>
+          <p>Modifiez les images du site. Les changements s'appliquent immédiatement.</p>
+        </div>
+        <div class="status-grid">
+          <div class="status-item">
+            <div class="status-num">5,0</div>
+            <div class="status-lbl">Note Google ★</div>
+          </div>
+          <div class="status-item">
+            <div class="status-num">205</div>
+            <div class="status-lbl">Avis Google</div>
+          </div>
+          <div class="status-item">
+            <div class="status-num">7j/7</div>
+            <div class="status-lbl">9h – 20h</div>
+          </div>
+        </div>
+        <div class="admin-grid">
+
+          <div class="admin-card">
+            <h3>🏔️ Image Hero (bannière principale)</h3>
+            <p>Grande image en fond de la page d'accueil. Format paysage recommandé (16/9).</p>
+            <div class="img-preview" id="heroPreview" onclick="document.getElementById('heroFile').click()">
+              <div class="placeholder" id="heroPlaceholder">
+                <div class="emoji">🏔️</div>
+                <div>Cliquez pour choisir une image</div>
+                <div style="font-size:.7rem; margin-top:.3rem; opacity:.5">JPG, PNG · Max 5 Mo</div>
+              </div>
+              <input type="file" id="heroFile" accept="image/*" onchange="previewImage(this,'heroPreview','heroPlaceholder','cs_hero_img')" />
+            </div>
+            <div class="img-actions">
+              <button class="btn-upload" onclick="document.getElementById('heroFile').click()">📁 Choisir une image</button>
+              <button class="btn-reset" onclick="resetImage('heroPreview','heroPlaceholder','cs_hero_img','heroBgDefault shown')">✕</button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3>👤 Photo de l'institut / Sophie</h3>
+            <p>Image affichée dans la section "L'Institut". Format portrait recommandé (4/5).</p>
+            <div class="img-preview" id="aboutPreview" onclick="document.getElementById('aboutFile').click()" style="aspect-ratio:4/5; max-height:280px;">
+              <div class="placeholder" id="aboutPlaceholder">
+                <div class="emoji">🐼</div>
+                <div>Cliquez pour choisir une image</div>
+                <div style="font-size:.7rem; margin-top:.3rem; opacity:.5">JPG, PNG · Max 5 Mo</div>
+              </div>
+              <input type="file" id="aboutFile" accept="image/*" onchange="previewImage(this,'aboutPreview','aboutPlaceholder','cs_about_img')" />
+            </div>
+            <div class="img-actions">
+              <button class="btn-upload" onclick="document.getElementById('aboutFile').click()">📁 Choisir une image</button>
+              <button class="btn-reset" onclick="resetImage('aboutPreview','aboutPlaceholder','cs_about_img')">✕</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Tab: Infos ── -->
+      <div id="tab-infos" style="display:none">
+        <div class="admin-header">
+          <h1>📝 Informations du site</h1>
+          <p>Rappel des informations affichées sur le site public.</p>
+        </div>
+        <div class="admin-card" style="max-width:560px">
+          <h3>📋 Fiche établissement</h3>
+          <p style="margin-bottom:1.5rem">Ces informations sont intégrées dans le code du site.</p>
+          <table style="width:100%; font-size:.87rem; border-collapse:collapse;">
+            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4); width:40%">Nom</td><td style="color:white">Chez Sophie Massage Tuina</td></tr>
+            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Adresse</td><td style="color:white">14C Bd de Curepipe Apt S, 33260 La Teste-de-Buch</td></tr>
+            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Téléphone</td><td style="color:white">06 27 14 62 31</td></tr>
+            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Horaires</td><td style="color:white">Lun–Dim · 9h00–20h00</td></tr>
+            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Note Google</td><td style="color:#D4AF37">★★★★★ 5,0 / 205 avis</td></tr>
+          </table>
+          <p style="margin-top:1.2rem; font-size:.75rem; background:rgba(255,255,255,.04); padding:.8rem; border-radius:7px; color:rgba(255,255,255,.4);">
+            💡 Pour modifier ces informations, éditez directement le fichier <code>index.html</code>.
+          </p>
+        </div>
+        <div class="admin-card" style="max-width:560px; margin-top:20px">
+          <h3>📅 Widget Fresha</h3>
+          <p>Une fois inscrite sur Fresha, collez ici le code d'intégration de votre widget.</p>
+          <textarea id="freshaCode" placeholder="Collez ici votre code embed Fresha..." style="width:100%;height:100px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;padding:.7rem;font-size:.82rem;resize:vertical;outline:none;"></textarea>
+          <button class="btn-upload" style="margin-top:.7rem;width:100%;" onclick="saveFreshaCode()">💾 Enregistrer le code Fresha</button>
+          <p style="margin-top:.7rem;font-size:.75rem;color:rgba(255,255,255,.3)">Le widget s'affichera sur le site à la place du bouton téléphone.</p>
+        </div>
+      </div>
+
+      <!-- ── Tab: Sécurité ── -->
+      <div id="tab-securite" style="display:none">
+        <div class="admin-header">
+          <h1>🔒 Sécurité</h1>
+          <p>Modifiez votre mot de passe d'administration.</p>
+        </div>
+        <div class="admin-card" style="max-width:400px">
+          <h3>🔑 Changer le mot de passe</h3>
+          <p>Choisissez un mot de passe sécurisé d'au moins 8 caractères.</p>
+          <div class="change-pwd-form">
+            <input type="password" id="currentPwd" placeholder="Mot de passe actuel" />
+            <input type="password" id="newPwd" placeholder="Nouveau mot de passe" />
+            <input type="password" id="confirmPwd" placeholder="Confirmer le nouveau mot de passe" />
+            <button class="btn-upload" onclick="changePwd()">💾 Enregistrer</button>
+            <p id="pwdMsg" style="font-size:.8rem;text-align:center;"></p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Default admin password (stored in localStorage) ──
+    function getAdminPwd() {
+      // Mot de passe par défaut : sophie2026 (à changer dans l'onglet Sécurité)
+      return localStorage.getItem('cs_admin_pwd') || 'sophie2026';
+    }
+
+    function login() {
+      const val = document.getElementById('pwdInput').value;
+      if (val === getAdminPwd()) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-screen').style.display = 'block';
+        loadPreviews();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('pwdInput').value = '';
+      }
+    }
+
+    function logout() {
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('admin-screen').style.display = 'none';
+      document.getElementById('pwdInput').value = '';
+    }
+
+    function showTab(tab) {
+      ['visuels','infos','securite'].forEach(t => {
+        document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none';
+      });
+      document.querySelectorAll('.sidebar-nav a').forEach((a,i) => {
+        a.classList.toggle('active', ['visuels','infos','securite'][i]===tab);
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    // ── Image handling ────────────────────────────────────
+    function previewImage(input, previewId, placeholderId, storageKey) {
+      const file = input.files[0];
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) { showToast('⚠️ Image trop lourde (max 5 Mo)'); return; }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const data = e.target.result;
+        const preview = document.getElementById(previewId);
+        const placeholder = document.getElementById(placeholderId);
+        // Show preview
+        let img = preview.querySelector('img');
+        if (!img) { img = document.createElement('img'); preview.insertBefore(img, preview.firstChild); }
+        img.src = data;
+        placeholder.style.display = 'none';
+        // Save
+        localStorage.setItem(storageKey, data);
+        showToast('✅ Image enregistrée !');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetImage(previewId, placeholderId, storageKey) {
+      const preview = document.getElementById(previewId);
+      const img = preview.querySelector('img');
+      if (img) img.remove();
+      document.getElementById(placeholderId).style.display = 'flex';
+      localStorage.removeItem(storageKey);
+      showToast('🗑 Image supprimée');
+    }
+
+    function loadPreviews() {
+      const keys = [
+        { key: 'cs_hero_img',  previewId: 'heroPreview',  placeholderId: 'heroPlaceholder' },
+        { key: 'cs_about_img', previewId: 'aboutPreview', placeholderId: 'aboutPlaceholder' },
+      ];
+      keys.forEach(({ key, previewId, placeholderId }) => {
+        const data = localStorage.getItem(key);
+        if (data) {
+          const preview = document.getElementById(previewId);
+          let img = document.createElement('img');
+          img.src = data;
+          preview.insertBefore(img, preview.firstChild);
+          document.getElementById(placeholderId).style.display = 'none';
+        }
+      });
+      // Load Fresha code
+      const fc = localStorage.getItem('cs_fresha_code');
+      if (fc) document.getElementById('freshaCode').value = fc;
+    }
+
+    function saveFreshaCode() {
+      const code = document.getElementById('freshaCode').value.trim();
+      localStorage.setItem('cs_fresha_code', code);
+      showToast('✅ Code Fresha enregistré !');
+    }
+
+    function changePwd() {
+      const current = document.getElementById('currentPwd').value;
+      const newP    = document.getElementById('newPwd').value;
+      const confirm = document.getElementById('confirmPwd').value;
+      const msg = document.getElementById('pwdMsg');
+      if (current !== getAdminPwd()) { msg.style.color='#ff7675'; msg.textContent='Mot de passe actuel incorrect'; return; }
+      if (newP.length < 6) { msg.style.color='#ff7675'; msg.textContent='Minimum 6 caractères'; return; }
+      if (newP !== confirm) { msg.style.color='#ff7675'; msg.textContent='Les mots de passe ne correspondent pas'; return; }
+      localStorage.setItem('cs_admin_pwd', newP);
+      msg.style.color='#6fcf97'; msg.textContent='✅ Mot de passe mis à jour !';
+      document.getElementById('currentPwd').value = '';
+      document.getElementById('newPwd').value = '';
+      document.getElementById('confirmPwd').value = '';
+    }
+  </script>
+</body>
+</html>

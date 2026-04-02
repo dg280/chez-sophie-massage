@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chez Sophie – Massage Tuina | La Teste-de-Buch</title>
+  <meta name="description" content="Institut de massage Tuina à La Teste-de-Buch. Massage chinois traditionnel, relaxant, moxibustion, bain de pieds. ★★★★★ 5,0 · 205 avis Google. Ouvert 7j/7 de 9h à 20h. Réservation en ligne." />
+  <meta name="keywords" content="massage tuina La Teste-de-Buch, massage chinois Arcachon, massage relaxant Gironde, moxibustion Bassin Arcachon, massage traditionnel chinois 33260, Chez Sophie massage" />
+  <meta property="og:title" content="Chez Sophie – Massage Tuina | La Teste-de-Buch" />
+  <meta property="og:description" content="★★★★★ 5,0 · 205 avis Google. Massage Tuina traditionnel à La Teste-de-Buch. Ouvert 7j/7 de 9h à 20h." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://chezsophie-massage.fr/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "Chez Sophie Massage Tuina",
+    "telephone": "0627146231",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "14C Boulevard de Curepipe Apt S",
+      "addressLocality": "La Teste-de-Buch",
+      "postalCode": "33260",
+      "addressCountry": "FR"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 44.627, "longitude": -1.138 },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "09:00", "closes": "20:00"
+    }],
+    "priceRange": "€€",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "205" },
+    "sameAs": ["https://www.facebook.com/chez.sophie.777/"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:  #3D5A3E;
+      --green2: #2E4A2F;
+      --sage:   #7A9E7E;
+      --gold:   #B8960C;
+      --gold2:  #D4AF37;
+      --cream:  #F6F1E9;
+      --cream2: #EDE7DA;
+      --stone:  #8C7B6B;
+      --dark:   #1C1C1C;
+      --white:  #FDFAF5;
+      --r:      12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--dark); line-height: 1.7; overflow-x: hidden; }
+    h1,h2,h3 { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--cream2); }
+    ::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
+
+    /* ── Nav ────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      background: rgba(246,241,233,.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(61,90,62,.1);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.08); }
+    .nav-logo { display: flex; align-items: center; gap: 11px; }
+    .nav-logo-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green2), var(--sage));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; box-shadow: 0 2px 12px rgba(61,90,62,.25);
+      flex-shrink: 0;
+    }
+    .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--green); line-height: 1.2; }
+    .nav-logo-text span { display: block; font-family: 'Lato', sans-serif; font-weight: 300; font-size: .7rem; color: var(--stone); letter-spacing: 1.5px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 2.2rem; align-items: center; }
+    .nav-links a { font-size: .88rem; color: var(--stone); letter-spacing: .3px; transition: color .2s; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta {
+      background: var(--green) !important; color: var(--white) !important;
+      padding: .55rem 1.4rem; border-radius: 30px; font-size: .84rem !important;
+      font-weight: 700; transition: background .2s, transform .15s !important;
+      letter-spacing: .3px;
+    }
+    .nav-cta:hover { background: var(--sage) !important; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--green); border-radius: 2px; transition: .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 100px 5% 70px;
+    }
+    .hero-bg-default {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(160deg, #243d25 0%, var(--green2) 25%, var(--green) 55%, #4a6741 78%, #3a5535 100%);
+    }
+    .hero-bg-default::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 85% 40%, rgba(255,255,255,.04) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 70% at 5% 90%, rgba(0,0,0,.15) 0%, transparent 55%);
+    }
+    /* Bamboo deco */
+    .hero-bamboo {
+      position: absolute; right: 0; top: 0; bottom: 0;
+      width: 180px; opacity: .07; z-index: 1;
+      display: flex; gap: 14px; pointer-events: none;
+    }
+    .bamboo-stalk {
+      flex: 1; background: linear-gradient(180deg,#fff,#999);
+      border-radius: 3px; position: relative;
+    }
+    .bamboo-stalk::before, .bamboo-stalk::after {
+      content: ''; position: absolute; left: -2px; right: -2px; height: 2px;
+      background: rgba(0,0,0,.3); border-radius: 1px;
+    }
+    .bamboo-stalk::before { top: 28%; }
+    .bamboo-stalk::after  { top: 58%; }
+    .bamboo-stalk:nth-child(2) { margin-top: 30px; }
+    .bamboo-stalk:nth-child(3) { margin-top: 60px; }
+    .bamboo-stalk:nth-child(4) { margin-top: 15px; }
+    /* Custom hero bg from admin */
+    .hero-bg-custom {
+      position: absolute; inset: 0; z-index: 1;
+      background-size: cover; background-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(to bottom, rgba(0,0,0,.3) 0%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.45) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 3; text-align: center; color: var(--white);
+      max-width: 740px; animation: fadeUp .9s ease both;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.13); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 30px; padding: .38rem 1.1rem; margin-bottom: 1.6rem;
+      font-size: .78rem; letter-spacing: 1.2px; text-transform: uppercase;
+      color: rgba(255,255,255,.88);
+    }
+    .hero-badge .stars { color: #FFD700; letter-spacing: 2px; }
+    .hero-panda {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      border: 2px solid rgba(255,255,255,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.2rem; margin: 0 auto 1.2rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,.2);
+    }
+    .hero-content h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 600; line-height: 1.12;
+      margin-bottom: .85rem; text-shadow: 0 2px 24px rgba(0,0,0,.28);
+    }
+    .hero-content h1 em { font-style: italic; color: var(--gold2); }
+    .hero-content p {
+      font-size: clamp(.95rem, 2vw, 1.15rem); font-weight: 300;
+      opacity: .88; max-width: 500px; margin: 0 auto 2.2rem; line-height: 1.75;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold2); color: var(--dark);
+      padding: .9rem 2.3rem; border-radius: 40px; font-weight: 700; font-size: 1rem;
+      box-shadow: 0 4px 22px rgba(212,175,55,.38); transition: transform .2s, box-shadow .2s;
+      letter-spacing: .3px;
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 7px 28px rgba(212,175,55,.5); }
+    .btn-outline-white {
+      background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.55);
+      padding: .88rem 2.1rem; border-radius: 40px; font-size: 1rem;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,.1); border-color: white; }
+    .hero-scroll-hint {
+      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+      z-index: 3; color: rgba(255,255,255,.45); font-size: .72rem; letter-spacing: 1.5px;
+      text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 5px;
+      animation: bounce 2.2s infinite;
+    }
+    .hero-scroll-hint::after { content: '↓'; font-size: 1.1rem; }
+
+    /* ── Section Base ───────────────────────────────────── */
+    section { padding: 80px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: .73rem; letter-spacing: 3px; text-transform: uppercase; color: var(--sage); margin-bottom: .6rem; }
+    .section-title { font-size: clamp(1.9rem, 3.5vw, 2.6rem); color: var(--green); margin-bottom: 1rem; }
+    .section-line { width: 48px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--sage)); border-radius: 2px; margin-bottom: 2.5rem; }
+    .section-line.center { margin-left: auto; margin-right: auto; }
+    .text-center { text-align: center; }
+
+    /* ── About ──────────────────────────────────────────── */
+    #about { background: var(--white); }
+    .about-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .about-img-wrap {
+      border-radius: var(--r); overflow: hidden; aspect-ratio: 4/5;
+      background: var(--cream2); box-shadow: 0 20px 60px rgba(0,0,0,.1);
+      position: relative;
+    }
+    .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .about-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(145deg, var(--cream2), #d0c8bc);
+      color: var(--stone); gap: 12px; font-size: .82rem; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .about-placeholder .big { font-size: 4.5rem; }
+    .about-text p { color: #4a4a4a; margin-bottom: 1rem; font-size: .97rem; }
+    .about-stats { display: flex; gap: 2.5rem; margin: 2rem 0; flex-wrap: wrap; }
+    .stat .num { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--green); font-weight: 600; line-height: 1; }
+    .stat .lbl { font-size: .72rem; color: var(--stone); letter-spacing: 1.2px; text-transform: uppercase; margin-top: .2rem; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
+    .tag { background: var(--cream2); color: var(--green); font-size: .78rem; padding: .3rem .85rem; border-radius: 20px; border: 1px solid rgba(61,90,62,.18); }
+
+    /* ── Services ───────────────────────────────────────── */
+    #services { background: var(--cream); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+    }
+    .service-card {
+      background: var(--white); border-radius: var(--r); padding: 28px 26px 24px;
+      border: 1px solid rgba(61,90,62,.07);
+      box-shadow: 0 4px 20px rgba(0,0,0,.04);
+      transition: transform .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--sage));
+    }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 14px 42px rgba(0,0,0,.1); }
+    .service-card .s-icon { font-size: 2rem; margin-bottom: .85rem; }
+    .service-card h3 { font-size: 1.12rem; color: var(--green); margin-bottom: .5rem; }
+    .service-card .s-desc { font-size: .87rem; color: var(--stone); margin-bottom: 1rem; line-height: 1.55; }
+    .price-list { list-style: none; }
+    .price-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .42rem 0; border-bottom: 1px dashed rgba(61,90,62,.11);
+      font-size: .88rem; color: #484848;
+    }
+    .price-list li:last-child { border-bottom: none; }
+    .price-list .price { font-weight: 700; color: var(--green); font-size: .95rem; white-space: nowrap; }
+    .s-note { margin-top: .65rem; font-size: .77rem; color: var(--stone); font-style: italic; }
+
+    /* ── Reviews ────────────────────────────────────────── */
+    #reviews { background: var(--green); color: var(--white); text-align: center; }
+    .reviews-inner { max-width: 960px; margin: 0 auto; }
+    .reviews-inner .section-label { color: rgba(255,255,255,.55); }
+    .reviews-inner .section-title { color: var(--white); }
+    .reviews-score-row {
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+      margin: 1.5rem 0 2.5rem; flex-wrap: wrap;
+    }
+    .score-big { font-family: 'Playfair Display', serif; font-size: 5.5rem; color: var(--gold2); line-height: 1; }
+    .score-details { text-align: left; }
+    .score-stars { font-size: 1.7rem; letter-spacing: 3px; color: #FFD700; }
+    .score-count { font-size: .95rem; opacity: .65; margin-top: .3rem; }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px; margin-bottom: 2.2rem;
+    }
+    .review-card {
+      background: rgba(255,255,255,.08); border-radius: var(--r); padding: 22px 20px;
+      text-align: left; border: 1px solid rgba(255,255,255,.1);
+      transition: background .2s;
+    }
+    .review-card:hover { background: rgba(255,255,255,.12); }
+    .r-stars { color: #FFD700; font-size: .88rem; margin-bottom: .7rem; }
+    .r-text { font-size: .87rem; opacity: .82; line-height: 1.6; font-style: italic; }
+    .r-name { margin-top: .8rem; font-size: .75rem; opacity: .45; font-style: normal; }
+    .google-btn {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      border-radius: 30px; padding: .55rem 1.3rem;
+      font-size: .85rem; cursor: pointer; transition: background .2s;
+      color: var(--white);
+    }
+    .google-btn:hover { background: rgba(255,255,255,.18); }
+
+    /* ── Booking ────────────────────────────────────────── */
+    #booking { background: var(--white); }
+    .booking-inner { max-width: 780px; margin: 0 auto; }
+
+    /* Steps */
+    .booking-steps {
+      display: flex; justify-content: center; align-items: center;
+      gap: 0; margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .step {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .8rem; color: var(--stone); letter-spacing: .3px;
+    }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--cream2); color: var(--stone);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .82rem; flex-shrink: 0;
+      transition: background .3s, color .3s;
+    }
+    .step.active .step-num { background: var(--green); color: white; }
+    .step.done .step-num { background: var(--sage); color: white; }
+    .step.done .step-num::after { content: '✓'; }
+    .step.active { color: var(--green); font-weight: 700; }
+    .step-line { width: 32px; height: 1px; background: var(--cream2); margin: 0 4px; }
+
+    /* Form panels */
+    .booking-panel { display: none; animation: fadeUp .35s ease both; }
+    .booking-panel.active { display: block; }
+
+    /* Service cards */
+    .service-select-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px; margin-bottom: 1.5rem;
+    }
+    .service-sel-card {
+      border: 2px solid rgba(61,90,62,.1); border-radius: var(--r);
+      padding: 18px 16px; cursor: pointer;
+      transition: border-color .2s, background .2s, transform .15s;
+      background: var(--white);
+    }
+    .service-sel-card:hover { border-color: var(--sage); transform: translateY(-2px); }
+    .service-sel-card.selected { border-color: var(--green); background: rgba(61,90,62,.04); }
+    .service-sel-card .s-sel-icon { font-size: 1.6rem; margin-bottom: .5rem; }
+    .service-sel-card h4 { font-family: 'Playfair Display', serif; font-size: .95rem; color: var(--green); margin-bottom: .3rem; }
+    .service-sel-card p { font-size: .76rem; color: var(--stone); }
+
+    /* Duration pills */
+    .duration-group { margin-bottom: 1.5rem; }
+    .duration-group label { display: block; font-size: .78rem; letter-spacing: 1px; text-transform: uppercase; color: var(--sage); margin-bottom: .7rem; }
+    .duration-pills { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .pill {
+      padding: .45rem 1.1rem; border-radius: 30px; border: 2px solid rgba(61,90,62,.15);
+      font-size: .86rem; cursor: pointer; transition: all .2s; background: var(--white);
+      color: var(--stone);
+    }
+    .pill:hover { border-color: var(--sage); color: var(--green); }
+    .pill.selected { border-color: var(--green); background: var(--green); color: white; font-weight: 700; }
+    .pill .pill-price { font-weight: 700; margin-left: .3rem; }
+
+    /* Date/time */
+    .datetime-group { margin-bottom: 1.5rem; }
+    .datetime-group label { display: block; font-size: .78rem; letter-spacing: 1px; text-transform: uppercase; color: var(--sage); margin-bottom: .7rem; }
+    .datetime-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-input {
+      width: 100%; padding: .7rem 1rem; border-radius: 8px;
+      border: 2px solid rgba(61,90,62,.12); background: var(--cream);
+      font-family: 'Lato', sans-serif; font-size: .92rem; color: var(--dark);
+      outline: none; transition: border-color .2s;
+    }
+    .form-input:focus { border-color: var(--green); background: var(--white); }
+
+    /* Contact fields */
+    .fields-group { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
+    .field-wrap { display: flex; flex-direction: column; gap: .4rem; }
+    .field-wrap label { font-size: .78rem; letter-spacing: .8px; text-transform: uppercase; color: var(--sage); }
+    .field-wrap.full { grid-column: 1 / -1; }
+    textarea.form-input { resize: vertical; min-height: 80px; font-family: 'Lato', sans-serif; }
+
+    /* Summary box */
+    .booking-summary {
+      background: rgba(61,90,62,.05); border-radius: var(--r);
+      border: 1px solid rgba(61,90,62,.12); padding: 18px 20px; margin-bottom: 1.5rem;
+    }
+    .booking-summary h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--green); margin-bottom: .8rem; }
+    .summary-line { display: flex; justify-content: space-between; font-size: .88rem; padding: .3rem 0; border-bottom: 1px dashed rgba(61,90,62,.1); color: #484848; }
+    .summary-line:last-child { border: none; font-weight: 700; color: var(--green); }
+    .summary-val { font-weight: 600; color: var(--dark); }
+
+    /* Nav buttons */
+    .booking-nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+    .btn-back {
+      background: transparent; color: var(--stone); border: 2px solid rgba(61,90,62,.15);
+      padding: .75rem 1.6rem; border-radius: 30px; font-size: .9rem; cursor: pointer;
+      transition: border-color .2s, color .2s; font-family: 'Lato', sans-serif;
+    }
+    .btn-back:hover { border-color: var(--sage); color: var(--green); }
+    .btn-next {
+      background: var(--green); color: white; border: none;
+      padding: .85rem 2rem; border-radius: 30px; font-size: .95rem; font-weight: 700;
+      cursor: pointer; transition: background .2s, transform .15s; font-family: 'Lato', sans-serif;
+      box-shadow: 0 4px 16px rgba(61,90,62,.22); flex: 1; max-width: 280px;
+    }
+    .btn-next:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-next:disabled { background: var(--cream2); color: var(--stone); box-shadow: none; cursor: not-allowed; transform: none; }
+
+    /* Success state */
+    .booking-success {
+      text-align: center; padding: 40px 20px;
+    }
+    .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .booking-success h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--green); margin-bottom: .7rem; }
+    .booking-success p { color: var(--stone); font-size: .95rem; max-width: 440px; margin: 0 auto 1.5rem; line-height: 1.7; }
+    .booking-success .phone-big { font-size: 1.3rem; font-weight: 700; color: var(--green); }
+
+    /* Error msg */
+    .form-error { color: #c0392b; font-size: .8rem; margin-top: .3rem; display: none; }
+    .field-wrap.has-error .form-input { border-color: #c0392b; }
+    .field-wrap.has-error .form-error { display: block; }
+
+    /* ── Contact ────────────────────────────────────────── */
+    #contact { background: var(--cream2); }
+    .contact-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+    }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.6rem; }
+    .c-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: .05rem; }
+    .c-info h4 { font-family: 'Playfair Display', serif; font-size: .78rem; letter-spacing: 1px; text-transform: uppercase; color: var(--sage); margin-bottom: .22rem; font-style: normal; }
+    .c-info p { font-size: .95rem; color: var(--dark); }
+    .c-info a { color: var(--green); font-weight: 700; transition: color .2s; }
+    .c-info a:hover { color: var(--sage); }
+    .map-wrap { border-radius: var(--r); overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.1); height: 320px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.5);
+      text-align: center; padding: 2.2rem 5%; font-size: .82rem; line-height: 1.9;
+    }
+    footer strong { color: rgba(255,255,255,.85); }
+    footer a { color: var(--sage); transition: color .2s; }
+    footer a:hover { color: white; }
+    .footer-links { display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: .5rem; }
+
+    /* ── Animations ─────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(-8px); }
+    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-wrap { aspect-ratio: 16/9; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0 4%; }
+      .nav-links { display: none; flex-direction: column; gap: 1rem;
+        position: absolute; top: 68px; left: 0; right: 0;
+        background: var(--white); padding: 1.5rem 5%;
+        border-bottom: 1px solid var(--cream2);
+        box-shadow: 0 8px 24px rgba(0,0,0,.07); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .hero-panda { width: 80px; height: 80px; font-size: 2.5rem; }
+      section { padding: 60px 5%; }
+      .services-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .about-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ════════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">🐼</div>
+    <div class="nav-logo-text">
+      Chez Sophie
+      <span>Massage Tuina</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">L'Institut</a>
+    <a href="#services">Soins & Tarifs</a>
+    <a href="#reviews">Avis</a>
+    <a href="#contact">Contact</a>
+    <a href="#booking" class="nav-cta">Réserver</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ══ HERO ═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-default"></div>
+  <div class="hero-bg-custom" id="heroBg"></div>
+  <div class="hero-bamboo">
+    <div class="bamboo-stalk"></div>
+    <div class="bamboo-stalk"></div>
+    <div class="bamboo-stalk"></div>
+    <div class="bamboo-stalk"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="stars">★★★★★</span>
+      5,0 · 205 avis Google
+    </div>
+    <div class="hero-panda">🐼</div>
+    <h1>Massage <em>Tuina</em><br/>au Cœur du Bassin</h1>
+    <p>Médecine traditionnelle chinoise · Détente profonde · Bien-être authentique — La Teste-de-Buch</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-gold">Prendre rendez-vous</a>
+      <a href="#services" class="btn-outline-white">Découvrir les soins</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">Découvrir</div>
+</section>
+
+<!-- ══ ABOUT ═══════════════════════════════════════════ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal" id="aboutImgWrap">
+      <div class="about-placeholder">
+        <span class="big">🐼</span>
+        <span>Photo de l'institut</span>
+      </div>
+    </div>
+    <div class="about-text reveal reveal-delay-1">
+      <p class="section-label">L'Institut</p>
+      <h2 class="section-title">Un havre de paix<br/>au cœur du Bassin</h2>
+      <div class="section-line"></div>
+      <p>Bienvenue <strong>Chez Sophie</strong>, votre espace dédié au massage <strong>Tuina</strong> — la plus ancienne forme de massage de la médecine traditionnelle chinoise, pratiquée depuis plus de 5 000 ans.</p>
+      <p>Dans un cadre chaleureux à La Teste-de-Buch, Sophie vous propose une expérience de soins sur-mesure : du massage relaxant au soin thérapeutique, chaque séance est entièrement adaptée à vos besoins du moment.</p>
+      <p>Ouvert tous les jours, <strong>uniquement sur rendez-vous</strong>, pour vous garantir une attention pleine et entière.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="num">205</div><div class="lbl">Avis Google</div></div>
+        <div class="stat"><div class="num">5,0</div><div class="lbl">Note ★</div></div>
+        <div class="stat"><div class="num">7j/7</div><div class="lbl">9h – 20h</div></div>
+      </div>
+      <div class="about-tags">
+        <span class="tag">Massage Tuina</span>
+        <span class="tag">Moxibustion</span>
+        <span class="tag">Bain de pieds</span>
+        <span class="tag">Médecine chinoise</span>
+        <span class="tag">Relaxation</span>
+        <span class="tag">Sur RDV uniquement</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ════════════════════════════════════════ -->
+<section id="services">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <p class="section-label">Nos soins</p>
+      <h2 class="section-title">Soins & Tarifs</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="s-icon">🌿</div>
+        <h3>Massage Tuina Corps</h3>
+        <p class="s-desc">Le massage chinois traditionnel. Pratiqué habillé, il agit sur les méridiens pour libérer les tensions et rééquilibrer l'énergie vitale.</p>
+        <ul class="price-list">
+          <li><span>30 minutes</span><span class="price">45 €</span></li>
+          <li><span>1 heure</span><span class="price">80 €</span></li>
+          <li><span>1h 30</span><span class="price">110 €</span></li>
+          <li><span>2 heures</span><span class="price">148 €</span></li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="s-icon">💆</div>
+        <h3>Massage Relaxant Corps</h3>
+        <p class="s-desc">Un soin profond pour relâcher les tensions musculaires et retrouver un équilibre corps-esprit durable.</p>
+        <ul class="price-list">
+          <li><span>1 heure</span><span class="price">90 €</span></li>
+          <li><span>1h 30</span><span class="price">128 €</span></li>
+          <li><span>2 heures</span><span class="price">168 €</span></li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="s-icon">✨</div>
+        <h3>Massages Ciblés</h3>
+        <p class="s-desc">Soins localisés pour une détente précise — tête, pieds ou ceinture selon vos besoins du moment.</p>
+        <ul class="price-list">
+          <li><span>Relaxant Tête · 30 min</span><span class="price">35 €</span></li>
+          <li><span>Relaxant Pieds · 30 min</span><span class="price">40 €</span></li>
+          <li><span>Ceinture · 30 min</span><span class="price">50 €</span></li>
+        </ul>
+        <p class="s-note">* Ceinture : éviter la douche pendant 2h après la séance.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="s-icon">🔥</div>
+        <h3>Moxibustion</h3>
+        <p class="s-desc">Technique ancestrale consistant à chauffer des points d'acupuncture avec du moxa pour tonifier l'énergie et soulager les douleurs profondes.</p>
+        <ul class="price-list">
+          <li><span>La séance</span><span class="price">80 €</span></li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="s-icon">🌡️</div>
+        <h3>Compresse Chaude Médicinale</h3>
+        <p class="s-desc">Application de compresses à base de plantes médicinales chinoises. Favorise la détente musculaire profonde et la circulation.</p>
+        <ul class="price-list">
+          <li><span>La séance (30 min – 1h)</span><span class="price">40 €</span></li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="s-icon">🛁</div>
+        <h3>Bain de Pieds & Bain</h3>
+        <p class="s-desc">Rituels de détente et purification pour une relaxation totale — en séance unique ou en cure de 10 séances.</p>
+        <ul class="price-list">
+          <li><span>Bain de pieds · 30 min</span><span class="price">35 €</span></li>
+          <li><span>10 séances bain de pieds</span><span class="price">300 €</span></li>
+          <li><span>Bain · 25 à 40 min</span><span class="price">85 €</span></li>
+        </ul>
+      </div>
+
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.8rem;color:var(--stone);">
+      Tous les tarifs sont indiqués TTC · Paiement sur place ou en ligne · Uniquement sur rendez-vous
+    </p>
+  </div>
+</section>
+
+<!-- ══ REVIEWS ══════════════════════════════════════════ -->
+<section id="reviews">
+  <div class="reviews-inner reveal">
+    <p class="section-label">Ce que disent nos clients</p>
+    <h2 class="section-title">★ 205 avis · Note parfaite</h2>
+    <div class="reviews-score-row">
+      <div class="score-big">5,0</div>
+      <div class="score-details">
+        <div class="score-stars">★★★★★</div>
+        <div class="score-count">205 avis · Google Business Profile</div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">« Un moment de pur bonheur. Sophie est une vraie professionnelle, attentive et bienveillante. Je repars à chaque fois comme neuve ! »</p>
+        <div class="r-name">— Avis Google vérifié ✓</div>
+      </div>
+      <div class="review-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">« Cadre magnifique, massage Tuina exceptionnel. Une expérience que je recommande à tout le monde pour se ressourcer en profondeur. »</p>
+        <div class="r-name">— Avis Google vérifié ✓</div>
+      </div>
+      <div class="review-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">« La moxibustion a fait une vraie différence sur mes douleurs chroniques. Sophie maîtrise parfaitement la médecine traditionnelle chinoise. »</p>
+        <div class="r-name">— Avis Google vérifié ✓</div>
+      </div>
+    </div>
+    <a href="https://www.google.com/search?q=Chez+Sophie+Massage+Tuina+La+Teste-de-Buch" target="_blank" rel="noopener" class="google-btn">
+      🔍 Voir tous les avis sur Google
+    </a>
+  </div>
+</section>
+
+<!-- ══ BOOKING ══════════════════════════════════════════ -->
+<section id="booking">
+  <div class="booking-inner">
+    <div class="text-center reveal">
+      <p class="section-label">Prendre rendez-vous</p>
+      <h2 class="section-title">Réservez votre séance</h2>
+      <div class="section-line center"></div>
+      <p style="color:var(--stone);margin-bottom:2rem;font-size:.95rem;">Ouvert 7j/7 · 9h00–20h00 · Sophie vous confirme par téléphone</p>
+    </div>
+
+    <!-- Progress steps -->
+    <div class="booking-steps reveal">
+      <div class="step active" id="step1-ind"><div class="step-num">1</div><span>Soin</span></div>
+      <div class="step-line"></div>
+      <div class="step" id="step2-ind"><div class="step-num">2</div><span>Durée</span></div>
+      <div class="step-line"></div>
+      <div class="step" id="step3-ind"><div class="step-num">3</div><span>Date & heure</span></div>
+      <div class="step-line"></div>
+      <div class="step" id="step4-ind"><div class="step-num">4</div><span>Coordonnées</span></div>
+    </div>
+
+    <!-- STEP 1 — Choisir le soin -->
+    <div class="booking-panel active reveal" id="panel1">
+      <div class="service-select-grid">
+        <div class="service-sel-card" data-service="Massage Tuina Corps" data-durations='[{"label":"30 min","price":"45 €"},{"label":"1 heure","price":"80 €"},{"label":"1h30","price":"110 €"},{"label":"2 heures","price":"148 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">🌿</div>
+          <h4>Massage Tuina Corps</h4>
+          <p>Massage chinois traditionnel sur méridiens</p>
+        </div>
+        <div class="service-sel-card" data-service="Massage Relaxant Corps" data-durations='[{"label":"1 heure","price":"90 €"},{"label":"1h30","price":"128 €"},{"label":"2 heures","price":"168 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">💆</div>
+          <h4>Massage Relaxant Corps</h4>
+          <p>Détente musculaire profonde</p>
+        </div>
+        <div class="service-sel-card" data-service="Massage Relaxant Tête" data-durations='[{"label":"30 min","price":"35 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">✨</div>
+          <h4>Massage Relaxant Tête</h4>
+          <p>Soin ciblé tête & nuque</p>
+        </div>
+        <div class="service-sel-card" data-service="Massage Relaxant Pieds" data-durations='[{"label":"30 min","price":"40 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">🦶</div>
+          <h4>Massage Relaxant Pieds</h4>
+          <p>Soin ciblé réflexologie</p>
+        </div>
+        <div class="service-sel-card" data-service="Ceinture" data-durations='[{"label":"30 min","price":"50 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">🎀</div>
+          <h4>Ceinture</h4>
+          <p>Soin ciblé zone lombaire</p>
+        </div>
+        <div class="service-sel-card" data-service="Moxibustion" data-durations='[{"label":"1 séance","price":"80 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">🔥</div>
+          <h4>Moxibustion</h4>
+          <p>Chaleur thérapeutique sur méridiens</p>
+        </div>
+        <div class="service-sel-card" data-service="Compresse Chaude Médicinale" data-durations='[{"label":"30 min – 1h","price":"40 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">🌡️</div>
+          <h4>Compresse Médicinale</h4>
+          <p>Plantes chinoises chaudes</p>
+        </div>
+        <div class="service-sel-card" data-service="Bain de Pieds" data-durations='[{"label":"30 min","price":"35 €"},{"label":"Cure 10 séances","price":"300 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">🛁</div>
+          <h4>Bain de Pieds</h4>
+          <p>Rituel détente & purification</p>
+        </div>
+        <div class="service-sel-card" data-service="Bain" data-durations='[{"label":"25–40 min","price":"85 €"}]' onclick="selectService(this)">
+          <div class="s-sel-icon">🚿</div>
+          <h4>Bain</h4>
+          <p>Soin bain complet relaxant</p>
+        </div>
+      </div>
+      <div class="booking-nav" style="justify-content:flex-end">
+        <button class="btn-next" id="btn-to-2" onclick="goToStep(2)" disabled>Choisir la durée →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 — Choisir la durée -->
+    <div class="booking-panel" id="panel2">
+      <div class="duration-group">
+        <label>Durée & tarif</label>
+        <div class="duration-pills" id="durationPills"></div>
+      </div>
+      <div class="booking-nav">
+        <button class="btn-back" onclick="goToStep(1)">← Retour</button>
+        <button class="btn-next" id="btn-to-3" onclick="goToStep(3)" disabled>Choisir la date →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 — Date & heure -->
+    <div class="booking-panel" id="panel3">
+      <div class="datetime-group">
+        <label>Date et heure souhaitées</label>
+        <div class="datetime-row">
+          <div class="field-wrap" id="wrap-date">
+            <input type="date" class="form-input" id="bookDate" min="" onchange="validateDateTime()" />
+            <span class="form-error">Veuillez choisir une date</span>
+          </div>
+          <div class="field-wrap" id="wrap-time">
+            <select class="form-input" id="bookTime" onchange="validateDateTime()">
+              <option value="">Heure souhaitée</option>
+              <option>09:00</option><option>09:30</option>
+              <option>10:00</option><option>10:30</option>
+              <option>11:00</option><option>11:30</option>
+              <option>12:00</option><option>12:30</option>
+              <option>13:00</option><option>13:30</option>
+              <option>14:00</option><option>14:30</option>
+              <option>15:00</option><option>15:30</option>
+              <option>16:00</option><option>16:30</option>
+              <option>17:00</option><option>17:30</option>
+              <option>18:00</option><option>18:30</option>
+              <option>19:00</option><option>19:30</option>
+            </select>
+            <span class="form-error">Veuillez choisir une heure</span>
+          </div>
+        </div>
+        <p style="font-size:.78rem;color:var(--stone);margin-top:.7rem;">💡 Sophie vous confirmera la disponibilité par téléphone sous 24h.</p>
+      </div>
+      <div class="booking-nav">
+        <button class="btn-back" onclick="goToStep(2)">← Retour</button>
+        <button class="btn-next" id="btn-to-4" onclick="goToStep(4)" disabled>Mes coordonnées →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 — Coordonnées & envoi -->
+    <div class="booking-panel" id="panel4">
+      <!-- Récap -->
+      <div class="booking-summary" id="bookingSummary"></div>
+
+      <div class="fields-group">
+        <div class="field-wrap" id="wrap-prenom">
+          <label>Prénom *</label>
+          <input type="text" class="form-input" id="fieldPrenom" placeholder="Votre prénom" oninput="validateContact()" />
+          <span class="form-error">Champ requis</span>
+        </div>
+        <div class="field-wrap" id="wrap-nom">
+          <label>Nom *</label>
+          <input type="text" class="form-input" id="fieldNom" placeholder="Votre nom" oninput="validateContact()" />
+          <span class="form-error">Champ requis</span>
+        </div>
+        <div class="field-wrap" id="wrap-tel">
+          <label>Téléphone *</label>
+          <input type="tel" class="form-input" id="fieldTel" placeholder="06 XX XX XX XX" oninput="validateContact()" />
+          <span class="form-error">Numéro invalide</span>
+        </div>
+        <div class="field-wrap" id="wrap-email">
+          <label>Email</label>
+          <input type="email" class="form-input" id="fieldEmail" placeholder="Optionnel" />
+        </div>
+        <div class="field-wrap full">
+          <label>Message (optionnel)</label>
+          <textarea class="form-input" id="fieldMsg" placeholder="Précisez si vous avez des douleurs particulières, contraintes ou questions…"></textarea>
+        </div>
+      </div>
+
+      <div class="booking-nav">
+        <button class="btn-back" onclick="goToStep(3)">← Retour</button>
+        <button class="btn-next" id="btn-submit" onclick="submitBooking()" disabled>Envoyer ma demande ✓</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="booking-panel" id="panelSuccess">
+      <div class="booking-success">
+        <div class="success-icon">🐼</div>
+        <h3>Demande envoyée !</h3>
+        <p>Sophie a bien reçu votre demande de réservation. Elle vous rappellera sous <strong>24h</strong> pour confirmer votre créneau.</p>
+        <p class="phone-big">📞 06 27 14 62 31</p>
+        <p style="font-size:.82rem;margin-top:.5rem;">Vous pouvez aussi l'appeler directement.</p>
+        <button class="btn-next" style="margin:1.5rem auto 0;display:block;" onclick="resetBooking()">Faire une nouvelle réservation</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CONTACT ══════════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <p class="section-label">Nous trouver</p>
+      <h2 class="section-title">Contact & Accès</h2>
+      <div class="section-line"></div>
+      <div class="contact-item">
+        <span class="c-icon">📍</span>
+        <div class="c-info">
+          <h4>Adresse</h4>
+          <p>14C Boulevard de Curepipe, Apt S<br/>33260 La Teste-de-Buch</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="c-icon">📞</span>
+        <div class="c-info">
+          <h4>Téléphone</h4>
+          <p><a href="tel:0627146231">06 27 14 62 31</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="c-icon">🕘</span>
+        <div class="c-info">
+          <h4>Horaires</h4>
+          <p>Lundi – Dimanche · 9h00 – 20h00<br/><em style="font-size:.85rem;color:var(--stone)">Uniquement sur rendez-vous</em></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="c-icon">📱</span>
+        <div class="c-info">
+          <h4>Réseaux sociaux</h4>
+          <p><a href="https://www.facebook.com/chez.sophie.777/" target="_blank" rel="noopener">Facebook — Chez Sophie</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="map-wrap reveal reveal-delay-1">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836!2d-1.138!3d44.627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54c87f45aaaaab%3A0x0!2zNDQuNjI3LCAtMS4xMzg!5e0!3m2!1sfr!2sfr!4v1"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Chez Sophie Massage Tuina – La Teste-de-Buch">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═══════════════════════════════════════════ -->
+<footer>
+  <p><strong>🐼 Chez Sophie – Massage Tuina</strong></p>
+  <p>14C Bd de Curepipe Apt S · 33260 La Teste-de-Buch · <a href="tel:0627146231">06 27 14 62 31</a></p>
+  <div class="footer-links" style="margin-top:.6rem">
+    <a href="#about">L'Institut</a>
+    <a href="#services">Soins & Tarifs</a>
+    <a href="#booking">Réservation</a>
+    <a href="#contact">Contact</a>
+    <a href="admin.html">Admin</a>
+  </div>
+  <p style="margin-top:.8rem;font-size:.7rem;opacity:.3">© 2026 Chez Sophie Massage Tuina · Tous droits réservés</p>
+</footer>
+
+<script>
+  // ── Nav scroll shadow ──────────────────────────────
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // ── Mobile nav ─────────────────────────────────────
+  function toggleNav() {
+    const links = document.getElementById('navLinks');
+    const ham   = document.getElementById('hamburger');
+    links.classList.toggle('open');
+    ham.classList.toggle('open');
+  }
+  // Close on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    });
+  });
+
+  // ── Scroll reveal ──────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  // ── Admin images ───────────────────────────────────
+  (function applyAdminSettings() {
+    const heroImg = localStorage.getItem('cs_hero_img');
+    if (heroImg) {
+      const bg = document.getElementById('heroBg');
+      bg.style.backgroundImage = `url(${heroImg})`;
+      bg.style.backgroundSize = 'cover';
+      bg.style.backgroundPosition = 'center';
+    }
+    const aboutImg = localStorage.getItem('cs_about_img');
+    if (aboutImg) {
+      const wrap = document.getElementById('aboutImgWrap');
+      wrap.innerHTML = `<img src="${aboutImg}" alt="Institut Chez Sophie – Massage Tuina La Teste-de-Buch" />`;
+    }
+  })();
+
+  // ── Set min date to today ──────────────────────────
+  const dateInput = document.getElementById('bookDate');
+  if (dateInput) {
+    const today = new Date();
+    dateInput.min = today.toISOString().split('T')[0];
+  }
+
+  // ── Booking state ──────────────────────────────────
+  const booking = { service: '', durations: [], duration: '', price: '', date: '', time: '' };
+
+  // ── Step navigation ────────────────────────────────
+  function goToStep(n) {
+    document.querySelectorAll('.booking-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel' + n).classList.add('active');
+    document.querySelectorAll('.step').forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i + 1 < n)  s.classList.add('done');
+      if (i + 1 === n) s.classList.add('active');
+    });
+    if (n === 2) renderDurationPills();
+    if (n === 4) renderSummary();
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── Step 1: select service ─────────────────────────
+  function selectService(card) {
+    document.querySelectorAll('.service-sel-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    booking.service   = card.dataset.service;
+    booking.durations = JSON.parse(card.dataset.durations);
+    booking.duration  = '';
+    booking.price     = '';
+    document.getElementById('btn-to-2').disabled = false;
+  }
+
+  // ── Step 2: duration pills ─────────────────────────
+  function renderDurationPills() {
+    const container = document.getElementById('durationPills');
+    container.innerHTML = '';
+    booking.durations.forEach(d => {
+      const pill = document.createElement('div');
+      pill.className = 'pill' + (booking.duration === d.label ? ' selected' : '');
+      pill.innerHTML = `${d.label} <span class="pill-price">· ${d.price}</span>`;
+      pill.onclick = () => {
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
+        pill.classList.add('selected');
+        booking.duration = d.label;
+        booking.price    = d.price;
+        document.getElementById('btn-to-3').disabled = false;
+      };
+      container.appendChild(pill);
+    });
+    // Auto-select if only 1 option
+    if (booking.durations.length === 1) {
+      container.querySelector('.pill').click();
+    }
+  }
+
+  // ── Step 3: date/time ──────────────────────────────
+  function validateDateTime() {
+    const d = document.getElementById('bookDate').value;
+    const t = document.getElementById('bookTime').value;
+    booking.date = d;
+    booking.time = t;
+    document.getElementById('btn-to-4').disabled = !(d && t);
+  }
+
+  // ── Step 4: contact + summary ──────────────────────
+  function renderSummary() {
+    const box = document.getElementById('bookingSummary');
+    const dateStr = booking.date
+      ? new Date(booking.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' })
+      : '';
+    box.innerHTML = `
+      <h4>📋 Récapitulatif</h4>
+      <div class="summary-line"><span>Soin</span><span class="summary-val">${booking.service}</span></div>
+      <div class="summary-line"><span>Durée</span><span class="summary-val">${booking.duration}</span></div>
+      <div class="summary-line"><span>Date souhaitée</span><span class="summary-val">${dateStr}</span></div>
+      <div class="summary-line"><span>Heure souhaitée</span><span class="summary-val">${booking.time}</span></div>
+      <div class="summary-line"><span>Tarif indicatif</span><span class="summary-val">${booking.price}</span></div>
+    `;
+  }
+
+  function validateContact() {
+    const prenom = document.getElementById('fieldPrenom').value.trim();
+    const nom    = document.getElementById('fieldNom').value.trim();
+    const tel    = document.getElementById('fieldTel').value.trim();
+    const telOk  = /^[\d\s\+\-\.]{8,}$/.test(tel);
+    document.getElementById('btn-submit').disabled = !(prenom && nom && telOk);
+  }
+
+  // ── Submit ─────────────────────────────────────────
+  function submitBooking() {
+    const prenom = document.getElementById('fieldPrenom').value.trim();
+    const nom    = document.getElementById('fieldNom').value.trim();
+    const tel    = document.getElementById('fieldTel').value.trim();
+    const email  = document.getElementById('fieldEmail').value.trim();
+    const msg    = document.getElementById('fieldMsg').value.trim();
+
+    // Validate
+    let ok = true;
+    ['fieldPrenom','fieldNom'].forEach(id => {
+      const el = document.getElementById(id);
+      const wrap = el.closest('.field-wrap');
+      if (!el.value.trim()) { wrap.classList.add('has-error'); ok = false; }
+      else wrap.classList.remove('has-error');
+    });
+    const telEl = document.getElementById('fieldTel');
+    const telWrap = telEl.closest('.field-wrap');
+    if (!/^[\d\s\+\-\.]{8,}$/.test(tel)) { telWrap.classList.add('has-error'); ok = false; }
+    else telWrap.classList.remove('has-error');
+    if (!ok) return;
+
+    // Build mailto (fallback universel, 0 backend)
+    const dateStr = new Date(booking.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    const subject = encodeURIComponent(`Demande de RDV – ${booking.service} – ${prenom} ${nom}`);
+    const body = encodeURIComponent(
+`Nouvelle demande de réservation – Chez Sophie Massage Tuina
+
+Soin : ${booking.service}
+Durée : ${booking.duration}
+Tarif indicatif : ${booking.price}
+Date souhaitée : ${dateStr}
+Heure souhaitée : ${booking.time}
+
+Client : ${prenom} ${nom}
+Téléphone : ${tel}
+Email : ${email || 'Non renseigné'}
+
+Message : ${msg || 'Aucun'}
+
+---
+Demande envoyée depuis chezsophie-massage.fr`
+    );
+
+    // Ouvrir l'email prérempli (Sophie configurera son adresse ici)
+    // Remplacer ADRESSE@EMAIL par l'email de Sophie
+    window.location.href = `mailto:zhengyajie68@gmail.com?subject=${subject}&body=${body}`;
+
+    // Afficher le succès
+    setTimeout(() => {
+      document.querySelectorAll('.booking-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panelSuccess').classList.add('active');
+      document.querySelectorAll('.booking-steps').forEach(s => s.style.display = 'none');
+    }, 300);
+  }
+
+  // ── Reset ──────────────────────────────────────────
+  function resetBooking() {
+    booking.service = ''; booking.duration = ''; booking.price = '';
+    booking.date = ''; booking.time = '';
+    document.querySelectorAll('.service-sel-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('fieldPrenom').value = '';
+    document.getElementById('fieldNom').value = '';
+    document.getElementById('fieldTel').value = '';
+    document.getElementById('fieldEmail').value = '';
+    document.getElementById('fieldMsg').value = '';
+    document.querySelectorAll('.booking-steps').forEach(s => s.style.display = '');
+    document.getElementById('btn-to-2').disabled = true;
+    goToStep(1);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"version":2,"name":"chez-sophie-massage","builds":[{"src":"*.html","use":"@vercel/static"}]}
