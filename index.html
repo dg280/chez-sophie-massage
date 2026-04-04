@@ -898,24 +898,25 @@
   }
 
   // ── Step 1: select service ─────────────────────────
-  let _autoAdvance = true; // avance auto vers duree apres selection
   function selectService(card) {
     document.querySelectorAll('.service-sel-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
-    booking.service   = card.dataset.service;
-    booking.durations = JSON.parse(card.dataset.durations);
-    booking.duration  = '';
-    booking.price     = '';
+    booking.service = card.dataset.service;
+    // Lire les durations depuis le JS (pas depuis le HTML pour eviter les problemes d'encodage)
+    const grid = document.getElementById('serviceSelectGrid');
+    const idx = parseInt(card.dataset.svcIdx);
+    const svc = grid._servicesData[idx];
+    booking.durations = svc.rows.map(r => ({ label: r.label, price: r.price }));
+    booking.duration = '';
+    booking.price = '';
     document.getElementById('btn-to-2').disabled = false;
-    // Auto-avancer vers l'etape duree apres un court delai visuel
-    if (_autoAdvance) {
-      setTimeout(() => {
-        goToStep(2);
-        if (booking.durations.length === 1) {
-          setTimeout(() => goToStep(3), 400);
-        }
-      }, 350);
-    }
+    // Auto-avancer vers l'etape duree
+    setTimeout(() => {
+      goToStep(2);
+      if (booking.durations.length === 1) {
+        setTimeout(() => goToStep(3), 400);
+      }
+    }, 350);
   }
 
   // ── Step 2: duration pills ─────────────────────────
@@ -1086,11 +1087,11 @@ Demande envoyée depuis sophie-tuina.fr`
 
   function renderBookingCards(services) {
     const grid = document.getElementById('serviceSelectGrid');
-    grid.innerHTML = services.map(svc => {
+    grid.innerHTML = services.map((svc, i) => {
       const durations = JSON.stringify(svc.rows.map(r => ({label: r.label, price: r.price})));
       return `
         <div class="service-sel-card" data-service="${escHtml(svc.name)}"
-             data-durations='${escHtml(durations)}'
+             data-svc-idx="${i}"
              onclick="selectService(this)">
           <div class="s-sel-icon">${svc.icon}</div>
           <h4>${escHtml(svc.name)}</h4>
@@ -1098,6 +1099,8 @@ Demande envoyée depuis sophie-tuina.fr`
         </div>
       `;
     }).join('');
+    // Stocker les durations en JS pur (pas dans le HTML)
+    grid._servicesData = services;
   }
 
   function renderAll(services) {
