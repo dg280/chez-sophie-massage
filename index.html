@@ -540,7 +540,7 @@
   <div class="hero-content">
     <div class="hero-badge">
       <span class="stars">★★★★★</span>
-      5,0 · 205 avis Google
+      <span id="heroBadgeText">5,0 · 205 avis Google</span>
     </div>
     <div class="hero-panda">🐼</div>
     <h1>Massage <em>Tuina</em><br/>au Cœur du Bassin</h1>
@@ -570,8 +570,8 @@
       <p>Dans un cadre chaleureux à La Teste-de-Buch, Sophie vous propose une expérience de soins sur-mesure : du massage relaxant au soin thérapeutique, chaque séance est entièrement adaptée à vos besoins du moment.</p>
       <p>Ouvert tous les jours, <strong>uniquement sur rendez-vous</strong>, pour vous garantir une attention pleine et entière.</p>
       <div class="about-stats">
-        <div class="stat"><div class="num">205</div><div class="lbl">Avis Google</div></div>
-        <div class="stat"><div class="num">5,0</div><div class="lbl">Note ★</div></div>
+        <div class="stat"><div class="num" id="aboutReviewCount">205</div><div class="lbl">Avis Google</div></div>
+        <div class="stat"><div class="num" id="aboutRating">5,0</div><div class="lbl">Note ★</div></div>
         <div class="stat"><div class="num">7j/7</div><div class="lbl">9h – 20h</div></div>
       </div>
       <div class="about-tags">
@@ -607,15 +607,15 @@
 <section id="reviews">
   <div class="reviews-inner reveal">
     <p class="section-label">Ce que disent nos clients</p>
-    <h2 class="section-title">★ 205 avis · Note parfaite</h2>
+    <h2 class="section-title" id="reviewsTitle">★ 205 avis · Note parfaite</h2>
     <div class="reviews-score-row">
-      <div class="score-big">5,0</div>
+      <div class="score-big" id="scoreBig">5,0</div>
       <div class="score-details">
-        <div class="score-stars">★★★★★</div>
-        <div class="score-count">205 avis · Google Business Profile</div>
+        <div class="score-stars" id="scoreStars">★★★★★</div>
+        <div class="score-count" id="scoreCount">205 avis · Google Business Profile</div>
       </div>
     </div>
-    <div class="reviews-grid">
+    <div class="reviews-grid" id="reviewsGrid">
       <div class="review-card">
         <div class="r-stars">★★★★★</div>
         <p class="r-text">« Un moment de pur bonheur. Sophie est une vraie professionnelle, attentive et bienveillante. Je repars à chaque fois comme neuve ! »</p>
@@ -1107,6 +1107,66 @@ Demande envoyée depuis sophie-tuina.fr`
     renderServiceCards(services);
     renderBookingCards(services);
   }
+
+  // ── Chargement des avis Google via /api/reviews ──
+  (async function loadReviews() {
+    try {
+      const res = await fetch('/api/reviews');
+      if (!res.ok) return;
+      const data = await res.json();
+      const rating = data.rating;
+      const total = data.totalReviews;
+      const ratingFr = rating.toFixed(1).replace('.', ',');
+      const stars = '★'.repeat(Math.round(rating)) + '☆'.repeat(5 - Math.round(rating));
+
+      // Hero badge
+      const badge = document.getElementById('heroBadgeText');
+      if (badge) badge.textContent = `${ratingFr} · ${total} avis Google`;
+
+      // About section
+      const aboutCount = document.getElementById('aboutReviewCount');
+      if (aboutCount) aboutCount.textContent = total;
+      const aboutRating = document.getElementById('aboutRating');
+      if (aboutRating) aboutRating.textContent = ratingFr;
+
+      // Reviews section
+      const title = document.getElementById('reviewsTitle');
+      if (title) title.textContent = `★ ${total} avis · Note ${ratingFr}/5`;
+      const scoreBig = document.getElementById('scoreBig');
+      if (scoreBig) scoreBig.textContent = ratingFr;
+      const scoreStars = document.getElementById('scoreStars');
+      if (scoreStars) scoreStars.textContent = stars;
+      const scoreCount = document.getElementById('scoreCount');
+      if (scoreCount) scoreCount.textContent = `${total} avis · Google Business Profile`;
+
+      // Reviews cards
+      if (data.reviews && data.reviews.length) {
+        const grid = document.getElementById('reviewsGrid');
+        grid.innerHTML = data.reviews.map(r => {
+          const rStars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+          const text = r.text.length > 200 ? r.text.slice(0, 200) + '…' : r.text;
+          return `
+            <div class="review-card">
+              <div class="r-stars">${rStars}</div>
+              <p class="r-text">« ${escHtml(text)} »</p>
+              <div class="r-name">— ${escHtml(r.author)} · ${escHtml(r.relativeTime)} ✓</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Schema.org (SEO)
+      const schema = document.querySelector('script[type="application/ld+json"]');
+      if (schema) {
+        try {
+          const ld = JSON.parse(schema.textContent);
+          ld.aggregateRating.ratingValue = rating.toString();
+          ld.aggregateRating.reviewCount = total.toString();
+          schema.textContent = JSON.stringify(ld);
+        } catch(e) {}
+      }
+    } catch(e) { /* Fallback : les valeurs par defaut restent affichees */ }
+  })();
 
   // Afficher immediatement avec les donnees par defaut
   renderAll(DEFAULT_SERVICES);
