@@ -898,6 +898,7 @@
   }
 
   // ── Step 1: select service ─────────────────────────
+  let _autoAdvance = true; // avance auto vers duree apres selection
   function selectService(card) {
     document.querySelectorAll('.service-sel-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
@@ -906,6 +907,15 @@
     booking.duration  = '';
     booking.price     = '';
     document.getElementById('btn-to-2').disabled = false;
+    // Auto-avancer vers l'etape duree apres un court delai visuel
+    if (_autoAdvance) {
+      setTimeout(() => {
+        goToStep(2);
+        if (booking.durations.length === 1) {
+          setTimeout(() => goToStep(3), 400);
+        }
+      }, 350);
+    }
   }
 
   // ── Step 2: duration pills ─────────────────────────
@@ -922,6 +932,8 @@
         booking.duration = d.label;
         booking.price    = d.price;
         document.getElementById('btn-to-3').disabled = false;
+        // Auto-avancer vers date/heure
+        setTimeout(() => goToStep(3), 350);
       };
       container.appendChild(pill);
     });
@@ -1100,7 +1112,7 @@ Demande envoyée depuis sophie-tuina.fr`
     if (serviceName) {
       setTimeout(() => {
         const card = document.querySelector(`.service-sel-card[data-service="${serviceName}"]`);
-        if (card) selectService(card);
+        if (card) selectService(card); // selectService gere deja l'auto-avance
       }, 600);
     }
   }
