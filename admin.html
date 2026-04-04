@@ -114,6 +114,46 @@
     }
     .btn-reset:hover { background: rgba(192,57,43,.2); color: #ff7675; }
 
+    /* ── Tarifs editor ── */
+    .tarif-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .tarif-card {
+      background: #1e2620; border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 18px; transition: border-color .2s;
+    }
+    .tarif-card:hover { border-color: rgba(122,158,126,.25); }
+    .tarif-card h4 { font-size: .9rem; color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: .4rem; }
+    .tarif-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin-bottom: .65rem; padding-bottom: .65rem;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .tarif-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .tarif-label { font-size: .82rem; color: rgba(255,255,255,.55); flex: 1; }
+    .tarif-price-input {
+      width: 90px; padding: .38rem .6rem; background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12); border-radius: 6px;
+      color: var(--gold); font-size: .88rem; font-weight: 700;
+      outline: none; text-align: right; transition: border-color .2s;
+    }
+    .tarif-price-input:focus { border-color: var(--sage); background: rgba(255,255,255,.1); }
+    .save-tarifs-bar {
+      position: sticky; bottom: 20px; display: flex; justify-content: flex-end; gap: 10px;
+      background: linear-gradient(to top, #1a1f1b 60%, transparent);
+      padding: 16px 0 4px;
+    }
+    .btn-save-tarifs {
+      padding: .75rem 2rem; background: var(--green); color: white;
+      border: none; border-radius: 10px; font-size: .92rem; font-weight: 700;
+      cursor: pointer; transition: background .2s, transform .15s;
+      box-shadow: 0 4px 16px rgba(61,90,62,.35);
+    }
+    .btn-save-tarifs:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-reset-tarifs {
+      padding: .75rem 1.4rem; background: rgba(255,255,255,.06); color: rgba(255,255,255,.5);
+      border: none; border-radius: 10px; font-size: .92rem; cursor: pointer; transition: background .2s;
+    }
+    .btn-reset-tarifs:hover { background: rgba(192,57,43,.15); color: #ff7675; }
+
     /* ── Toast ── */
     .toast {
       position: fixed; bottom: 24px; right: 24px; z-index: 999;
@@ -146,6 +186,7 @@
       .admin-sidebar { display: none; }
       .admin-main { margin-left: 0; padding: 20px; }
       .status-grid { grid-template-columns: 1fr 1fr; }
+      .tarif-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -176,6 +217,7 @@
       </div>
       <nav class="sidebar-nav">
         <a class="active" onclick="showTab('visuels')"><span class="icon">🖼️</span> Visuels</a>
+        <a onclick="showTab('tarifs')"><span class="icon">💶</span> Tarifs</a>
         <a onclick="showTab('infos')"><span class="icon">📝</span> Informations</a>
         <a onclick="showTab('securite')"><span class="icon">🔒</span> Sécurité</a>
       </nav>
@@ -222,7 +264,7 @@
             </div>
             <div class="img-actions">
               <button class="btn-upload" onclick="document.getElementById('heroFile').click()">📁 Choisir une image</button>
-              <button class="btn-reset" onclick="resetImage('heroPreview','heroPlaceholder','cs_hero_img','heroBgDefault shown')">✕</button>
+              <button class="btn-reset" onclick="resetImage('heroPreview','heroPlaceholder','cs_hero_img')">✕</button>
             </div>
           </div>
 
@@ -246,6 +288,47 @@
         </div>
       </div>
 
+      <!-- ── Tab: Tarifs ── -->
+      <div id="tab-tarifs" style="display:none">
+        <div class="admin-header">
+          <h1>💶 Gestion des tarifs</h1>
+          <p>Modifiez les prix affichés sur le site. Cliquez sur un montant pour l'éditer, puis enregistrez.</p>
+        </div>
+
+        <div class="tarif-grid" id="tarifGrid">
+          <!-- Généré par JS -->
+        </div>
+
+        <div class="save-tarifs-bar">
+          <button class="btn-reset-tarifs" onclick="resetTarifs()">↺ Prix d'origine</button>
+          <button class="btn-save-tarifs" onclick="saveTarifs()">💾 Publier sur GitHub</button>
+        </div>
+
+        <!-- Config GitHub -->
+        <div id="ghConfigSection" class="admin-card" style="margin-top:32px; max-width:520px;">
+          <h3>⚙️ Configuration GitHub</h3>
+          <p>Entrez une seule fois vos identifiants GitHub. Ils sont sauvegardés sur cet appareil.</p>
+          <div style="display:flex; flex-direction:column; gap:.65rem; margin-top:1rem;">
+            <div>
+              <label style="font-size:.75rem; color:rgba(255,255,255,.4); letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:.3rem;">Nom d'utilisateur GitHub</label>
+              <input id="ghOwner" type="text" placeholder="ex : sophietuina" style="width:100%;padding:.6rem .8rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;font-size:.87rem;outline:none;" />
+            </div>
+            <div>
+              <label style="font-size:.75rem; color:rgba(255,255,255,.4); letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:.3rem;">Nom du repo</label>
+              <input id="ghRepo" type="text" placeholder="ex : sophie-tuina-site" style="width:100%;padding:.6rem .8rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;font-size:.87rem;outline:none;" />
+            </div>
+            <div>
+              <label style="font-size:.75rem; color:rgba(255,255,255,.4); letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:.3rem;">Personal Access Token <span style="color:rgba(255,255,255,.25)">(GitHub → Settings → Developer settings → Tokens)</span></label>
+              <input id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx" style="width:100%;padding:.6rem .8rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;font-size:.87rem;outline:none;" />
+            </div>
+            <button class="btn-upload" style="margin-top:.3rem" onclick="saveGhConfig()">💾 Sauvegarder la configuration</button>
+          </div>
+          <p style="margin-top:1rem; font-size:.74rem; background:rgba(255,255,255,.04); padding:.8rem; border-radius:7px; color:rgba(255,255,255,.35); line-height:1.6;">
+            🔒 Le token est stocké uniquement sur cet appareil (localStorage). Le repo doit contenir le fichier <code>tarifs.json</code>. Créer un token avec permission <strong>Contents: Read & Write</strong> uniquement.
+          </p>
+        </div>
+      </div>
+
       <!-- ── Tab: Infos ── -->
       <div id="tab-infos" style="display:none">
         <div class="admin-header">
@@ -261,17 +344,11 @@
             <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Téléphone</td><td style="color:white">06 27 14 62 31</td></tr>
             <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Horaires</td><td style="color:white">Lun–Dim · 9h00–20h00</td></tr>
             <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Note Google</td><td style="color:#D4AF37">★★★★★ 5,0 / 205 avis</td></tr>
+            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Domaine</td><td style="color:white">sophie-tuina.fr</td></tr>
           </table>
           <p style="margin-top:1.2rem; font-size:.75rem; background:rgba(255,255,255,.04); padding:.8rem; border-radius:7px; color:rgba(255,255,255,.4);">
             💡 Pour modifier ces informations, éditez directement le fichier <code>index.html</code>.
           </p>
-        </div>
-        <div class="admin-card" style="max-width:560px; margin-top:20px">
-          <h3>📅 Widget Fresha</h3>
-          <p>Une fois inscrite sur Fresha, collez ici le code d'intégration de votre widget.</p>
-          <textarea id="freshaCode" placeholder="Collez ici votre code embed Fresha..." style="width:100%;height:100px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;padding:.7rem;font-size:.82rem;resize:vertical;outline:none;"></textarea>
-          <button class="btn-upload" style="margin-top:.7rem;width:100%;" onclick="saveFreshaCode()">💾 Enregistrer le code Fresha</button>
-          <p style="margin-top:.7rem;font-size:.75rem;color:rgba(255,255,255,.3)">Le widget s'affichera sur le site à la place du bouton téléphone.</p>
         </div>
       </div>
 
@@ -300,9 +377,48 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // ── Default admin password (stored in localStorage) ──
+    // ── Config GitHub (stockée en localStorage côté admin) ──
+    function ghConfig() {
+      return {
+        owner: localStorage.getItem('gh_owner') || '',
+        repo:  localStorage.getItem('gh_repo')  || '',
+        token: localStorage.getItem('gh_token') || '',
+        path:  'tarifs.json',
+      };
+    }
+    function ghRawUrl() {
+      const { owner, repo, path } = ghConfig();
+      return owner && repo ? `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}` : '';
+    }
+    function ghConfigured() {
+      const c = ghConfig();
+      return c.owner && c.repo && c.token;
+    }
+
+    // ── Tarifs par défaut ───────────────────────────────────
+    const DEFAULT_TARIFS = [
+      { key: 'tuina',       icon: '🌿', name: 'Massage Tuina Corps',
+        rows: [{label:'30 min', price:'45 €'},{label:'1 heure', price:'80 €'},{label:'1h30', price:'110 €'},{label:'2 heures', price:'148 €'}] },
+      { key: 'relaxant',    icon: '💆', name: 'Massage Relaxant Corps',
+        rows: [{label:'1 heure', price:'90 €'},{label:'1h30', price:'128 €'},{label:'2 heures', price:'168 €'}] },
+      { key: 'tete',        icon: '✨', name: 'Massage Relaxant Tête',
+        rows: [{label:'30 min', price:'35 €'}] },
+      { key: 'pieds',       icon: '🦶', name: 'Massage Relaxant Pieds',
+        rows: [{label:'30 min', price:'40 €'}] },
+      { key: 'ceinture',    icon: '🎀', name: 'Ceinture',
+        rows: [{label:'30 min', price:'50 €'}] },
+      { key: 'moxa',        icon: '🔥', name: 'Moxibustion',
+        rows: [{label:'La séance', price:'80 €'}] },
+      { key: 'compresse',   icon: '🌡️', name: 'Compresse Chaude Médicinale',
+        rows: [{label:'30 min – 1h', price:'40 €'}] },
+      { key: 'bainpieds',   icon: '🛁', name: 'Bain de Pieds',
+        rows: [{label:'30 min', price:'35 €'},{label:'Cure 10 séances', price:'300 €'}] },
+      { key: 'bain',        icon: '🚿', name: 'Bain',
+        rows: [{label:'25–40 min', price:'85 €'}] },
+    ];
+
+    // ── Admin password ──────────────────────────────────────
     function getAdminPwd() {
-      // Mot de passe par défaut : sophie2026 (à changer dans l'onglet Sécurité)
       return localStorage.getItem('cs_admin_pwd') || 'sophie2026';
     }
 
@@ -312,6 +428,8 @@
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('admin-screen').style.display = 'block';
         loadPreviews();
+        prefillGhConfig();
+        loadTarifsAdmin();
       } else {
         document.getElementById('loginError').style.display = 'block';
         document.getElementById('pwdInput').value = '';
@@ -325,11 +443,11 @@
     }
 
     function showTab(tab) {
-      ['visuels','infos','securite'].forEach(t => {
+      ['visuels','tarifs','infos','securite'].forEach(t => {
         document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none';
       });
       document.querySelectorAll('.sidebar-nav a').forEach((a,i) => {
-        a.classList.toggle('active', ['visuels','infos','securite'][i]===tab);
+        a.classList.toggle('active', ['visuels','tarifs','infos','securite'][i]===tab);
       });
     }
 
@@ -339,7 +457,7 @@
       setTimeout(() => t.classList.remove('show'), 2800);
     }
 
-    // ── Image handling ────────────────────────────────────
+    // ── Image handling ─────────────────────────────────────
     function previewImage(input, previewId, placeholderId, storageKey) {
       const file = input.files[0];
       if (!file) return;
@@ -349,12 +467,10 @@
         const data = e.target.result;
         const preview = document.getElementById(previewId);
         const placeholder = document.getElementById(placeholderId);
-        // Show preview
         let img = preview.querySelector('img');
         if (!img) { img = document.createElement('img'); preview.insertBefore(img, preview.firstChild); }
         img.src = data;
         placeholder.style.display = 'none';
-        // Save
         localStorage.setItem(storageKey, data);
         showToast('✅ Image enregistrée !');
       };
@@ -370,32 +486,164 @@
       showToast('🗑 Image supprimée');
     }
 
+    function prefillGhConfig() {
+      const c = ghConfig();
+      if (c.owner) document.getElementById('ghOwner').value = c.owner;
+      if (c.repo)  document.getElementById('ghRepo').value  = c.repo;
+      if (c.token) document.getElementById('ghToken').value = c.token;
+    }
+
     function loadPreviews() {
-      const keys = [
-        { key: 'cs_hero_img',  previewId: 'heroPreview',  placeholderId: 'heroPlaceholder' },
-        { key: 'cs_about_img', previewId: 'aboutPreview', placeholderId: 'aboutPlaceholder' },
-      ];
-      keys.forEach(({ key, previewId, placeholderId }) => {
+      [{ key: 'cs_hero_img', pid: 'heroPreview', plid: 'heroPlaceholder' },
+       { key: 'cs_about_img', pid: 'aboutPreview', plid: 'aboutPlaceholder' }]
+      .forEach(({ key, pid, plid }) => {
         const data = localStorage.getItem(key);
         if (data) {
-          const preview = document.getElementById(previewId);
-          let img = document.createElement('img');
+          const preview = document.getElementById(pid);
+          const img = document.createElement('img');
           img.src = data;
           preview.insertBefore(img, preview.firstChild);
-          document.getElementById(placeholderId).style.display = 'none';
+          document.getElementById(plid).style.display = 'none';
         }
       });
-      // Load Fresha code
-      const fc = localStorage.getItem('cs_fresha_code');
-      if (fc) document.getElementById('freshaCode').value = fc;
     }
 
-    function saveFreshaCode() {
-      const code = document.getElementById('freshaCode').value.trim();
-      localStorage.setItem('cs_fresha_code', code);
-      showToast('✅ Code Fresha enregistré !');
+    // ── Tarifs editor ──────────────────────────────────────
+    let _currentSha = null; // SHA du fichier GitHub (requis pour le PUT)
+
+    function mergeWithDefaults(saved) {
+      return DEFAULT_TARIFS.map(svc => ({
+        ...svc,
+        rows: svc.rows.map((row, i) => ({
+          label: row.label,
+          price: (saved[svc.key] && saved[svc.key][i]) ? saved[svc.key][i] : row.price
+        }))
+      }));
     }
 
+    function renderTarifGrid(tarifs) {
+      const grid = document.getElementById('tarifGrid');
+
+      // Bandeau statut GitHub
+      const configured = ghConfigured();
+      const statusHtml = `
+        <div style="grid-column:1/-1; padding:.9rem 1.2rem; border-radius:10px; margin-bottom:4px;
+          background:${configured ? 'rgba(122,158,126,.12)' : 'rgba(212,175,55,.1)'};
+          border:1px solid ${configured ? 'rgba(122,158,126,.3)' : 'rgba(212,175,55,.3)'};
+          display:flex; align-items:center; gap:.7rem; font-size:.83rem; color:rgba(255,255,255,.7);">
+          <span>${configured ? '✅' : '⚙️'}</span>
+          <span>${configured
+            ? `Connecté à <strong style="color:white">${ghConfig().owner}/${ghConfig().repo}</strong>`
+            : 'GitHub non configuré — allez dans <strong style="color:white">Configuration GitHub</strong> ci-dessous'
+          }</span>
+        </div>
+      `;
+
+      grid.innerHTML = statusHtml + tarifs.map(svc => `
+        <div class="tarif-card">
+          <h4>${svc.icon} ${svc.name}</h4>
+          ${svc.rows.map((row, i) => `
+            <div class="tarif-row">
+              <span class="tarif-label">${row.label}</span>
+              <input class="tarif-price-input" type="text"
+                data-svc="${svc.key}" data-idx="${i}"
+                value="${row.price}" />
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    async function loadTarifsAdmin() {
+      const rawUrl = ghRawUrl();
+      if (!rawUrl) {
+        renderTarifGrid(DEFAULT_TARIFS);
+        return;
+      }
+      try {
+        // Fetch via API (pour avoir le SHA)
+        const { owner, repo, path, token } = ghConfig();
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+          headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+        });
+        if (!res.ok) throw new Error('API error ' + res.status);
+        const file = await res.json();
+        _currentSha = file.sha;
+        const data = JSON.parse(atob(file.content.replace(/\n/g, '')));
+        renderTarifGrid(mergeWithDefaults(data));
+        showToast('✅ Tarifs chargés depuis GitHub');
+      } catch(e) {
+        renderTarifGrid(DEFAULT_TARIFS);
+        showToast('⚠️ Impossible de charger depuis GitHub — prix par défaut affichés');
+      }
+    }
+
+    async function saveTarifs() {
+      if (!ghConfigured()) {
+        showToast('⚠️ Configurez d\'abord GitHub ci-dessous');
+        document.getElementById('ghConfigSection').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+      // Collecter les prix
+      const result = {};
+      document.querySelectorAll('.tarif-price-input').forEach(input => {
+        const svc = input.dataset.svc;
+        const idx = parseInt(input.dataset.idx);
+        if (!result[svc]) result[svc] = [];
+        result[svc][idx] = input.value.trim();
+      });
+
+      const { owner, repo, path, token } = ghConfig();
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(result, null, 2))));
+      const body = {
+        message: '💶 Mise à jour des tarifs via admin',
+        content,
+        ...((_currentSha) ? { sha: _currentSha } : {})
+      };
+
+      showToast('⏳ Enregistrement en cours...');
+      try {
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+          method: 'PUT',
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.message);
+        }
+        const data = await res.json();
+        _currentSha = data.content.sha; // mettre à jour le SHA
+        // Aussi mettre à jour l'URL dans index.html (localStorage)
+        localStorage.setItem('cs_tarifs_url', `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}`);
+        showToast('✅ Tarifs publiés sur GitHub ! Visible sur le site dans 1–2 min.');
+      } catch(e) {
+        showToast('❌ Erreur : ' + e.message);
+      }
+    }
+
+    async function resetTarifs() {
+      if (!confirm('Remettre tous les prix d\'origine ?')) return;
+      renderTarifGrid(DEFAULT_TARIFS);
+      // Pré-remplir les inputs avec les valeurs par défaut sans sauvegarder
+      showToast('↺ Prix d\'origine restaurés — cliquez Enregistrer pour publier');
+    }
+
+    function saveGhConfig() {
+      const owner = document.getElementById('ghOwner').value.trim();
+      const repo  = document.getElementById('ghRepo').value.trim();
+      const token = document.getElementById('ghToken').value.trim();
+      if (!owner || !repo || !token) { showToast('⚠️ Remplissez tous les champs'); return; }
+      localStorage.setItem('gh_owner', owner);
+      localStorage.setItem('gh_repo', repo);
+      localStorage.setItem('gh_token', token);
+      // Sauvegarder l'URL raw pour index.html
+      localStorage.setItem('cs_tarifs_url', `https://raw.githubusercontent.com/${owner}/${repo}/main/tarifs.json`);
+      showToast('✅ Configuration GitHub sauvegardée');
+      loadTarifsAdmin(); // recharger avec le bon token
+    }
+
+    // ── Password change ────────────────────────────────────
     function changePwd() {
       const current = document.getElementById('currentPwd').value;
       const newP    = document.getElementById('newPwd').value;

@@ -1156,6 +1156,64 @@ Demande envoyée depuis sophie-tuina.fr`
     goToStep(1);
   }
 
+  // ── Tarifs GitHub ────────────────────────────────────
+  // URL du fichier tarifs.json sur GitHub (raw) — à remplacer avec le bon repo
+  // Format : https://raw.githubusercontent.com/{user}/{repo}/main/tarifs.json
+  const TARIFS_URL = localStorage.getItem('cs_tarifs_url') || '';
+
+  const TARIF_MAP = [
+    { key:'tuina',     svcName:'Massage Tuina Corps',           labels:['30 min','1 heure','1h30','2 heures'] },
+    { key:'relaxant',  svcName:'Massage Relaxant Corps',        labels:['1 heure','1h30','2 heures'] },
+    { key:'tete',      svcName:'Massage Relaxant Tête',         labels:['30 min'] },
+    { key:'pieds',     svcName:'Massage Relaxant Pieds',        labels:['30 min'] },
+    { key:'ceinture',  svcName:'Ceinture',                      labels:['30 min'] },
+    { key:'moxa',      svcName:'Moxibustion',                   labels:['La séance'] },
+    { key:'compresse', svcName:'Compresse Chaude Médicinale',   labels:['30 min – 1h'] },
+    { key:'bainpieds', svcName:'Bain de Pieds',                 labels:['30 min','Cure 10 séances'] },
+    { key:'bain',      svcName:'Bain',                          labels:['25–40 min'] },
+  ];
+
+  function applyTarifs(data) {
+    TARIF_MAP.forEach(({ key, svcName, labels }) => {
+      const prices = data[key];
+      if (!prices) return;
+      // 1. Cartes service (affichage tarifs)
+      document.querySelectorAll('.price-list').forEach(ul => {
+        const card = ul.closest('.service-card');
+        if (!card) return;
+        const h3 = card.querySelector('h3');
+        if (!h3 || !h3.textContent.includes(svcName.split(' ').slice(0,2).join(' '))) return;
+        ul.querySelectorAll('li').forEach((li, i) => {
+          if (prices[i] !== undefined) {
+            const span = li.querySelector('.price');
+            if (span) span.textContent = prices[i];
+          }
+        });
+      });
+      // 2. Formulaire réservation (data-durations)
+      const selCard = document.querySelector(`.service-sel-card[data-service="${svcName}"]`);
+      if (selCard) {
+        selCard.dataset.durations = JSON.stringify(
+          labels.map((label, i) => ({ label, price: prices[i] ?? '—' }))
+        );
+      }
+    });
+  }
+
+  // Fetch tarifs depuis GitHub raw (avec cache court 5 min)
+  async function loadTarifs() {
+    if (!TARIFS_URL) return; // pas encore configuré
+    try {
+      const url = TARIFS_URL + '?t=' + Math.floor(Date.now() / 300000); // cache 5 min
+      const res = await fetch(url);
+      if (!res.ok) return;
+      const data = await res.json();
+      applyTarifs(data);
+    } catch(e) { /* réseau indisponible, prix par défaut utilisés */ }
+  }
+
+  loadTarifs();
+
   // ── Book from service tile ──────────────────────────
   function bookService(serviceName) {
     resetBooking();
