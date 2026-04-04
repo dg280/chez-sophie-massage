@@ -43,6 +43,7 @@
     }
     .btn-login:hover { background: var(--sage); }
     .login-error { color: #ff7675; font-size: .82rem; text-align: center; margin-top: .5rem; display: none; }
+    .login-attempts { color: rgba(255,255,255,.3); font-size: .72rem; text-align: center; margin-top: .3rem; }
 
     /* ── Admin layout ── */
     #admin-screen { display: none; min-height: 100vh; }
@@ -114,45 +115,68 @@
     }
     .btn-reset:hover { background: rgba(192,57,43,.2); color: #ff7675; }
 
-    /* ── Tarifs editor ── */
-    .tarif-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px; }
-    .tarif-card {
+    /* ── Services editor ── */
+    .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .svc-card {
       background: #1e2620; border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px; padding: 18px; transition: border-color .2s;
+      border-radius: 12px; padding: 20px; transition: border-color .2s;
     }
-    .tarif-card:hover { border-color: rgba(122,158,126,.25); }
-    .tarif-card h4 { font-size: .9rem; color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: .4rem; }
-    .tarif-row {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 10px; margin-bottom: .65rem; padding-bottom: .65rem;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
-    .tarif-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .tarif-label { font-size: .82rem; color: rgba(255,255,255,.55); flex: 1; }
-    .tarif-price-input {
-      width: 90px; padding: .38rem .6rem; background: rgba(255,255,255,.07);
+    .svc-card:hover { border-color: rgba(122,158,126,.25); }
+    .svc-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .svc-card-header h4 { font-size: .95rem; color: white; display: flex; align-items: center; gap: .4rem; }
+    .svc-field { margin-bottom: .8rem; }
+    .svc-field label { display: block; font-size: .72rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: .3rem; }
+    .svc-input {
+      width: 100%; padding: .5rem .7rem; background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.12); border-radius: 6px;
-      color: var(--gold); font-size: .88rem; font-weight: 700;
-      outline: none; text-align: right; transition: border-color .2s;
+      color: white; font-size: .85rem; outline: none; transition: border-color .2s;
+      font-family: 'Lato', sans-serif;
     }
-    .tarif-price-input:focus { border-color: var(--sage); background: rgba(255,255,255,.1); }
-    .save-tarifs-bar {
+    .svc-input:focus { border-color: var(--sage); background: rgba(255,255,255,.1); }
+    textarea.svc-input { resize: vertical; min-height: 60px; }
+    .svc-input-sm { width: 70px; text-align: center; }
+    .tarif-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: .5rem;
+    }
+    .tarif-row .svc-input { flex: 1; }
+    .tarif-row .svc-input-price { width: 90px; color: var(--gold); font-weight: 700; text-align: right; }
+    .btn-sm {
+      padding: .35rem .6rem; border-radius: 5px; border: none; cursor: pointer;
+      font-size: .75rem; font-weight: 700; transition: background .2s;
+    }
+    .btn-add-row { background: rgba(122,158,126,.15); color: var(--sage); }
+    .btn-add-row:hover { background: rgba(122,158,126,.3); }
+    .btn-del-row { background: rgba(192,57,43,.1); color: #ff7675; flex-shrink: 0; }
+    .btn-del-row:hover { background: rgba(192,57,43,.25); }
+    .btn-del-svc { background: rgba(192,57,43,.15); color: #ff7675; padding: .3rem .7rem; }
+    .btn-del-svc:hover { background: rgba(192,57,43,.3); }
+
+    .btn-add-svc {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      width: 100%; padding: 1rem; background: rgba(122,158,126,.08);
+      border: 2px dashed rgba(122,158,126,.25); border-radius: 12px;
+      color: var(--sage); font-size: .9rem; font-weight: 700; cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-add-svc:hover { background: rgba(122,158,126,.15); border-color: var(--sage); }
+
+    .save-bar {
       position: sticky; bottom: 20px; display: flex; justify-content: flex-end; gap: 10px;
       background: linear-gradient(to top, #1a1f1b 60%, transparent);
       padding: 16px 0 4px;
     }
-    .btn-save-tarifs {
+    .btn-save {
       padding: .75rem 2rem; background: var(--green); color: white;
       border: none; border-radius: 10px; font-size: .92rem; font-weight: 700;
       cursor: pointer; transition: background .2s, transform .15s;
       box-shadow: 0 4px 16px rgba(61,90,62,.35);
     }
-    .btn-save-tarifs:hover { background: var(--sage); transform: translateY(-1px); }
-    .btn-reset-tarifs {
+    .btn-save:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-reset-all {
       padding: .75rem 1.4rem; background: rgba(255,255,255,.06); color: rgba(255,255,255,.5);
       border: none; border-radius: 10px; font-size: .92rem; cursor: pointer; transition: background .2s;
     }
-    .btn-reset-tarifs:hover { background: rgba(192,57,43,.15); color: #ff7675; }
+    .btn-reset-all:hover { background: rgba(192,57,43,.15); color: #ff7675; }
 
     /* ── Toast ── */
     .toast {
@@ -186,13 +210,13 @@
       .admin-sidebar { display: none; }
       .admin-main { margin-left: 0; padding: 20px; }
       .status-grid { grid-template-columns: 1fr 1fr; }
-      .tarif-grid { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══ LOGIN ════════════════════════════════════════════ -->
+  <!-- LOGIN -->
   <div id="login-screen">
     <div class="login-box">
       <div class="panda">🐼</div>
@@ -204,10 +228,11 @@
       </div>
       <button class="btn-login" onclick="login()">Se connecter</button>
       <p class="login-error" id="loginError">Mot de passe incorrect</p>
+      <p class="login-attempts" id="loginAttempts"></p>
     </div>
   </div>
 
-  <!-- ═══ ADMIN ════════════════════════════════════════════ -->
+  <!-- ADMIN -->
   <div id="admin-screen">
     <aside class="admin-sidebar">
       <div class="sidebar-logo">
@@ -216,29 +241,45 @@
         <span>Panneau d'administration</span>
       </div>
       <nav class="sidebar-nav">
-        <a class="active" onclick="showTab('visuels')"><span class="icon">🖼️</span> Visuels</a>
-        <a onclick="showTab('tarifs')"><span class="icon">💶</span> Tarifs</a>
-        <a onclick="showTab('infos')"><span class="icon">📝</span> Informations</a>
-        <a onclick="showTab('securite')"><span class="icon">🔒</span> Sécurité</a>
+        <a class="active" onclick="showTab('soins')"><span class="icon">🌿</span> Soins & Tarifs</a>
+        <a onclick="showTab('visuels')"><span class="icon">🖼️</span> Visuels</a>
+        <a onclick="showTab('github')"><span class="icon">⚙️</span> GitHub</a>
+        <a onclick="showTab('securite')"><span class="icon">🔒</span> Securite</a>
       </nav>
       <div class="sidebar-bottom">
         <button class="btn-visit" onclick="window.open('index.html','_blank')">🌐 Voir le site</button>
-        <button class="btn-logout" onclick="logout()">⬅ Déconnexion</button>
+        <button class="btn-logout" onclick="logout()">⬅ Deconnexion</button>
       </div>
     </aside>
 
     <main class="admin-main">
 
-      <!-- ── Tab: Visuels ── -->
-      <div id="tab-visuels">
+      <!-- Tab: Soins & Tarifs -->
+      <div id="tab-soins">
+        <div class="admin-header">
+          <h1>🌿 Gestion des soins & tarifs</h1>
+          <p>Ajoutez, modifiez ou supprimez des soins. Les changements sont publies sur GitHub.</p>
+        </div>
+
+        <div class="svc-grid" id="svcGrid"></div>
+
+        <button class="btn-add-svc" onclick="addService()">+ Ajouter un soin</button>
+
+        <div class="save-bar">
+          <button class="btn-save" onclick="saveServices()">💾 Publier sur GitHub</button>
+        </div>
+      </div>
+
+      <!-- Tab: Visuels -->
+      <div id="tab-visuels" style="display:none">
         <div class="admin-header">
           <h1>🖼️ Gestion des visuels</h1>
-          <p>Modifiez les images du site. Les changements s'appliquent immédiatement.</p>
+          <p>Modifiez les images du site. Les changements s'appliquent immediatement.</p>
         </div>
         <div class="status-grid">
           <div class="status-item">
             <div class="status-num">5,0</div>
-            <div class="status-lbl">Note Google ★</div>
+            <div class="status-lbl">Note Google</div>
           </div>
           <div class="status-item">
             <div class="status-num">205</div>
@@ -250,10 +291,9 @@
           </div>
         </div>
         <div class="admin-grid">
-
           <div class="admin-card">
-            <h3>🏔️ Image Hero (bannière principale)</h3>
-            <p>Grande image en fond de la page d'accueil. Format paysage recommandé (16/9).</p>
+            <h3>🏔️ Image Hero (banniere principale)</h3>
+            <p>Grande image en fond de la page d'accueil. Format paysage recommande (16/9).</p>
             <div class="img-preview" id="heroPreview" onclick="document.getElementById('heroFile').click()">
               <div class="placeholder" id="heroPlaceholder">
                 <div class="emoji">🏔️</div>
@@ -267,10 +307,9 @@
               <button class="btn-reset" onclick="resetImage('heroPreview','heroPlaceholder','cs_hero_img')">✕</button>
             </div>
           </div>
-
           <div class="admin-card">
             <h3>👤 Photo de l'institut / Sophie</h3>
-            <p>Image affichée dans la section "L'Institut". Format portrait recommandé (4/5).</p>
+            <p>Image affichee dans la section "L'Institut". Format portrait recommande (4/5).</p>
             <div class="img-preview" id="aboutPreview" onclick="document.getElementById('aboutFile').click()" style="aspect-ratio:4/5; max-height:280px;">
               <div class="placeholder" id="aboutPlaceholder">
                 <div class="emoji">🐼</div>
@@ -284,90 +323,63 @@
               <button class="btn-reset" onclick="resetImage('aboutPreview','aboutPlaceholder','cs_about_img')">✕</button>
             </div>
           </div>
-
         </div>
       </div>
 
-      <!-- ── Tab: Tarifs ── -->
-      <div id="tab-tarifs" style="display:none">
+      <!-- Tab: GitHub -->
+      <div id="tab-github" style="display:none">
         <div class="admin-header">
-          <h1>💶 Gestion des tarifs</h1>
-          <p>Modifiez les prix affichés sur le site. Cliquez sur un montant pour l'éditer, puis enregistrez.</p>
+          <h1>⚙️ Configuration GitHub</h1>
+          <p>Connectez votre depot GitHub pour publier les modifications des soins et tarifs.</p>
         </div>
-
-        <div class="tarif-grid" id="tarifGrid">
-          <!-- Généré par JS -->
-        </div>
-
-        <div class="save-tarifs-bar">
-          <button class="btn-reset-tarifs" onclick="resetTarifs()">↺ Prix d'origine</button>
-          <button class="btn-save-tarifs" onclick="saveTarifs()">💾 Publier sur GitHub</button>
-        </div>
-
-        <!-- Config GitHub -->
-        <div id="ghConfigSection" class="admin-card" style="margin-top:32px; max-width:520px;">
-          <h3>⚙️ Configuration GitHub</h3>
-          <p>Entrez une seule fois vos identifiants GitHub. Ils sont sauvegardés sur cet appareil.</p>
+        <div class="admin-card" style="max-width:520px;">
+          <h3>🔗 Connexion au depot</h3>
+          <p>Entrez vos identifiants GitHub. Ils sont chiffres et stockes sur cet appareil.</p>
           <div style="display:flex; flex-direction:column; gap:.65rem; margin-top:1rem;">
             <div>
               <label style="font-size:.75rem; color:rgba(255,255,255,.4); letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:.3rem;">Nom d'utilisateur GitHub</label>
-              <input id="ghOwner" type="text" placeholder="ex : sophietuina" style="width:100%;padding:.6rem .8rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;font-size:.87rem;outline:none;" />
+              <input id="ghOwner" type="text" class="svc-input" placeholder="ex : dg280" />
             </div>
             <div>
               <label style="font-size:.75rem; color:rgba(255,255,255,.4); letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:.3rem;">Nom du repo</label>
-              <input id="ghRepo" type="text" placeholder="ex : sophie-tuina-site" style="width:100%;padding:.6rem .8rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;font-size:.87rem;outline:none;" />
+              <input id="ghRepo" type="text" class="svc-input" placeholder="ex : chez-sophie-massage" />
             </div>
             <div>
-              <label style="font-size:.75rem; color:rgba(255,255,255,.4); letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:.3rem;">Personal Access Token <span style="color:rgba(255,255,255,.25)">(GitHub → Settings → Developer settings → Tokens)</span></label>
-              <input id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx" style="width:100%;padding:.6rem .8rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;font-size:.87rem;outline:none;" />
+              <label style="font-size:.75rem; color:rgba(255,255,255,.4); letter-spacing:1px; text-transform:uppercase; display:block; margin-bottom:.3rem;">Personal Access Token</label>
+              <input id="ghToken" type="password" class="svc-input" placeholder="ghp_xxxxxxxxxxxx" />
             </div>
             <button class="btn-upload" style="margin-top:.3rem" onclick="saveGhConfig()">💾 Sauvegarder la configuration</button>
           </div>
+          <div id="ghStatus" style="margin-top:1rem; padding:.8rem; border-radius:7px; font-size:.8rem; background:rgba(255,255,255,.04); color:rgba(255,255,255,.4);"></div>
           <p style="margin-top:1rem; font-size:.74rem; background:rgba(255,255,255,.04); padding:.8rem; border-radius:7px; color:rgba(255,255,255,.35); line-height:1.6;">
-            🔒 Le token est stocké uniquement sur cet appareil (localStorage). Le repo doit contenir le fichier <code>tarifs.json</code>. Créer un token avec permission <strong>Contents: Read & Write</strong> uniquement.
+            🔒 Le token est chiffre avec votre mot de passe admin (AES-GCM) avant d'etre stocke.
+            Le repo doit contenir le fichier <code>tarifs.json</code>.
+            Creer un token avec permission <strong>Contents: Read & Write</strong> uniquement.
           </p>
         </div>
       </div>
 
-      <!-- ── Tab: Infos ── -->
-      <div id="tab-infos" style="display:none">
-        <div class="admin-header">
-          <h1>📝 Informations du site</h1>
-          <p>Rappel des informations affichées sur le site public.</p>
-        </div>
-        <div class="admin-card" style="max-width:560px">
-          <h3>📋 Fiche établissement</h3>
-          <p style="margin-bottom:1.5rem">Ces informations sont intégrées dans le code du site.</p>
-          <table style="width:100%; font-size:.87rem; border-collapse:collapse;">
-            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4); width:40%">Nom</td><td style="color:white">Chez Sophie Massage Tuina</td></tr>
-            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Adresse</td><td style="color:white">14C Bd de Curepipe Apt S, 33260 La Teste-de-Buch</td></tr>
-            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Téléphone</td><td style="color:white">06 27 14 62 31</td></tr>
-            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Horaires</td><td style="color:white">Lun–Dim · 9h00–20h00</td></tr>
-            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Note Google</td><td style="color:#D4AF37">★★★★★ 5,0 / 205 avis</td></tr>
-            <tr><td style="padding:.5rem 0; color:rgba(255,255,255,.4)">Domaine</td><td style="color:white">sophie-tuina.fr</td></tr>
-          </table>
-          <p style="margin-top:1.2rem; font-size:.75rem; background:rgba(255,255,255,.04); padding:.8rem; border-radius:7px; color:rgba(255,255,255,.4);">
-            💡 Pour modifier ces informations, éditez directement le fichier <code>index.html</code>.
-          </p>
-        </div>
-      </div>
-
-      <!-- ── Tab: Sécurité ── -->
+      <!-- Tab: Securite -->
       <div id="tab-securite" style="display:none">
         <div class="admin-header">
-          <h1>🔒 Sécurité</h1>
+          <h1>🔒 Securite</h1>
           <p>Modifiez votre mot de passe d'administration.</p>
         </div>
         <div class="admin-card" style="max-width:400px">
           <h3>🔑 Changer le mot de passe</h3>
-          <p>Choisissez un mot de passe sécurisé d'au moins 8 caractères.</p>
+          <p>Le mot de passe est stocke sous forme de hash securise (SHA-256). Minimum 8 caracteres.</p>
           <div class="change-pwd-form">
             <input type="password" id="currentPwd" placeholder="Mot de passe actuel" />
-            <input type="password" id="newPwd" placeholder="Nouveau mot de passe" />
+            <input type="password" id="newPwd" placeholder="Nouveau mot de passe (min 8 car.)" />
             <input type="password" id="confirmPwd" placeholder="Confirmer le nouveau mot de passe" />
             <button class="btn-upload" onclick="changePwd()">💾 Enregistrer</button>
             <p id="pwdMsg" style="font-size:.8rem;text-align:center;"></p>
           </div>
+        </div>
+        <div class="admin-card" style="max-width:400px; margin-top:16px;">
+          <h3>🔐 Session</h3>
+          <p>La session expire automatiquement apres 30 minutes d'inactivite.</p>
+          <p style="font-size:.8rem; color:rgba(255,255,255,.5); margin-top:.5rem;" id="sessionInfo"></p>
         </div>
       </div>
 
@@ -377,77 +389,153 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // ── Config GitHub (stockée en localStorage côté admin) ──
-    function ghConfig() {
-      return {
-        owner: localStorage.getItem('gh_owner') || '',
-        repo:  localStorage.getItem('gh_repo')  || '',
-        token: localStorage.getItem('gh_token') || '',
-        path:  'tarifs.json',
-      };
-    }
-    function ghRawUrl() {
-      const { owner, repo, path } = ghConfig();
-      return owner && repo ? `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}` : '';
-    }
-    function ghConfigured() {
-      const c = ghConfig();
-      return c.owner && c.repo && c.token;
+    // ══════════════════════════════════════════════════════
+    //  SECURITE : hash SHA-256 + chiffrement AES-GCM
+    // ══════════════════════════════════════════════════════
+
+    async function sha256(text) {
+      const data = new TextEncoder().encode(text);
+      const hash = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    // ── Tarifs par défaut ───────────────────────────────────
-    const DEFAULT_TARIFS = [
-      { key: 'tuina',       icon: '🌿', name: 'Massage Tuina Corps',
-        rows: [{label:'30 min', price:'45 €'},{label:'1 heure', price:'80 €'},{label:'1h30', price:'110 €'},{label:'2 heures', price:'148 €'}] },
-      { key: 'relaxant',    icon: '💆', name: 'Massage Relaxant Corps',
-        rows: [{label:'1 heure', price:'90 €'},{label:'1h30', price:'128 €'},{label:'2 heures', price:'168 €'}] },
-      { key: 'tete',        icon: '✨', name: 'Massage Relaxant Tête',
-        rows: [{label:'30 min', price:'35 €'}] },
-      { key: 'pieds',       icon: '🦶', name: 'Massage Relaxant Pieds',
-        rows: [{label:'30 min', price:'40 €'}] },
-      { key: 'ceinture',    icon: '🎀', name: 'Ceinture',
-        rows: [{label:'30 min', price:'50 €'}] },
-      { key: 'moxa',        icon: '🔥', name: 'Moxibustion',
-        rows: [{label:'La séance', price:'80 €'}] },
-      { key: 'compresse',   icon: '🌡️', name: 'Compresse Chaude Médicinale',
-        rows: [{label:'30 min – 1h', price:'40 €'}] },
-      { key: 'bainpieds',   icon: '🛁', name: 'Bain de Pieds',
-        rows: [{label:'30 min', price:'35 €'},{label:'Cure 10 séances', price:'300 €'}] },
-      { key: 'bain',        icon: '🚿', name: 'Bain',
-        rows: [{label:'25–40 min', price:'85 €'}] },
-    ];
-
-    // ── Admin password ──────────────────────────────────────
-    function getAdminPwd() {
-      return localStorage.getItem('cs_admin_pwd') || 'sophie2026';
+    async function deriveKey(password) {
+      const enc = new TextEncoder().encode(password);
+      const keyMaterial = await crypto.subtle.importKey('raw', enc, 'PBKDF2', false, ['deriveKey']);
+      const salt = new TextEncoder().encode('chez-sophie-salt-v1');
+      return crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['encrypt', 'decrypt']
+      );
     }
 
-    function login() {
+    async function encrypt(text, password) {
+      const key = await deriveKey(password);
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const encoded = new TextEncoder().encode(text);
+      const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded);
+      const combined = new Uint8Array(iv.length + ciphertext.byteLength);
+      combined.set(iv);
+      combined.set(new Uint8Array(ciphertext), iv.length);
+      return btoa(String.fromCharCode(...combined));
+    }
+
+    async function decrypt(base64, password) {
+      try {
+        const combined = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+        const iv = combined.slice(0, 12);
+        const ciphertext = combined.slice(12);
+        const key = await deriveKey(password);
+        const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+        return new TextDecoder().decode(decrypted);
+      } catch { return null; }
+    }
+
+    // ══════════════════════════════════════════════════════
+    //  SESSION & AUTH
+    // ══════════════════════════════════════════════════════
+
+    const SESSION_DURATION = 30 * 60 * 1000; // 30 min
+    const MAX_ATTEMPTS = 5;
+    const LOCKOUT_DURATION = 5 * 60 * 1000; // 5 min
+    let _sessionPwd = null; // mot de passe en memoire (session only)
+    let _sessionTimer = null;
+
+    function getAttempts() {
+      const data = JSON.parse(localStorage.getItem('cs_login_attempts') || '{"count":0,"lockUntil":0}');
+      return data;
+    }
+    function setAttempts(count, lockUntil) {
+      localStorage.setItem('cs_login_attempts', JSON.stringify({ count, lockUntil }));
+    }
+
+    async function login() {
+      const attempts = getAttempts();
+      if (attempts.lockUntil > Date.now()) {
+        const remaining = Math.ceil((attempts.lockUntil - Date.now()) / 1000);
+        document.getElementById('loginAttempts').textContent = `Compte verrouille. Reessayez dans ${remaining}s.`;
+        return;
+      }
+
       const val = document.getElementById('pwdInput').value;
-      if (val === getAdminPwd()) {
+      if (!val) return;
+
+      const hash = await sha256(val);
+      const storedHash = localStorage.getItem('cs_admin_hash');
+
+      // Premier lancement : pas de hash stocke, on utilise le mot de passe par defaut
+      let valid = false;
+      if (!storedHash) {
+        // Premiere connexion : on hash et stocke le mdp par defaut
+        const defaultHash = await sha256('sophie2026');
+        if (hash === defaultHash) {
+          localStorage.setItem('cs_admin_hash', defaultHash);
+          valid = true;
+        }
+      } else {
+        valid = (hash === storedHash);
+      }
+
+      if (valid) {
+        _sessionPwd = val;
+        setAttempts(0, 0);
+        startSession();
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('admin-screen').style.display = 'block';
         loadPreviews();
         prefillGhConfig();
-        loadTarifsAdmin();
+        loadServicesAdmin();
+        updateSessionInfo();
       } else {
+        const newCount = attempts.count + 1;
+        if (newCount >= MAX_ATTEMPTS) {
+          setAttempts(newCount, Date.now() + LOCKOUT_DURATION);
+          document.getElementById('loginAttempts').textContent = `Trop de tentatives. Verrouille pour 5 min.`;
+        } else {
+          setAttempts(newCount, 0);
+          document.getElementById('loginAttempts').textContent = `Tentative ${newCount}/${MAX_ATTEMPTS}`;
+        }
         document.getElementById('loginError').style.display = 'block';
         document.getElementById('pwdInput').value = '';
       }
     }
 
+    function startSession() {
+      if (_sessionTimer) clearTimeout(_sessionTimer);
+      _sessionTimer = setTimeout(() => {
+        showToast('⏰ Session expiree');
+        logout();
+      }, SESSION_DURATION);
+    }
+
+    function resetSessionTimer() {
+      if (_sessionPwd) startSession();
+    }
+    document.addEventListener('click', resetSessionTimer);
+    document.addEventListener('keydown', resetSessionTimer);
+
     function logout() {
+      _sessionPwd = null;
+      if (_sessionTimer) clearTimeout(_sessionTimer);
       document.getElementById('login-screen').style.display = 'flex';
       document.getElementById('admin-screen').style.display = 'none';
       document.getElementById('pwdInput').value = '';
     }
 
+    function updateSessionInfo() {
+      const el = document.getElementById('sessionInfo');
+      if (el) el.textContent = `Session active. Expire apres 30 min d'inactivite.`;
+    }
+
     function showTab(tab) {
-      ['visuels','tarifs','infos','securite'].forEach(t => {
+      ['soins','visuels','github','securite'].forEach(t => {
         document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none';
       });
       document.querySelectorAll('.sidebar-nav a').forEach((a,i) => {
-        a.classList.toggle('active', ['visuels','tarifs','infos','securite'][i]===tab);
+        a.classList.toggle('active', ['soins','visuels','github','securite'][i]===tab);
       });
     }
 
@@ -457,11 +545,14 @@
       setTimeout(() => t.classList.remove('show'), 2800);
     }
 
-    // ── Image handling ─────────────────────────────────────
+    // ══════════════════════════════════════════════════════
+    //  IMAGES
+    // ══════════════════════════════════════════════════════
+
     function previewImage(input, previewId, placeholderId, storageKey) {
       const file = input.files[0];
       if (!file) return;
-      if (file.size > 5 * 1024 * 1024) { showToast('⚠️ Image trop lourde (max 5 Mo)'); return; }
+      if (file.size > 5 * 1024 * 1024) { showToast('Image trop lourde (max 5 Mo)'); return; }
       const reader = new FileReader();
       reader.onload = (e) => {
         const data = e.target.result;
@@ -472,7 +563,7 @@
         img.src = data;
         placeholder.style.display = 'none';
         localStorage.setItem(storageKey, data);
-        showToast('✅ Image enregistrée !');
+        showToast('Image enregistree !');
       };
       reader.readAsDataURL(file);
     }
@@ -483,14 +574,7 @@
       if (img) img.remove();
       document.getElementById(placeholderId).style.display = 'flex';
       localStorage.removeItem(storageKey);
-      showToast('🗑 Image supprimée');
-    }
-
-    function prefillGhConfig() {
-      const c = ghConfig();
-      if (c.owner) document.getElementById('ghOwner').value = c.owner;
-      if (c.repo)  document.getElementById('ghRepo').value  = c.repo;
-      if (c.token) document.getElementById('ghToken').value = c.token;
+      showToast('Image supprimee');
     }
 
     function loadPreviews() {
@@ -508,100 +592,227 @@
       });
     }
 
-    // ── Tarifs editor ──────────────────────────────────────
-    let _currentSha = null; // SHA du fichier GitHub (requis pour le PUT)
+    // ══════════════════════════════════════════════════════
+    //  GITHUB CONFIG (chiffre avec AES)
+    // ══════════════════════════════════════════════════════
 
-    function mergeWithDefaults(saved) {
-      return DEFAULT_TARIFS.map(svc => ({
-        ...svc,
-        rows: svc.rows.map((row, i) => ({
-          label: row.label,
-          price: (saved[svc.key] && saved[svc.key][i]) ? saved[svc.key][i] : row.price
-        }))
-      }));
+    function ghConfig() {
+      return {
+        owner: localStorage.getItem('gh_owner') || '',
+        repo:  localStorage.getItem('gh_repo')  || '',
+        path:  'tarifs.json',
+      };
     }
 
-    function renderTarifGrid(tarifs) {
-      const grid = document.getElementById('tarifGrid');
+    async function getGhToken() {
+      const encrypted = localStorage.getItem('gh_token_enc');
+      if (!encrypted || !_sessionPwd) return '';
+      const token = await decrypt(encrypted, _sessionPwd);
+      return token || '';
+    }
 
-      // Bandeau statut GitHub
-      const configured = ghConfigured();
-      const statusHtml = `
-        <div style="grid-column:1/-1; padding:.9rem 1.2rem; border-radius:10px; margin-bottom:4px;
-          background:${configured ? 'rgba(122,158,126,.12)' : 'rgba(212,175,55,.1)'};
-          border:1px solid ${configured ? 'rgba(122,158,126,.3)' : 'rgba(212,175,55,.3)'};
-          display:flex; align-items:center; gap:.7rem; font-size:.83rem; color:rgba(255,255,255,.7);">
-          <span>${configured ? '✅' : '⚙️'}</span>
-          <span>${configured
-            ? `Connecté à <strong style="color:white">${ghConfig().owner}/${ghConfig().repo}</strong>`
-            : 'GitHub non configuré — allez dans <strong style="color:white">Configuration GitHub</strong> ci-dessous'
-          }</span>
-        </div>
-      `;
+    function ghConfigured() {
+      const c = ghConfig();
+      return c.owner && c.repo && localStorage.getItem('gh_token_enc');
+    }
 
-      grid.innerHTML = statusHtml + tarifs.map(svc => `
-        <div class="tarif-card">
-          <h4>${svc.icon} ${svc.name}</h4>
-          ${svc.rows.map((row, i) => `
-            <div class="tarif-row">
-              <span class="tarif-label">${row.label}</span>
-              <input class="tarif-price-input" type="text"
-                data-svc="${svc.key}" data-idx="${i}"
-                value="${row.price}" />
-            </div>
-          `).join('')}
+    async function prefillGhConfig() {
+      const c = ghConfig();
+      if (c.owner) document.getElementById('ghOwner').value = c.owner;
+      if (c.repo)  document.getElementById('ghRepo').value  = c.repo;
+      const token = await getGhToken();
+      if (token) document.getElementById('ghToken').value = token;
+      updateGhStatus();
+    }
+
+    function updateGhStatus() {
+      const el = document.getElementById('ghStatus');
+      if (ghConfigured()) {
+        const c = ghConfig();
+        el.innerHTML = `✅ Connecte a <strong style="color:white">${c.owner}/${c.repo}</strong>`;
+        el.style.background = 'rgba(122,158,126,.12)';
+        el.style.borderLeft = '3px solid var(--sage)';
+      } else {
+        el.innerHTML = `⚠️ Non configure — remplissez les champs ci-dessus`;
+        el.style.background = 'rgba(212,175,55,.08)';
+        el.style.borderLeft = '3px solid var(--gold)';
+      }
+    }
+
+    async function saveGhConfig() {
+      const owner = document.getElementById('ghOwner').value.trim();
+      const repo  = document.getElementById('ghRepo').value.trim();
+      const token = document.getElementById('ghToken').value.trim();
+      if (!owner || !repo || !token) { showToast('Remplissez tous les champs'); return; }
+      if (!_sessionPwd) { showToast('Session expiree, reconnectez-vous'); return; }
+
+      localStorage.setItem('gh_owner', owner);
+      localStorage.setItem('gh_repo', repo);
+      const encrypted = await encrypt(token, _sessionPwd);
+      localStorage.setItem('gh_token_enc', encrypted);
+
+      showToast('Configuration GitHub sauvegardee');
+      updateGhStatus();
+      loadServicesAdmin();
+    }
+
+    // ══════════════════════════════════════════════════════
+    //  SERVICES EDITOR
+    // ══════════════════════════════════════════════════════
+
+    let _services = [];
+    let _currentSha = null;
+
+    function renderServicesGrid() {
+      const grid = document.getElementById('svcGrid');
+      grid.innerHTML = _services.map((svc, si) => `
+        <div class="svc-card" data-idx="${si}">
+          <div class="svc-card-header">
+            <h4>${svc.icon || '🌿'} ${svc.name || 'Nouveau soin'}</h4>
+            <button class="btn-sm btn-del-svc" onclick="deleteService(${si})">🗑 Supprimer</button>
+          </div>
+          <div class="svc-field">
+            <label>Icone (emoji)</label>
+            <input class="svc-input svc-input-sm" value="${escHtml(svc.icon)}" oninput="updateSvc(${si},'icon',this.value)" />
+          </div>
+          <div class="svc-field">
+            <label>Nom du soin</label>
+            <input class="svc-input" value="${escHtml(svc.name)}" oninput="updateSvc(${si},'name',this.value)" />
+          </div>
+          <div class="svc-field">
+            <label>Description courte (reservation)</label>
+            <input class="svc-input" value="${escHtml(svc.shortDesc)}" oninput="updateSvc(${si},'shortDesc',this.value)" />
+          </div>
+          <div class="svc-field">
+            <label>Description complete (carte du site)</label>
+            <textarea class="svc-input" oninput="updateSvc(${si},'description',this.value)">${escHtml(svc.description)}</textarea>
+          </div>
+          <div class="svc-field">
+            <label>Note (optionnel, affiche en italique)</label>
+            <input class="svc-input" value="${escHtml(svc.note || '')}" oninput="updateSvc(${si},'note',this.value)" />
+          </div>
+          <div class="svc-field">
+            <label>Tarifs</label>
+            ${svc.rows.map((row, ri) => `
+              <div class="tarif-row">
+                <input class="svc-input" value="${escHtml(row.label)}" placeholder="Duree" oninput="updateRow(${si},${ri},'label',this.value)" />
+                <input class="svc-input svc-input-price" value="${escHtml(row.price)}" placeholder="Prix" oninput="updateRow(${si},${ri},'price',this.value)" />
+                <button class="btn-sm btn-del-row" onclick="deleteRow(${si},${ri})">✕</button>
+              </div>
+            `).join('')}
+            <button class="btn-sm btn-add-row" onclick="addRow(${si})" style="margin-top:.4rem">+ Ajouter un tarif</button>
+          </div>
         </div>
       `).join('');
     }
 
-    async function loadTarifsAdmin() {
-      const rawUrl = ghRawUrl();
-      if (!rawUrl) {
-        renderTarifGrid(DEFAULT_TARIFS);
+    function escHtml(s) {
+      return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function updateSvc(idx, field, value) {
+      _services[idx][field] = value;
+    }
+
+    function updateRow(svcIdx, rowIdx, field, value) {
+      _services[svcIdx].rows[rowIdx][field] = value;
+    }
+
+    function addRow(svcIdx) {
+      _services[svcIdx].rows.push({ label: '', price: '' });
+      renderServicesGrid();
+    }
+
+    function deleteRow(svcIdx, rowIdx) {
+      if (_services[svcIdx].rows.length <= 1) {
+        showToast('Un soin doit avoir au moins un tarif');
+        return;
+      }
+      _services[svcIdx].rows.splice(rowIdx, 1);
+      renderServicesGrid();
+    }
+
+    function addService() {
+      _services.push({
+        key: 'soin_' + Date.now(),
+        icon: '🌿',
+        name: '',
+        shortDesc: '',
+        description: '',
+        note: '',
+        rows: [{ label: '', price: '' }]
+      });
+      renderServicesGrid();
+      // Scroll to new card
+      const grid = document.getElementById('svcGrid');
+      grid.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showToast('Nouveau soin ajoute');
+    }
+
+    function deleteService(idx) {
+      const name = _services[idx].name || 'ce soin';
+      if (!confirm(`Supprimer "${name}" ?`)) return;
+      _services.splice(idx, 1);
+      renderServicesGrid();
+      showToast('Soin supprime');
+    }
+
+    async function loadServicesAdmin() {
+      if (!ghConfigured()) {
+        _services = getDefaultServices();
+        renderServicesGrid();
         return;
       }
       try {
-        // Fetch via API (pour avoir le SHA)
-        const { owner, repo, path, token } = ghConfig();
+        const { owner, repo, path } = ghConfig();
+        const token = await getGhToken();
+        if (!token) { _services = getDefaultServices(); renderServicesGrid(); return; }
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
           headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
         });
-        if (!res.ok) throw new Error('API error ' + res.status);
+        if (!res.ok) throw new Error('API ' + res.status);
         const file = await res.json();
         _currentSha = file.sha;
         const data = JSON.parse(atob(file.content.replace(/\n/g, '')));
-        renderTarifGrid(mergeWithDefaults(data));
-        showToast('✅ Tarifs chargés depuis GitHub');
+        _services = data.services || getDefaultServices();
+        renderServicesGrid();
+        showToast('Soins charges depuis GitHub');
       } catch(e) {
-        renderTarifGrid(DEFAULT_TARIFS);
-        showToast('⚠️ Impossible de charger depuis GitHub — prix par défaut affichés');
+        _services = getDefaultServices();
+        renderServicesGrid();
+        showToast('Impossible de charger depuis GitHub — donnees par defaut');
       }
     }
 
-    async function saveTarifs() {
+    async function saveServices() {
       if (!ghConfigured()) {
-        showToast('⚠️ Configurez d\'abord GitHub ci-dessous');
-        document.getElementById('ghConfigSection').scrollIntoView({ behavior: 'smooth' });
+        showToast('Configurez GitHub dans l\'onglet ⚙️ GitHub');
+        showTab('github');
         return;
       }
-      // Collecter les prix
-      const result = {};
-      document.querySelectorAll('.tarif-price-input').forEach(input => {
-        const svc = input.dataset.svc;
-        const idx = parseInt(input.dataset.idx);
-        if (!result[svc]) result[svc] = [];
-        result[svc][idx] = input.value.trim();
-      });
+      // Validation
+      for (const svc of _services) {
+        if (!svc.name.trim()) { showToast('Chaque soin doit avoir un nom'); return; }
+        for (const row of svc.rows) {
+          if (!row.label.trim() || !row.price.trim()) {
+            showToast(`Completez tous les tarifs de "${svc.name}"`); return;
+          }
+        }
+      }
 
-      const { owner, repo, path, token } = ghConfig();
-      const content = btoa(unescape(encodeURIComponent(JSON.stringify(result, null, 2))));
+      const token = await getGhToken();
+      if (!token) { showToast('Session expiree, reconnectez-vous'); return; }
+
+      const { owner, repo, path } = ghConfig();
+      const jsonContent = JSON.stringify({ services: _services }, null, 2);
+      const content = btoa(unescape(encodeURIComponent(jsonContent)));
       const body = {
-        message: '💶 Mise à jour des tarifs via admin',
+        message: 'Mise a jour des soins et tarifs via admin',
         content,
-        ...((_currentSha) ? { sha: _currentSha } : {})
+        ...(_currentSha ? { sha: _currentSha } : {})
       };
 
-      showToast('⏳ Enregistrement en cours...');
+      showToast('Enregistrement en cours...');
       try {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
           method: 'PUT',
@@ -613,47 +824,62 @@
           throw new Error(err.message);
         }
         const data = await res.json();
-        _currentSha = data.content.sha; // mettre à jour le SHA
-        // Aussi mettre à jour l'URL dans index.html (localStorage)
-        localStorage.setItem('cs_tarifs_url', `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}`);
-        showToast('✅ Tarifs publiés sur GitHub ! Visible sur le site dans 1–2 min.');
+        _currentSha = data.content.sha;
+        showToast('Soins et tarifs publies sur GitHub !');
       } catch(e) {
-        showToast('❌ Erreur : ' + e.message);
+        showToast('Erreur : ' + e.message);
       }
     }
 
-    async function resetTarifs() {
-      if (!confirm('Remettre tous les prix d\'origine ?')) return;
-      renderTarifGrid(DEFAULT_TARIFS);
-      // Pré-remplir les inputs avec les valeurs par défaut sans sauvegarder
-      showToast('↺ Prix d\'origine restaurés — cliquez Enregistrer pour publier');
+    function getDefaultServices() {
+      return [
+        { key:'tuina', icon:'🌿', name:'Massage Tuina Corps', shortDesc:'Massage chinois traditionnel sur meridiens', description:'Le massage chinois traditionnel. Pratique habille, il agit sur les meridiens pour liberer les tensions et reequilibrer l\'energie vitale.', note:'', rows:[{label:'30 minutes',price:'45 €'},{label:'1 heure',price:'80 €'},{label:'1h 30',price:'110 €'},{label:'2 heures',price:'148 €'}] },
+        { key:'relaxant', icon:'💆', name:'Massage Relaxant Corps', shortDesc:'Detente musculaire profonde', description:'Un soin profond pour relacher les tensions musculaires et retrouver un equilibre corps-esprit durable.', note:'', rows:[{label:'1 heure',price:'90 €'},{label:'1h 30',price:'128 €'},{label:'2 heures',price:'168 €'}] },
+        { key:'tete', icon:'✨', name:'Massage Relaxant Tete', shortDesc:'Soin cible tete & nuque', description:'Soin localise pour une detente precise de la tete et de la nuque.', note:'', rows:[{label:'30 min',price:'35 €'}] },
+        { key:'pieds', icon:'🦶', name:'Massage Relaxant Pieds', shortDesc:'Soin cible reflexologie', description:'Soin localise pour une detente precise des pieds par reflexologie plantaire.', note:'', rows:[{label:'30 min',price:'40 €'}] },
+        { key:'ceinture', icon:'🎀', name:'Ceinture', shortDesc:'Soin cible zone lombaire', description:'Soin cible sur la zone lombaire pour soulager les douleurs du dos.', note:'Eviter la douche pendant 2h apres la seance.', rows:[{label:'30 min',price:'50 €'}] },
+        { key:'moxa', icon:'🔥', name:'Moxibustion', shortDesc:'Chaleur therapeutique sur meridiens', description:'Technique ancestrale consistant a chauffer des points d\'acupuncture avec du moxa pour tonifier l\'energie et soulager les douleurs profondes.', note:'', rows:[{label:'La seance',price:'80 €'}] },
+        { key:'compresse', icon:'🌡️', name:'Compresse Chaude Medicinale', shortDesc:'Plantes chinoises chaudes', description:'Application de compresses a base de plantes medicinales chinoises. Favorise la detente musculaire profonde et la circulation.', note:'', rows:[{label:'30 min – 1h',price:'40 €'}] },
+        { key:'bainpieds', icon:'🛁', name:'Bain de Pieds', shortDesc:'Rituel detente & purification', description:'Rituel de detente et purification pour une relaxation totale des pieds.', note:'', rows:[{label:'30 min',price:'35 €'},{label:'Cure 10 seances',price:'300 €'}] },
+        { key:'bain', icon:'🚿', name:'Bain', shortDesc:'Soin bain complet relaxant', description:'Soin bain complet pour une relaxation totale du corps.', note:'', rows:[{label:'25–40 min',price:'85 €'}] },
+      ];
     }
 
-    function saveGhConfig() {
-      const owner = document.getElementById('ghOwner').value.trim();
-      const repo  = document.getElementById('ghRepo').value.trim();
-      const token = document.getElementById('ghToken').value.trim();
-      if (!owner || !repo || !token) { showToast('⚠️ Remplissez tous les champs'); return; }
-      localStorage.setItem('gh_owner', owner);
-      localStorage.setItem('gh_repo', repo);
-      localStorage.setItem('gh_token', token);
-      // Sauvegarder l'URL raw pour index.html
-      localStorage.setItem('cs_tarifs_url', `https://raw.githubusercontent.com/${owner}/${repo}/main/tarifs.json`);
-      showToast('✅ Configuration GitHub sauvegardée');
-      loadTarifsAdmin(); // recharger avec le bon token
-    }
+    // ══════════════════════════════════════════════════════
+    //  PASSWORD CHANGE
+    // ══════════════════════════════════════════════════════
 
-    // ── Password change ────────────────────────────────────
-    function changePwd() {
-      const current = document.getElementById('currentPwd').value;
-      const newP    = document.getElementById('newPwd').value;
-      const confirm = document.getElementById('confirmPwd').value;
-      const msg = document.getElementById('pwdMsg');
-      if (current !== getAdminPwd()) { msg.style.color='#ff7675'; msg.textContent='Mot de passe actuel incorrect'; return; }
-      if (newP.length < 6) { msg.style.color='#ff7675'; msg.textContent='Minimum 6 caractères'; return; }
-      if (newP !== confirm) { msg.style.color='#ff7675'; msg.textContent='Les mots de passe ne correspondent pas'; return; }
-      localStorage.setItem('cs_admin_pwd', newP);
-      msg.style.color='#6fcf97'; msg.textContent='✅ Mot de passe mis à jour !';
+    async function changePwd() {
+      const current  = document.getElementById('currentPwd').value;
+      const newP     = document.getElementById('newPwd').value;
+      const confirmP = document.getElementById('confirmPwd').value;
+      const msg      = document.getElementById('pwdMsg');
+
+      const currentHash = await sha256(current);
+      const storedHash  = localStorage.getItem('cs_admin_hash');
+
+      if (currentHash !== storedHash) {
+        msg.style.color = '#ff7675'; msg.textContent = 'Mot de passe actuel incorrect'; return;
+      }
+      if (newP.length < 8) {
+        msg.style.color = '#ff7675'; msg.textContent = 'Minimum 8 caracteres'; return;
+      }
+      if (newP !== confirmP) {
+        msg.style.color = '#ff7675'; msg.textContent = 'Les mots de passe ne correspondent pas'; return;
+      }
+
+      const newHash = await sha256(newP);
+      localStorage.setItem('cs_admin_hash', newHash);
+
+      // Re-chiffrer le token GitHub avec le nouveau mot de passe
+      const oldToken = await getGhToken();
+      _sessionPwd = newP;
+      if (oldToken) {
+        const reEncrypted = await encrypt(oldToken, newP);
+        localStorage.setItem('gh_token_enc', reEncrypted);
+      }
+
+      msg.style.color = '#6fcf97'; msg.textContent = 'Mot de passe mis a jour !';
       document.getElementById('currentPwd').value = '';
       document.getElementById('newPwd').value = '';
       document.getElementById('confirmPwd').value = '';

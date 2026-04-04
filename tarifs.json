@@ -1,11 +1,109 @@
 {
-  "tuina":     ["45 €", "80 €", "110 €", "148 €"],
-  "relaxant":  ["90 €", "128 €", "168 €"],
-  "tete":      ["35 €"],
-  "pieds":     ["40 €"],
-  "ceinture":  ["50 €"],
-  "moxa":      ["80 €"],
-  "compresse": ["40 €"],
-  "bainpieds": ["35 €", "300 €"],
-  "bain":      ["85 €"]
+  "services": [
+    {
+      "key": "tuina",
+      "icon": "\ud83c\udf3f",
+      "name": "Massage Tuina Corps",
+      "shortDesc": "Massage chinois traditionnel sur m\u00e9ridiens",
+      "description": "Le massage chinois traditionnel. Pratiqu\u00e9 habill\u00e9, il agit sur les m\u00e9ridiens pour lib\u00e9rer les tensions et r\u00e9\u00e9quilibrer l'\u00e9nergie vitale.",
+      "note": "",
+      "rows": [
+        { "label": "30 minutes", "price": "45 \u20ac" },
+        { "label": "1 heure", "price": "80 \u20ac" },
+        { "label": "1h 30", "price": "110 \u20ac" },
+        { "label": "2 heures", "price": "148 \u20ac" }
+      ]
+    },
+    {
+      "key": "relaxant",
+      "icon": "\ud83d\udc86",
+      "name": "Massage Relaxant Corps",
+      "shortDesc": "D\u00e9tente musculaire profonde",
+      "description": "Un soin profond pour rel\u00e2cher les tensions musculaires et retrouver un \u00e9quilibre corps-esprit durable.",
+      "note": "",
+      "rows": [
+        { "label": "1 heure", "price": "90 \u20ac" },
+        { "label": "1h 30", "price": "128 \u20ac" },
+        { "label": "2 heures", "price": "168 \u20ac" }
+      ]
+    },
+    {
+      "key": "tete",
+      "icon": "\u2728",
+      "name": "Massage Relaxant T\u00eate",
+      "shortDesc": "Soin cibl\u00e9 t\u00eate & nuque",
+      "description": "Soin localis\u00e9 pour une d\u00e9tente pr\u00e9cise de la t\u00eate et de la nuque.",
+      "note": "",
+      "rows": [
+        { "label": "30 min", "price": "35 \u20ac" }
+      ]
+    },
+    {
+      "key": "pieds",
+      "icon": "\ud83e\uddb6",
+      "name": "Massage Relaxant Pieds",
+      "shortDesc": "Soin cibl\u00e9 r\u00e9flexologie",
+      "description": "Soin localis\u00e9 pour une d\u00e9tente pr\u00e9cise des pieds par r\u00e9flexologie plantaire.",
+      "note": "",
+      "rows": [
+        { "label": "30 min", "price": "40 \u20ac" }
+      ]
+    },
+    {
+      "key": "ceinture",
+      "icon": "\ud83c\udf80",
+      "name": "Ceinture",
+      "shortDesc": "Soin cibl\u00e9 zone lombaire",
+      "description": "Soin cibl\u00e9 sur la zone lombaire pour soulager les douleurs du dos.",
+      "note": "\u00c9viter la douche pendant 2h apr\u00e8s la s\u00e9ance.",
+      "rows": [
+        { "label": "30 min", "price": "50 \u20ac" }
+      ]
+    },
+    {
+      "key": "moxa",
+      "icon": "\ud83d\udd25",
+      "name": "Moxibustion",
+      "shortDesc": "Chaleur th\u00e9rapeutique sur m\u00e9ridiens",
+      "description": "Technique ancestrale consistant \u00e0 chauffer des points d'acupuncture avec du moxa pour tonifier l'\u00e9nergie et soulager les douleurs profondes.",
+      "note": "",
+      "rows": [
+        { "label": "La s\u00e9ance", "price": "80 \u20ac" }
+      ]
+    },
+    {
+      "key": "compresse",
+      "icon": "\ud83c\udf21\ufe0f",
+      "name": "Compresse Chaude M\u00e9dicinale",
+      "shortDesc": "Plantes chinoises chaudes",
+      "description": "Application de compresses \u00e0 base de plantes m\u00e9dicinales chinoises. Favorise la d\u00e9tente musculaire profonde et la circulation.",
+      "note": "",
+      "rows": [
+        { "label": "30 min \u2013 1h", "price": "40 \u20ac" }
+      ]
+    },
+    {
+      "key": "bainpieds",
+      "icon": "\ud83d\udec1",
+      "name": "Bain de Pieds",
+      "shortDesc": "Rituel d\u00e9tente & purification",
+      "description": "Rituel de d\u00e9tente et purification pour une relaxation totale des pieds.",
+      "note": "",
+      "rows": [
+        { "label": "30 min", "price": "35 \u20ac" },
+        { "label": "Cure 10 s\u00e9ances", "price": "300 \u20ac" }
+      ]
+    },
+    {
+      "key": "bain",
+      "icon": "\ud83d\udebf",
+      "name": "Bain",
+      "shortDesc": "Soin bain complet relaxant",
+      "description": "Soin bain complet pour une relaxation totale du corps.",
+      "note": "",
+      "rows": [
+        { "label": "25\u201340 min", "price": "85 \u20ac" }
+      ]
+    }
+  ]
 }

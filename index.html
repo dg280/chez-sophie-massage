@@ -594,85 +594,8 @@
       <h2 class="section-title">Soins & Tarifs</h2>
       <div class="section-line center"></div>
     </div>
-    <div class="services-grid">
-
-      <div class="service-card reveal reveal-delay-1">
-        <div class="s-icon">🌿</div>
-        <h3>Massage Tuina Corps</h3>
-        <p class="s-desc">Le massage chinois traditionnel. Pratiqué habillé, il agit sur les méridiens pour libérer les tensions et rééquilibrer l'énergie vitale.</p>
-        <ul class="price-list">
-          <li><span>30 minutes</span><span class="price">45 €</span></li>
-          <li><span>1 heure</span><span class="price">80 €</span></li>
-          <li><span>1h 30</span><span class="price">110 €</span></li>
-          <li><span>2 heures</span><span class="price">148 €</span></li>
-        </ul>
-        <button class="book-cta" onclick="bookService('Massage Tuina Corps')">Réserver →</button>
-      </div>
-
-      <div class="service-card reveal reveal-delay-2">
-        <div class="s-icon">💆</div>
-        <h3>Massage Relaxant Corps</h3>
-        <p class="s-desc">Un soin profond pour relâcher les tensions musculaires et retrouver un équilibre corps-esprit durable.</p>
-        <ul class="price-list">
-          <li><span>1 heure</span><span class="price">90 €</span></li>
-          <li><span>1h 30</span><span class="price">128 €</span></li>
-          <li><span>2 heures</span><span class="price">168 €</span></li>
-        </ul>
-        <button class="book-cta" onclick="bookService('Massage Relaxant Corps')">Réserver →</button>
-      </div>
-
-      <div class="service-card reveal reveal-delay-3">
-        <div class="s-icon">✨</div>
-        <h3>Massages Ciblés</h3>
-        <p class="s-desc">Soins localisés pour une détente précise — tête, pieds ou ceinture selon vos besoins du moment.</p>
-        <ul class="price-list">
-          <li><span>Relaxant Tête · 30 min</span><span class="price">35 €</span></li>
-          <li><span>Relaxant Pieds · 30 min</span><span class="price">40 €</span></li>
-          <li><span>Ceinture · 30 min</span><span class="price">50 €</span></li>
-        </ul>
-        <p class="s-note">* Ceinture : éviter la douche pendant 2h après la séance.</p>
-        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.1rem;">
-          <button class="book-cta" style="margin-top:0" onclick="bookService('Massage Relaxant Tête')">Tête →</button>
-          <button class="book-cta" style="margin-top:0" onclick="bookService('Massage Relaxant Pieds')">Pieds →</button>
-          <button class="book-cta" style="margin-top:0" onclick="bookService('Ceinture')">Ceinture →</button>
-        </div>
-      </div>
-
-      <div class="service-card reveal reveal-delay-1">
-        <div class="s-icon">🔥</div>
-        <h3>Moxibustion</h3>
-        <p class="s-desc">Technique ancestrale consistant à chauffer des points d'acupuncture avec du moxa pour tonifier l'énergie et soulager les douleurs profondes.</p>
-        <ul class="price-list">
-          <li><span>La séance</span><span class="price">80 €</span></li>
-        </ul>
-        <button class="book-cta" onclick="bookService('Moxibustion')">Réserver →</button>
-      </div>
-
-      <div class="service-card reveal reveal-delay-2">
-        <div class="s-icon">🌡️</div>
-        <h3>Compresse Chaude Médicinale</h3>
-        <p class="s-desc">Application de compresses à base de plantes médicinales chinoises. Favorise la détente musculaire profonde et la circulation.</p>
-        <ul class="price-list">
-          <li><span>La séance (30 min – 1h)</span><span class="price">40 €</span></li>
-        </ul>
-        <button class="book-cta" onclick="bookService('Compresse Chaude Médicinale')">Réserver →</button>
-      </div>
-
-      <div class="service-card reveal reveal-delay-3">
-        <div class="s-icon">🛁</div>
-        <h3>Bain de Pieds & Bain</h3>
-        <p class="s-desc">Rituels de détente et purification pour une relaxation totale — en séance unique ou en cure de 10 séances.</p>
-        <ul class="price-list">
-          <li><span>Bain de pieds · 30 min</span><span class="price">35 €</span></li>
-          <li><span>10 séances bain de pieds</span><span class="price">300 €</span></li>
-          <li><span>Bain · 25 à 40 min</span><span class="price">85 €</span></li>
-        </ul>
-        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.1rem;">
-          <button class="book-cta" style="margin-top:0" onclick="bookService('Bain de Pieds')">Bain de pieds →</button>
-          <button class="book-cta" style="margin-top:0" onclick="bookService('Bain')">Bain →</button>
-        </div>
-      </div>
-
+    <div class="services-grid" id="servicesGrid">
+      <!-- Genere dynamiquement depuis tarifs.json -->
     </div>
     <p style="text-align:center;margin-top:2rem;font-size:.8rem;color:var(--stone);">
       Tous les tarifs sont indiqués TTC · Paiement sur place ou en ligne · Uniquement sur rendez-vous
@@ -738,52 +661,8 @@
 
     <!-- STEP 1 — Choisir le soin -->
     <div class="booking-panel active reveal" id="panel1">
-      <div class="service-select-grid">
-        <div class="service-sel-card" data-service="Massage Tuina Corps" data-durations='[{"label":"30 min","price":"45 €"},{"label":"1 heure","price":"80 €"},{"label":"1h30","price":"110 €"},{"label":"2 heures","price":"148 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">🌿</div>
-          <h4>Massage Tuina Corps</h4>
-          <p>Massage chinois traditionnel sur méridiens</p>
-        </div>
-        <div class="service-sel-card" data-service="Massage Relaxant Corps" data-durations='[{"label":"1 heure","price":"90 €"},{"label":"1h30","price":"128 €"},{"label":"2 heures","price":"168 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">💆</div>
-          <h4>Massage Relaxant Corps</h4>
-          <p>Détente musculaire profonde</p>
-        </div>
-        <div class="service-sel-card" data-service="Massage Relaxant Tête" data-durations='[{"label":"30 min","price":"35 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">✨</div>
-          <h4>Massage Relaxant Tête</h4>
-          <p>Soin ciblé tête & nuque</p>
-        </div>
-        <div class="service-sel-card" data-service="Massage Relaxant Pieds" data-durations='[{"label":"30 min","price":"40 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">🦶</div>
-          <h4>Massage Relaxant Pieds</h4>
-          <p>Soin ciblé réflexologie</p>
-        </div>
-        <div class="service-sel-card" data-service="Ceinture" data-durations='[{"label":"30 min","price":"50 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">🎀</div>
-          <h4>Ceinture</h4>
-          <p>Soin ciblé zone lombaire</p>
-        </div>
-        <div class="service-sel-card" data-service="Moxibustion" data-durations='[{"label":"1 séance","price":"80 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">🔥</div>
-          <h4>Moxibustion</h4>
-          <p>Chaleur thérapeutique sur méridiens</p>
-        </div>
-        <div class="service-sel-card" data-service="Compresse Chaude Médicinale" data-durations='[{"label":"30 min – 1h","price":"40 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">🌡️</div>
-          <h4>Compresse Médicinale</h4>
-          <p>Plantes chinoises chaudes</p>
-        </div>
-        <div class="service-sel-card" data-service="Bain de Pieds" data-durations='[{"label":"30 min","price":"35 €"},{"label":"Cure 10 séances","price":"300 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">🛁</div>
-          <h4>Bain de Pieds</h4>
-          <p>Rituel détente & purification</p>
-        </div>
-        <div class="service-sel-card" data-service="Bain" data-durations='[{"label":"25–40 min","price":"85 €"}]' onclick="selectService(this)">
-          <div class="s-sel-icon">🚿</div>
-          <h4>Bain</h4>
-          <p>Soin bain complet relaxant</p>
-        </div>
+      <div class="service-select-grid" id="serviceSelectGrid">
+        <!-- Genere dynamiquement depuis tarifs.json -->
       </div>
       <div class="booking-nav" style="justify-content:flex-end">
         <button class="btn-next" id="btn-to-2" onclick="goToStep(2)" disabled>Choisir la durée →</button>
@@ -1156,63 +1035,62 @@ Demande envoyée depuis sophie-tuina.fr`
     goToStep(1);
   }
 
-  // ── Tarifs GitHub ────────────────────────────────────
-  // URL du fichier tarifs.json sur GitHub (raw) — à remplacer avec le bon repo
-  // Format : https://raw.githubusercontent.com/{user}/{repo}/main/tarifs.json
-  const TARIFS_URL = localStorage.getItem('cs_tarifs_url') || '';
+  // ── Chargement dynamique des soins depuis tarifs.json ──
+  const SERVICES_URL = 'https://raw.githubusercontent.com/dg280/chez-sophie-massage/main/tarifs.json';
 
-  const TARIF_MAP = [
-    { key:'tuina',     svcName:'Massage Tuina Corps',           labels:['30 min','1 heure','1h30','2 heures'] },
-    { key:'relaxant',  svcName:'Massage Relaxant Corps',        labels:['1 heure','1h30','2 heures'] },
-    { key:'tete',      svcName:'Massage Relaxant Tête',         labels:['30 min'] },
-    { key:'pieds',     svcName:'Massage Relaxant Pieds',        labels:['30 min'] },
-    { key:'ceinture',  svcName:'Ceinture',                      labels:['30 min'] },
-    { key:'moxa',      svcName:'Moxibustion',                   labels:['La séance'] },
-    { key:'compresse', svcName:'Compresse Chaude Médicinale',   labels:['30 min – 1h'] },
-    { key:'bainpieds', svcName:'Bain de Pieds',                 labels:['30 min','Cure 10 séances'] },
-    { key:'bain',      svcName:'Bain',                          labels:['25–40 min'] },
-  ];
-
-  function applyTarifs(data) {
-    TARIF_MAP.forEach(({ key, svcName, labels }) => {
-      const prices = data[key];
-      if (!prices) return;
-      // 1. Cartes service (affichage tarifs)
-      document.querySelectorAll('.price-list').forEach(ul => {
-        const card = ul.closest('.service-card');
-        if (!card) return;
-        const h3 = card.querySelector('h3');
-        if (!h3 || !h3.textContent.includes(svcName.split(' ').slice(0,2).join(' '))) return;
-        ul.querySelectorAll('li').forEach((li, i) => {
-          if (prices[i] !== undefined) {
-            const span = li.querySelector('.price');
-            if (span) span.textContent = prices[i];
-          }
-        });
-      });
-      // 2. Formulaire réservation (data-durations)
-      const selCard = document.querySelector(`.service-sel-card[data-service="${svcName}"]`);
-      if (selCard) {
-        selCard.dataset.durations = JSON.stringify(
-          labels.map((label, i) => ({ label, price: prices[i] ?? '—' }))
-        );
-      }
-    });
+  function escHtml(s) {
+    const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
   }
 
-  // Fetch tarifs depuis GitHub raw (avec cache court 5 min)
-  async function loadTarifs() {
-    if (!TARIFS_URL) return; // pas encore configuré
+  function renderServiceCards(services) {
+    const grid = document.getElementById('servicesGrid');
+    const delays = ['reveal-delay-1','reveal-delay-2','reveal-delay-3'];
+    grid.innerHTML = services.map((svc, i) => `
+      <div class="service-card reveal ${delays[i % 3]}">
+        <div class="s-icon">${svc.icon}</div>
+        <h3>${escHtml(svc.name)}</h3>
+        <p class="s-desc">${escHtml(svc.description)}</p>
+        <ul class="price-list">
+          ${svc.rows.map(r => `<li><span>${escHtml(r.label)}</span><span class="price">${escHtml(r.price)}</span></li>`).join('')}
+        </ul>
+        ${svc.note ? `<p class="s-note">* ${escHtml(svc.note)}</p>` : ''}
+        <button class="book-cta" onclick="bookService('${svc.name.replace(/'/g,"\\'")}')">Réserver →</button>
+      </div>
+    `).join('');
+    // Re-observe reveal elements
+    grid.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  }
+
+  function renderBookingCards(services) {
+    const grid = document.getElementById('serviceSelectGrid');
+    grid.innerHTML = services.map(svc => {
+      const durations = JSON.stringify(svc.rows.map(r => ({label: r.label, price: r.price})));
+      return `
+        <div class="service-sel-card" data-service="${escHtml(svc.name)}"
+             data-durations='${escHtml(durations)}'
+             onclick="selectService(this)">
+          <div class="s-sel-icon">${svc.icon}</div>
+          <h4>${escHtml(svc.name)}</h4>
+          <p>${escHtml(svc.shortDesc || '')}</p>
+        </div>
+      `;
+    }).join('');
+  }
+
+  async function loadServices() {
     try {
-      const url = TARIFS_URL + '?t=' + Math.floor(Date.now() / 300000); // cache 5 min
+      const url = SERVICES_URL + '?t=' + Math.floor(Date.now() / 300000);
       const res = await fetch(url);
-      if (!res.ok) return;
+      if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
-      applyTarifs(data);
-    } catch(e) { /* réseau indisponible, prix par défaut utilisés */ }
+      if (data.services && data.services.length) {
+        renderServiceCards(data.services);
+        renderBookingCards(data.services);
+      }
+    } catch(e) { /* Fallback silencieux si fetch echoue */ }
   }
 
-  loadTarifs();
+  loadServices();
 
   // ── Book from service tile ──────────────────────────
   function bookService(serviceName) {
