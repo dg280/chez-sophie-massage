@@ -1047,8 +1047,20 @@ Demande envoyée depuis sophie-tuina.fr`
     goToStep(1);
   }
 
-  // ── Chargement dynamique des soins depuis tarifs.json ──
+  // ── Donnees des soins (fallback embarque + chargement GitHub) ──
   const SERVICES_URL = 'https://raw.githubusercontent.com/dg280/chez-sophie-massage/main/tarifs.json';
+
+  const DEFAULT_SERVICES = [
+    {key:'tuina',icon:'🌿',name:'Massage Tuina Corps',shortDesc:'Massage chinois traditionnel sur méridiens',description:'Le massage chinois traditionnel. Pratiqué habillé, il agit sur les méridiens pour libérer les tensions et rééquilibrer l\'énergie vitale.',note:'',rows:[{label:'30 minutes',price:'45 €'},{label:'1 heure',price:'80 €'},{label:'1h 30',price:'110 €'},{label:'2 heures',price:'148 €'}]},
+    {key:'relaxant',icon:'💆',name:'Massage Relaxant Corps',shortDesc:'Détente musculaire profonde',description:'Un soin profond pour relâcher les tensions musculaires et retrouver un équilibre corps-esprit durable.',note:'',rows:[{label:'1 heure',price:'90 €'},{label:'1h 30',price:'128 €'},{label:'2 heures',price:'168 €'}]},
+    {key:'tete',icon:'✨',name:'Massage Relaxant Tête',shortDesc:'Soin ciblé tête & nuque',description:'Soin localisé pour une détente précise de la tête et de la nuque.',note:'',rows:[{label:'30 min',price:'35 €'}]},
+    {key:'pieds',icon:'🦶',name:'Massage Relaxant Pieds',shortDesc:'Soin ciblé réflexologie',description:'Soin localisé pour une détente précise des pieds par réflexologie plantaire.',note:'',rows:[{label:'30 min',price:'40 €'}]},
+    {key:'ceinture',icon:'🎀',name:'Ceinture',shortDesc:'Soin ciblé zone lombaire',description:'Soin ciblé sur la zone lombaire pour soulager les douleurs du dos.',note:'Éviter la douche pendant 2h après la séance.',rows:[{label:'30 min',price:'50 €'}]},
+    {key:'moxa',icon:'🔥',name:'Moxibustion',shortDesc:'Chaleur thérapeutique sur méridiens',description:'Technique ancestrale consistant à chauffer des points d\'acupuncture avec du moxa pour tonifier l\'énergie et soulager les douleurs profondes.',note:'',rows:[{label:'La séance',price:'80 €'}]},
+    {key:'compresse',icon:'🌡️',name:'Compresse Chaude Médicinale',shortDesc:'Plantes chinoises chaudes',description:'Application de compresses à base de plantes médicinales chinoises. Favorise la détente musculaire profonde et la circulation.',note:'',rows:[{label:'30 min – 1h',price:'40 €'}]},
+    {key:'bainpieds',icon:'🛁',name:'Bain de Pieds',shortDesc:'Rituel détente & purification',description:'Rituel de détente et purification pour une relaxation totale des pieds.',note:'',rows:[{label:'30 min',price:'35 €'},{label:'Cure 10 séances',price:'300 €'}]},
+    {key:'bain',icon:'🚿',name:'Bain',shortDesc:'Soin bain complet relaxant',description:'Soin bain complet pour une relaxation totale du corps.',note:'',rows:[{label:'25–40 min',price:'85 €'}]},
+  ];
 
   function escHtml(s) {
     const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
@@ -1069,7 +1081,6 @@ Demande envoyée depuis sophie-tuina.fr`
         <button class="book-cta" onclick="bookService('${svc.name.replace(/'/g,"\\'")}')">Réserver →</button>
       </div>
     `).join('');
-    // Re-observe reveal elements
     grid.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   }
 
@@ -1089,20 +1100,26 @@ Demande envoyée depuis sophie-tuina.fr`
     }).join('');
   }
 
-  async function loadServices() {
+  function renderAll(services) {
+    renderServiceCards(services);
+    renderBookingCards(services);
+  }
+
+  // Afficher immediatement avec les donnees par defaut
+  renderAll(DEFAULT_SERVICES);
+
+  // Puis tenter de charger les donnees a jour depuis GitHub
+  (async function loadServices() {
     try {
       const url = SERVICES_URL + '?t=' + Math.floor(Date.now() / 300000);
       const res = await fetch(url);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       if (data.services && data.services.length) {
-        renderServiceCards(data.services);
-        renderBookingCards(data.services);
+        renderAll(data.services);
       }
-    } catch(e) { /* Fallback silencieux si fetch echoue */ }
-  }
-
-  loadServices();
+    } catch(e) { /* Donnees par defaut deja affichees */ }
+  })();
 
   // ── Book from service tile ──────────────────────────
   function bookService(serviceName) {
