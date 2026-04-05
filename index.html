@@ -684,7 +684,7 @@
         <label>Date et heure souhaitées</label>
         <div class="datetime-row">
           <div class="field-wrap" id="wrap-date">
-            <input type="date" class="form-input" id="bookDate" min="" onchange="validateDateTime()" />
+            <input type="date" class="form-input" id="bookDate" min="" onchange="onDateChange()" />
             <span class="form-error">Veuillez choisir une date</span>
           </div>
           <div class="field-wrap" id="wrap-time">
@@ -1180,6 +1180,83 @@ Demande envoyée depuis sophie-tuina.fr`
       }
     } catch(e) { /* Donnees par defaut deja affichees */ }
   })();
+
+  // ── Planning : indisponibilites ─────────────────────
+  const PLANNING_URL = 'https://raw.githubusercontent.com/dg280/chez-sophie-massage/main/planning.json';
+  let _planning = { joursFermes: [], creneauxBloques: {}, conges: [] };
+
+  const ALL_SLOTS = ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30',
+    '13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30',
+    '17:00','17:30','18:00','18:30','19:00','19:30'];
+
+  (async function loadPlanning() {
+    try {
+      const url = PLANNING_URL + '?t=' + Math.floor(Date.now() / 300000);
+      const res = await fetch(url);
+      if (!res.ok) return;
+      _planning = await res.json();
+    } catch(e) {}
+  })();
+
+  function isDateBlocked(dateStr) {
+    if (!dateStr) return false;
+    // Jour ferme ponctuel
+    if (_planning.joursFermes && _planning.joursFermes.includes(dateStr)) return true;
+    // Periode de conges
+    if (_planning.conges) {
+      for (const c of _planning.conges) {
+        if (dateStr >= c.debut && dateStr <= c.fin) return true;
+      }
+    }
+    return false;
+  }
+
+  function getBlockedSlots(dateStr) {
+    if (!dateStr || !_planning.creneauxBloques) return [];
+    return _planning.creneauxBloques[dateStr] || [];
+  }
+
+  function onDateChange() {
+    const dateStr = document.getElementById('bookDate').value;
+    const timeSelect = document.getElementById('bookTime');
+    const dateWrap = document.getElementById('wrap-date');
+
+    if (isDateBlocked(dateStr)) {
+      // Jour indisponible
+      dateWrap.classList.add('has-error');
+      dateWrap.querySelector('.form-error').textContent = 'Ce jour est indisponible';
+      dateWrap.querySelector('.form-error').style.display = 'block';
+      timeSelect.disabled = true;
+      document.getElementById('btn-to-4').disabled = true;
+      return;
+    }
+
+    dateWrap.classList.remove('has-error');
+    dateWrap.querySelector('.form-error').style.display = '';
+    timeSelect.disabled = false;
+
+    // Filtrer les creneaux bloques
+    const blocked = getBlockedSlots(dateStr);
+    timeSelect.innerHTML = '<option value="">Heure souhaitée</option>';
+    ALL_SLOTS.forEach(slot => {
+      if (!blocked.includes(slot)) {
+        const opt = document.createElement('option');
+        opt.value = slot;
+        opt.textContent = slot;
+        timeSelect.appendChild(opt);
+      }
+    });
+
+    // Si tous les creneaux sont bloques
+    if (timeSelect.options.length <= 1) {
+      dateWrap.classList.add('has-error');
+      dateWrap.querySelector('.form-error').textContent = 'Plus de creneaux disponibles ce jour';
+      dateWrap.querySelector('.form-error').style.display = 'block';
+      timeSelect.disabled = true;
+    }
+
+    validateDateTime();
+  }
 
   // ── Book from service tile ──────────────────────────
   function bookService(serviceName) {

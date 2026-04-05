@@ -242,6 +242,7 @@
       </div>
       <nav class="sidebar-nav">
         <a class="active" onclick="showTab('soins')"><span class="icon">🌿</span> Soins & Tarifs</a>
+        <a onclick="showTab('planning')"><span class="icon">📅</span> Planning</a>
         <a onclick="showTab('visuels')"><span class="icon">🖼️</span> Visuels</a>
         <a onclick="showTab('github')"><span class="icon">⚙️</span> GitHub</a>
         <a onclick="showTab('securite')"><span class="icon">🔒</span> Securite</a>
@@ -267,6 +268,85 @@
 
         <div class="save-bar">
           <button class="btn-save" onclick="saveServices()">💾 Publier sur GitHub</button>
+        </div>
+      </div>
+
+      <!-- Tab: Planning -->
+      <div id="tab-planning" style="display:none">
+        <div class="admin-header">
+          <h1>📅 Planning & indisponibilites</h1>
+          <p>Definissez vos jours de conges et bloquez des creneaux. Les clients ne pourront pas les reserver.</p>
+        </div>
+
+        <!-- Conges / jours fermes -->
+        <div class="admin-card" style="margin-bottom:20px">
+          <h3>🏖️ Periodes de conges</h3>
+          <p>Bloquez des periodes entieres (vacances, fermeture exceptionnelle).</p>
+          <div style="display:flex; gap:10px; align-items:end; flex-wrap:wrap; margin-top:1rem;">
+            <div>
+              <label style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem">Du</label>
+              <input type="date" id="congeDebut" class="svc-input" style="width:170px" />
+            </div>
+            <div>
+              <label style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem">Au</label>
+              <input type="date" id="congeFin" class="svc-input" style="width:170px" />
+            </div>
+            <div>
+              <label style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem">Motif (optionnel)</label>
+              <input type="text" id="congeMotif" class="svc-input" style="width:200px" placeholder="ex: Vacances" />
+            </div>
+            <button class="btn-sm btn-add-row" style="padding:.5rem 1rem;font-size:.85rem" onclick="addConge()">+ Ajouter</button>
+          </div>
+          <div id="congesList" style="margin-top:1rem"></div>
+        </div>
+
+        <!-- Jours fermes ponctuels -->
+        <div class="admin-card" style="margin-bottom:20px">
+          <h3>🚫 Jours fermes ponctuels</h3>
+          <p>Bloquez des jours individuels (jour ferie, absence ponctuelle).</p>
+          <div style="display:flex; gap:10px; align-items:end; flex-wrap:wrap; margin-top:1rem;">
+            <div>
+              <label style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem">Date</label>
+              <input type="date" id="jourFermeDate" class="svc-input" style="width:170px" />
+            </div>
+            <button class="btn-sm btn-add-row" style="padding:.5rem 1rem;font-size:.85rem" onclick="addJourFerme()">+ Ajouter</button>
+          </div>
+          <div id="joursFermesList" style="margin-top:1rem"></div>
+        </div>
+
+        <!-- Creneaux bloques -->
+        <div class="admin-card" style="margin-bottom:20px">
+          <h3>⏰ Creneaux bloques</h3>
+          <p>Bloquez des creneaux horaires sur un jour precis (deja reserve, indisponible).</p>
+          <div style="display:flex; gap:10px; align-items:end; flex-wrap:wrap; margin-top:1rem;">
+            <div>
+              <label style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem">Date</label>
+              <input type="date" id="blocDate" class="svc-input" style="width:170px" />
+            </div>
+            <div>
+              <label style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem">Creneaux</label>
+              <select id="blocHeure" class="svc-input" style="width:120px">
+                <option value="">Heure</option>
+                <option>09:00</option><option>09:30</option>
+                <option>10:00</option><option>10:30</option>
+                <option>11:00</option><option>11:30</option>
+                <option>12:00</option><option>12:30</option>
+                <option>13:00</option><option>13:30</option>
+                <option>14:00</option><option>14:30</option>
+                <option>15:00</option><option>15:30</option>
+                <option>16:00</option><option>16:30</option>
+                <option>17:00</option><option>17:30</option>
+                <option>18:00</option><option>18:30</option>
+                <option>19:00</option><option>19:30</option>
+              </select>
+            </div>
+            <button class="btn-sm btn-add-row" style="padding:.5rem 1rem;font-size:.85rem" onclick="addBlocCreneau()">+ Ajouter</button>
+          </div>
+          <div id="blocsList" style="margin-top:1rem"></div>
+        </div>
+
+        <div class="save-bar">
+          <button class="btn-save" onclick="savePlanning()">💾 Publier le planning</button>
         </div>
       </div>
 
@@ -530,13 +610,15 @@
       if (el) el.textContent = `Session active. Expire apres 30 min d'inactivite.`;
     }
 
+    const TABS = ['soins','planning','visuels','github','securite'];
     function showTab(tab) {
-      ['soins','visuels','github','securite'].forEach(t => {
+      TABS.forEach(t => {
         document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none';
       });
       document.querySelectorAll('.sidebar-nav a').forEach((a,i) => {
-        a.classList.toggle('active', ['soins','visuels','github','securite'][i]===tab);
+        a.classList.toggle('active', TABS[i]===tab);
       });
+      if (tab === 'planning') loadPlanningAdmin();
     }
 
     function showToast(msg) {
@@ -883,6 +965,193 @@
       document.getElementById('currentPwd').value = '';
       document.getElementById('newPwd').value = '';
       document.getElementById('confirmPwd').value = '';
+    }
+
+    // ══════════════════════════════════════════════════════
+    //  PLANNING — indisponibilites
+    // ══════════════════════════════════════════════════════
+
+    let _planning = { joursFermes: [], creneauxBloques: {}, conges: [] };
+    let _planningSha = null;
+
+    function formatDateFr(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('fr-FR', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
+    }
+
+    function renderPlanning() {
+      // Conges
+      const congesEl = document.getElementById('congesList');
+      if (_planning.conges.length === 0) {
+        congesEl.innerHTML = '<p style="font-size:.8rem;color:rgba(255,255,255,.3);font-style:italic">Aucune periode de conges definie</p>';
+      } else {
+        congesEl.innerHTML = _planning.conges.map((c, i) => `
+          <div class="tarif-row" style="margin-bottom:.4rem">
+            <span style="flex:1;font-size:.85rem;color:rgba(255,255,255,.7)">
+              📅 ${formatDateFr(c.debut)} → ${formatDateFr(c.fin)}
+              ${c.motif ? `<span style="color:rgba(255,255,255,.4)"> — ${escHtml(c.motif)}</span>` : ''}
+            </span>
+            <button class="btn-sm btn-del-row" onclick="delConge(${i})">✕</button>
+          </div>
+        `).join('');
+      }
+
+      // Jours fermes
+      const joursEl = document.getElementById('joursFermesList');
+      const joursTries = [..._planning.joursFermes].sort();
+      if (joursTries.length === 0) {
+        joursEl.innerHTML = '<p style="font-size:.8rem;color:rgba(255,255,255,.3);font-style:italic">Aucun jour ferme</p>';
+      } else {
+        joursEl.innerHTML = joursTries.map((j, i) => `
+          <div class="tarif-row" style="margin-bottom:.4rem">
+            <span style="flex:1;font-size:.85rem;color:rgba(255,255,255,.7)">🚫 ${formatDateFr(j)}</span>
+            <button class="btn-sm btn-del-row" onclick="delJourFerme(${i})">✕</button>
+          </div>
+        `).join('');
+      }
+
+      // Creneaux bloques
+      const blocsEl = document.getElementById('blocsList');
+      const dates = Object.keys(_planning.creneauxBloques).sort();
+      if (dates.length === 0) {
+        blocsEl.innerHTML = '<p style="font-size:.8rem;color:rgba(255,255,255,.3);font-style:italic">Aucun creneau bloque</p>';
+      } else {
+        blocsEl.innerHTML = dates.map(date => {
+          const heures = _planning.creneauxBloques[date].sort();
+          return heures.map(h => `
+            <div class="tarif-row" style="margin-bottom:.4rem">
+              <span style="flex:1;font-size:.85rem;color:rgba(255,255,255,.7)">⏰ ${formatDateFr(date)} a ${h}</span>
+              <button class="btn-sm btn-del-row" onclick="delBlocCreneau('${date}','${h}')">✕</button>
+            </div>
+          `).join('');
+        }).join('');
+      }
+    }
+
+    function addConge() {
+      const debut = document.getElementById('congeDebut').value;
+      const fin = document.getElementById('congeFin').value;
+      const motif = document.getElementById('congeMotif').value.trim();
+      if (!debut || !fin) { showToast('Remplissez les dates de debut et fin'); return; }
+      if (fin < debut) { showToast('La date de fin doit etre apres le debut'); return; }
+      _planning.conges.push({ debut, fin, motif });
+      document.getElementById('congeDebut').value = '';
+      document.getElementById('congeFin').value = '';
+      document.getElementById('congeMotif').value = '';
+      renderPlanning();
+      showToast('Periode ajoutee — pensez a publier');
+    }
+
+    function delConge(i) {
+      _planning.conges.splice(i, 1);
+      renderPlanning();
+    }
+
+    function addJourFerme() {
+      const date = document.getElementById('jourFermeDate').value;
+      if (!date) { showToast('Choisissez une date'); return; }
+      if (_planning.joursFermes.includes(date)) { showToast('Ce jour est deja bloque'); return; }
+      _planning.joursFermes.push(date);
+      document.getElementById('jourFermeDate').value = '';
+      renderPlanning();
+      showToast('Jour ajoute — pensez a publier');
+    }
+
+    function delJourFerme(i) {
+      const sorted = [..._planning.joursFermes].sort();
+      const toRemove = sorted[i];
+      _planning.joursFermes = _planning.joursFermes.filter(j => j !== toRemove);
+      renderPlanning();
+    }
+
+    function addBlocCreneau() {
+      const date = document.getElementById('blocDate').value;
+      const heure = document.getElementById('blocHeure').value;
+      if (!date || !heure) { showToast('Choisissez une date et un creneau'); return; }
+      if (!_planning.creneauxBloques[date]) _planning.creneauxBloques[date] = [];
+      if (_planning.creneauxBloques[date].includes(heure)) { showToast('Ce creneau est deja bloque'); return; }
+      _planning.creneauxBloques[date].push(heure);
+      document.getElementById('blocHeure').value = '';
+      renderPlanning();
+      showToast('Creneau bloque — pensez a publier');
+    }
+
+    function delBlocCreneau(date, heure) {
+      if (_planning.creneauxBloques[date]) {
+        _planning.creneauxBloques[date] = _planning.creneauxBloques[date].filter(h => h !== heure);
+        if (_planning.creneauxBloques[date].length === 0) delete _planning.creneauxBloques[date];
+      }
+      renderPlanning();
+    }
+
+    // Nettoyer les dates passees
+    function cleanPlanning() {
+      const today = new Date().toISOString().split('T')[0];
+      _planning.joursFermes = _planning.joursFermes.filter(j => j >= today);
+      _planning.conges = _planning.conges.filter(c => c.fin >= today);
+      Object.keys(_planning.creneauxBloques).forEach(date => {
+        if (date < today) delete _planning.creneauxBloques[date];
+      });
+    }
+
+    async function loadPlanningAdmin() {
+      if (!ghConfigured()) { renderPlanning(); return; }
+      try {
+        const { owner, repo } = ghConfig();
+        const token = await getGhToken();
+        if (!token) { renderPlanning(); return; }
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/planning.json`, {
+          headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+        });
+        if (!res.ok) throw new Error('API ' + res.status);
+        const file = await res.json();
+        _planningSha = file.sha;
+        const data = JSON.parse(atob(file.content.replace(/\n/g, '')));
+        _planning = {
+          joursFermes: data.joursFermes || [],
+          creneauxBloques: data.creneauxBloques || {},
+          conges: data.conges || []
+        };
+        cleanPlanning();
+        renderPlanning();
+        showToast('Planning charge');
+      } catch(e) {
+        renderPlanning();
+      }
+    }
+
+    async function savePlanning() {
+      if (!ghConfigured()) {
+        showToast('Configurez GitHub dans l\'onglet ⚙️');
+        showTab('github');
+        return;
+      }
+      const token = await getGhToken();
+      if (!token) { showToast('Session expiree'); return; }
+
+      cleanPlanning();
+      const { owner, repo } = ghConfig();
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(_planning, null, 2))));
+      const body = {
+        message: 'Mise a jour du planning via admin',
+        content,
+        ...(_planningSha ? { sha: _planningSha } : {})
+      };
+
+      showToast('Publication en cours...');
+      try {
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/planning.json`, {
+          method: 'PUT',
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) { const e = await res.json(); throw new Error(e.message); }
+        const data = await res.json();
+        _planningSha = data.content.sha;
+        showToast('Planning publie !');
+      } catch(e) {
+        showToast('Erreur : ' + e.message);
+      }
     }
   </script>
 </body>
