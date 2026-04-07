@@ -233,6 +233,33 @@
     .stat .lbl { font-size: .72rem; color: var(--stone); letter-spacing: 1.2px; text-transform: uppercase; margin-top: .2rem; }
     .about-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
     .tag { background: var(--cream2); color: var(--green); font-size: .78rem; padding: .3rem .85rem; border-radius: 20px; border: 1px solid rgba(61,90,62,.18); }
+    .about-story-link {
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 1.8rem; padding: 1.1rem 1.3rem;
+      background: var(--white); border: 1px solid rgba(61,90,62,.15);
+      border-left: 3px solid var(--gold2);
+      border-radius: var(--r);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .about-story-link:hover {
+      transform: translateX(4px);
+      border-color: var(--sage); border-left-color: var(--gold);
+      box-shadow: 0 6px 22px rgba(61,90,62,.12);
+    }
+    .story-link-arrow {
+      font-size: 1.5rem; color: var(--gold); flex-shrink: 0;
+      transition: transform .25s;
+    }
+    .about-story-link:hover .story-link-arrow { transform: translateX(4px); }
+    .story-link-text { display: flex; flex-direction: column; gap: .15rem; }
+    .story-link-text strong {
+      font-family: 'Playfair Display', serif; font-size: 1.05rem;
+      color: var(--green); font-weight: 600;
+    }
+    .story-link-text em {
+      font-size: .82rem; color: var(--stone); font-style: italic;
+    }
 
     /* ── Services ───────────────────────────────────────── */
     #services { background: var(--cream); }
@@ -515,7 +542,7 @@
     </div>
   </a>
   <div class="nav-links" id="navLinks">
-    <a href="#about">L'Institut</a>
+    <a href="mon-histoire.html">Mon histoire</a>
     <a href="#services">Soins & Tarifs</a>
     <a href="#reviews">Avis</a>
     <a href="#contact">Contact</a>
@@ -579,6 +606,13 @@
         <span class="tag">Relaxation</span>
         <span class="tag">Sur RDV uniquement</span>
       </div>
+      <a href="mon-histoire.html" class="about-story-link">
+        <span class="story-link-arrow">→</span>
+        <span class="story-link-text">
+          <strong>Découvrir mon histoire</strong>
+          <em>Une chute, une promesse, une vocation. Et 25 ans de Tuina.</em>
+        </span>
+      </a>
     </div>
   </div>
 </section>
@@ -816,7 +850,7 @@
   <p><strong>🐼 Chez Sophie – Massage Tuina</strong></p>
   <p>14C Bd de Curepipe Apt S · 33260 La Teste-de-Buch · <a href="tel:0627146231">06 27 14 62 31</a></p>
   <div class="footer-links" style="margin-top:.6rem">
-    <a href="#about">L'Institut</a>
+    <a href="mon-histoire.html">Mon histoire</a>
     <a href="#services">Soins & Tarifs</a>
     <a href="#booking">Réservation</a>
     <a href="#contact">Contact</a>
