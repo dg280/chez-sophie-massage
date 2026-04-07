@@ -174,8 +174,30 @@
       border-radius: var(--r); overflow: hidden;
       box-shadow: 0 20px 60px rgba(0,0,0,.12);
       background: var(--cream2);
+      aspect-ratio: 4/5; position: relative;
     }
-    .heritage-img img { width: 100%; height: auto; display: block; }
+    .heritage-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .heritage-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; padding: 30px;
+      background: linear-gradient(145deg, #e8dfd1 0%, #d6cab8 100%);
+      color: var(--stone);
+    }
+    .heritage-placeholder .ph-icon {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: rgba(255,255,255,.5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .heritage-placeholder .ph-title {
+      font-family: 'Playfair Display', serif; font-size: 1.05rem;
+      color: var(--green); text-align: center;
+    }
+    .heritage-placeholder .ph-sub {
+      font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase;
+      text-align: center; opacity: .65;
+    }
 
     /* ── CTA final ─────────────────────────────── */
     .story-cta {
@@ -335,7 +357,15 @@
       <p>En 2011, je suis arrivée en France. J'ai d'abord exercé à Paris. Puis, en 2020, j'ai posé mes mains et mes valises ici, au cœur du Bassin d'Arcachon. Chaque année, je retourne en Chine voir ma famille — et chaque année, je reviens avec ce que j'y ai appris d'autre.</p>
     </div>
     <div class="heritage-img reveal">
-      <img src="panda.webp" alt="Chez Sophie Massage Tuina – La Teste-de-Buch" />
+      <div class="heritage-placeholder">
+        <div class="ph-icon">📷</div>
+        <div class="ph-title">Photo de Sophie</div>
+        <div class="ph-sub">à venir</div>
+      </div>
+      <img src="sophie.jpg" alt="Sophie, praticienne de massage Tuina à La Teste-de-Buch"
+           style="position:relative;z-index:2"
+           onload="this.previousElementSibling.style.display='none'"
+           onerror="this.style.display='none'" />
     </div>
   </div>
 </section>
