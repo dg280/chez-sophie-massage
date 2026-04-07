@@ -388,20 +388,21 @@
             </div>
           </div>
           <div class="admin-card">
-            <h3>👤 Photo de l'institut / Sophie</h3>
-            <p>Image affichee dans la section "L'Institut". Format portrait recommande (4/5).</p>
-            <div class="img-preview" id="aboutPreview" onclick="document.getElementById('aboutFile').click()" style="aspect-ratio:4/5; max-height:280px;">
-              <div class="placeholder" id="aboutPlaceholder">
-                <div class="emoji">🐼</div>
-                <div>Cliquez pour choisir une image</div>
-                <div style="font-size:.7rem; margin-top:.3rem; opacity:.5">JPG, PNG · Max 5 Mo</div>
+            <h3>👤 Photo de Sophie</h3>
+            <p>Photo affichee sur la page <strong>"Mon histoire"</strong>. Format portrait recommande (4/5). Publiee sur GitHub, visible par tous les visiteurs.</p>
+            <div class="img-preview" id="sophiePreview" onclick="document.getElementById('sophieFile').click()" style="aspect-ratio:4/5; max-height:340px;">
+              <div class="placeholder" id="sophiePlaceholder">
+                <div class="emoji">📷</div>
+                <div>Cliquez pour choisir une photo</div>
+                <div style="font-size:.7rem; margin-top:.3rem; opacity:.5">JPG, PNG, WebP · Max 2 Mo</div>
               </div>
-              <input type="file" id="aboutFile" accept="image/*" onchange="previewImage(this,'aboutPreview','aboutPlaceholder','cs_about_img')" />
+              <input type="file" id="sophieFile" accept="image/jpeg,image/png,image/webp" onchange="onSophieFileSelected(this)" />
             </div>
             <div class="img-actions">
-              <button class="btn-upload" onclick="document.getElementById('aboutFile').click()">📁 Choisir une image</button>
-              <button class="btn-reset" onclick="resetImage('aboutPreview','aboutPlaceholder','cs_about_img')">✕</button>
+              <button class="btn-upload" onclick="uploadSophiePhoto()">💾 Publier sur GitHub</button>
+              <button class="btn-reset" onclick="resetSophiePreview()">✕</button>
             </div>
+            <div id="sophieStatus" style="margin-top:.8rem; font-size:.78rem; color:rgba(255,255,255,.45)"></div>
           </div>
         </div>
       </div>
@@ -619,6 +620,7 @@
         a.classList.toggle('active', TABS[i]===tab);
       });
       if (tab === 'planning') loadPlanningAdmin();
+      if (tab === 'visuels') loadSophiePhotoPreview();
     }
 
     function showToast(msg) {
@@ -660,18 +662,144 @@
     }
 
     function loadPreviews() {
-      [{ key: 'cs_hero_img', pid: 'heroPreview', plid: 'heroPlaceholder' },
-       { key: 'cs_about_img', pid: 'aboutPreview', plid: 'aboutPlaceholder' }]
-      .forEach(({ key, pid, plid }) => {
-        const data = localStorage.getItem(key);
-        if (data) {
-          const preview = document.getElementById(pid);
-          const img = document.createElement('img');
-          img.src = data;
-          preview.insertBefore(img, preview.firstChild);
-          document.getElementById(plid).style.display = 'none';
-        }
+      const data = localStorage.getItem('cs_hero_img');
+      if (data) {
+        const preview = document.getElementById('heroPreview');
+        const img = document.createElement('img');
+        img.src = data;
+        preview.insertBefore(img, preview.firstChild);
+        document.getElementById('heroPlaceholder').style.display = 'none';
+      }
+    }
+
+    // ── Photo de Sophie (publiee sur GitHub) ─────────
+    let _sophieFileData = null; // base64 sans prefixe data:
+    let _sophieFileExt = 'jpg';
+    let _sophieSha = null;
+
+    function onSophieFileSelected(input) {
+      const file = input.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) { showToast('Photo trop lourde (max 2 Mo)'); return; }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target.result;
+        // Apercu visuel
+        const preview = document.getElementById('sophiePreview');
+        let img = preview.querySelector('img');
+        if (!img) { img = document.createElement('img'); preview.insertBefore(img, preview.firstChild); }
+        img.src = dataUrl;
+        document.getElementById('sophiePlaceholder').style.display = 'none';
+
+        // Stocker le base64 pur pour upload GitHub
+        _sophieFileData = dataUrl.split(',')[1];
+        _sophieFileExt = (file.name.split('.').pop() || 'jpg').toLowerCase();
+        if (_sophieFileExt === 'jpeg') _sophieFileExt = 'jpg';
+
+        document.getElementById('sophieStatus').textContent = '✓ Photo prete a publier — cliquez "Publier sur GitHub"';
+        document.getElementById('sophieStatus').style.color = 'rgba(212,175,55,.8)';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetSophiePreview() {
+      const preview = document.getElementById('sophiePreview');
+      const img = preview.querySelector('img');
+      if (img) img.remove();
+      document.getElementById('sophiePlaceholder').style.display = 'flex';
+      _sophieFileData = null;
+      document.getElementById('sophieStatus').textContent = '';
+      document.getElementById('sophieFile').value = '';
+    }
+
+    async function loadSophiePhotoPreview() {
+      // Afficher la photo actuellement publiee sur GitHub (si elle existe)
+      const preview = document.getElementById('sophiePreview');
+      if (preview.querySelector('img')) return; // deja affichee
+
+      ['jpg', 'png', 'webp'].forEach(ext => {
+        const url = `https://raw.githubusercontent.com/${ghConfig().owner || 'dg280'}/${ghConfig().repo || 'chez-sophie-massage'}/main/sophie.${ext}?t=${Date.now()}`;
+        fetch(url, { method: 'HEAD' }).then(res => {
+          if (res.ok && !preview.querySelector('img')) {
+            const img = document.createElement('img');
+            img.src = url;
+            preview.insertBefore(img, preview.firstChild);
+            document.getElementById('sophiePlaceholder').style.display = 'none';
+            _sophieFileExt = ext;
+            document.getElementById('sophieStatus').textContent = `Photo actuelle : sophie.${ext}`;
+            document.getElementById('sophieStatus').style.color = 'rgba(255,255,255,.45)';
+          }
+        }).catch(() => {});
       });
+    }
+
+    async function uploadSophiePhoto() {
+      if (!_sophieFileData) {
+        showToast('Choisissez d\'abord une photo');
+        return;
+      }
+      if (!ghConfigured()) {
+        showToast('Configurez GitHub dans l\'onglet ⚙️');
+        showTab('github');
+        return;
+      }
+      const token = await getGhToken();
+      if (!token) { showToast('Session expiree'); return; }
+
+      const { owner, repo } = ghConfig();
+      const path = `sophie.${_sophieFileExt}`;
+
+      // Recuperer le SHA si le fichier existe deja
+      let sha = null;
+      try {
+        const headRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+          headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+        });
+        if (headRes.ok) {
+          const file = await headRes.json();
+          sha = file.sha;
+        }
+      } catch(e) {}
+
+      // Aussi tenter de supprimer les autres extensions pour eviter les conflits
+      for (const otherExt of ['jpg', 'png', 'webp']) {
+        if (otherExt === _sophieFileExt) continue;
+        try {
+          const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/sophie.${otherExt}`, {
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+          });
+          if (r.ok) {
+            const f = await r.json();
+            await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/sophie.${otherExt}`, {
+              method: 'DELETE',
+              headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' },
+              body: JSON.stringify({ message: 'Suppression ancienne photo', sha: f.sha })
+            });
+          }
+        } catch(e) {}
+      }
+
+      const body = {
+        message: 'Mise a jour photo de Sophie via admin',
+        content: _sophieFileData,
+        ...(sha ? { sha } : {})
+      };
+
+      showToast('Publication en cours...');
+      try {
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+          method: 'PUT',
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) { const e = await res.json(); throw new Error(e.message); }
+        showToast('Photo publiee ! Visible sur la page Mon histoire dans 1-2 min.');
+        document.getElementById('sophieStatus').textContent = `✓ Publiee : sophie.${_sophieFileExt}`;
+        document.getElementById('sophieStatus').style.color = '#6fcf97';
+      } catch(e) {
+        showToast('Erreur : ' + e.message);
+      }
     }
 
     // ══════════════════════════════════════════════════════

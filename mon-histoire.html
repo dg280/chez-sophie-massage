@@ -356,16 +356,12 @@
       <p>J'ai appris ce massage là-bas, dans sa forme la plus authentique. <em>Pas sur un week-end de stage.</em> Dans la durée, dans la transmission, dans le respect des gestes que mes maîtres m'ont confiés.</p>
       <p>En 2011, je suis arrivée en France. J'ai d'abord exercé à Paris. Puis, en 2020, j'ai posé mes mains et mes valises ici, au cœur du Bassin d'Arcachon. Chaque année, je retourne en Chine voir ma famille — et chaque année, je reviens avec ce que j'y ai appris d'autre.</p>
     </div>
-    <div class="heritage-img reveal">
+    <div class="heritage-img reveal" id="sophieImgContainer">
       <div class="heritage-placeholder">
         <div class="ph-icon">📷</div>
         <div class="ph-title">Photo de Sophie</div>
         <div class="ph-sub">à venir</div>
       </div>
-      <img src="sophie.jpg" alt="Sophie, praticienne de massage Tuina à La Teste-de-Buch"
-           style="position:relative;z-index:2"
-           onload="this.previousElementSibling.style.display='none'"
-           onerror="this.style.display='none'" />
     </div>
   </div>
 </section>
@@ -435,6 +431,31 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.15 });
   revealEls.forEach(el => revealObs.observe(el));
+
+  // Charger la photo de Sophie depuis GitHub raw (jpg, png ou webp)
+  (function loadSophiePhoto() {
+    const REPO_RAW = 'https://raw.githubusercontent.com/dg280/chez-sophie-massage/main';
+    const exts = ['jpg', 'png', 'webp'];
+    const cacheBuster = Math.floor(Date.now() / 300000); // 5 min cache
+    let found = false;
+
+    exts.forEach(ext => {
+      if (found) return;
+      const img = new Image();
+      img.onload = () => {
+        if (found) return;
+        found = true;
+        const container = document.getElementById('sophieImgContainer');
+        const placeholder = container.querySelector('.heritage-placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+        img.alt = 'Sophie, praticienne de massage Tuina a La Teste-de-Buch';
+        img.style.position = 'relative';
+        img.style.zIndex = '2';
+        container.appendChild(img);
+      };
+      img.src = `${REPO_RAW}/sophie.${ext}?t=${cacheBuster}`;
+    });
+  })();
 </script>
 
 </body>
