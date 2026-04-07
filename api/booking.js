@@ -25,12 +25,13 @@ export default async function handler(req, res) {
   }
 
   const secret = process.env.BOOKING_SECRET;
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.MAILERSEND_API_KEY;
   const sophieEmail = process.env.SOPHIE_EMAIL;
-  const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
+  const fromEmail = process.env.FROM_EMAIL;
+  const fromName = process.env.FROM_NAME || 'Chez Sophie - Massage Tuina';
 
-  if (!secret || !apiKey || !sophieEmail) {
-    console.error('Missing env vars:', { hasSecret: !!secret, hasApiKey: !!apiKey, hasEmail: !!sophieEmail });
+  if (!secret || !apiKey || !sophieEmail || !fromEmail) {
+    console.error('Missing env vars:', { hasSecret: !!secret, hasApiKey: !!apiKey, hasEmail: !!sophieEmail, hasFrom: !!fromEmail });
     return res.status(500).json({ error: 'Service de reservation non configure' });
   }
 
@@ -174,27 +175,32 @@ REFUSER : ${refuseUrl}
 
 Liens valables 7 jours.`;
 
-  // Send via Resend
+  // Send via MailerSend
   try {
-    const resp = await fetch('https://api.resend.com/emails', {
+    const body = {
+      from: { email: fromEmail, name: fromName },
+      to: [{ email: sophieEmail, name: 'Sophie' }],
+      subject: `🐼 Nouvelle demande RDV — ${payload.pr} ${payload.nm} — ${dateFr} ${payload.h}`,
+      html,
+      text,
+    };
+    if (payload.em) {
+      body.reply_to = { email: payload.em, name: `${payload.pr} ${payload.nm}` };
+    }
+
+    const resp = await fetch('https://api.mailersend.com/v1/email', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
       },
-      body: JSON.stringify({
-        from: `Chez Sophie <${fromEmail}>`,
-        to: [sophieEmail],
-        subject: `🐼 Nouvelle demande RDV — ${payload.pr} ${payload.nm} — ${dateFr} ${payload.h}`,
-        html,
-        text,
-        reply_to: payload.em || undefined,
-      }),
+      body: JSON.stringify(body),
     });
 
     if (!resp.ok) {
       const err = await resp.text();
-      console.error('Resend error:', err);
+      console.error('MailerSend error:', resp.status, err);
       return res.status(502).json({ error: 'Erreur d\'envoi de l\'email', details: err });
     }
 

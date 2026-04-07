@@ -98,11 +98,12 @@ export default async function handler(req, res) {
   }
 
   // Send confirmation email to client (if email provided)
-  if (payload.em && process.env.RESEND_API_KEY) {
+  if (payload.em && process.env.MAILERSEND_API_KEY && process.env.FROM_EMAIL) {
     const dateFr = new Date(payload.dt + 'T12:00:00').toLocaleDateString('fr-FR', {
       weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
     });
-    const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
+    const fromEmail = process.env.FROM_EMAIL;
+    const fromName = process.env.FROM_NAME || 'Sophie - Massage Tuina';
 
     const html = `
 <!DOCTYPE html><html><head><meta charset="UTF-8"></head>
@@ -135,12 +136,16 @@ export default async function handler(req, res) {
 </body></html>`;
 
     try {
-      await fetch('https://api.resend.com/emails', {
+      await fetch('https://api.mailersend.com/v1/email', {
         method: 'POST',
-        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Bearer ${process.env.MAILERSEND_API_KEY}`,
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
         body: JSON.stringify({
-          from: `Sophie - Massage Tuina <${fromEmail}>`,
-          to: [payload.em],
+          from: { email: fromEmail, name: fromName },
+          to: [{ email: payload.em, name: payload.pr + ' ' + payload.nm }],
           subject: `✓ Votre RDV est confirme — ${dateFr} ${payload.h}`,
           html,
         }),
