@@ -1009,7 +1009,7 @@
   }
 
   // ── Submit ─────────────────────────────────────────
-  function submitBooking() {
+  async function submitBooking() {
     const prenom = document.getElementById('fieldPrenom').value.trim();
     const nom    = document.getElementById('fieldNom').value.trim();
     const tel    = document.getElementById('fieldTel').value.trim();
@@ -1030,38 +1030,38 @@
     else telWrap.classList.remove('has-error');
     if (!ok) return;
 
-    // Build mailto (fallback universel, 0 backend)
-    const dateStr = new Date(booking.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-    const subject = encodeURIComponent(`Demande de RDV – ${booking.service} – ${prenom} ${nom}`);
-    const body = encodeURIComponent(
-`Nouvelle demande de réservation – Chez Sophie Massage Tuina
+    const submitBtn = document.getElementById('btn-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ Envoi en cours...';
 
-Soin : ${booking.service}
-Durée : ${booking.duration}
-Tarif indicatif : ${booking.price}
-Date souhaitée : ${dateStr}
-Heure souhaitée : ${booking.time}
+    try {
+      const res = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          service: booking.service,
+          duration: booking.duration,
+          price: booking.price,
+          date: booking.date,
+          time: booking.time,
+          prenom, nom, tel, email, message: msg,
+        }),
+      });
 
-Client : ${prenom} ${nom}
-Téléphone : ${tel}
-Email : ${email || 'Non renseigné'}
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Erreur lors de l\'envoi');
+      }
 
-Message : ${msg || 'Aucun'}
-
----
-Demande envoyée depuis sophie-tuina.fr`
-    );
-
-    // Ouvrir l'email prérempli (Sophie configurera son adresse ici)
-    // Remplacer ADRESSE@EMAIL par l'email de Sophie
-    window.location.href = `mailto:zhengyajie68@gmail.com?subject=${subject}&body=${body}`;
-
-    // Afficher le succès
-    setTimeout(() => {
+      // Afficher le succes
       document.querySelectorAll('.booking-panel').forEach(p => p.classList.remove('active'));
       document.getElementById('panelSuccess').classList.add('active');
       document.querySelectorAll('.booking-steps').forEach(s => s.style.display = 'none');
-    }, 300);
+    } catch (e) {
+      alert('❌ ' + e.message + '\n\nVous pouvez aussi appeler Sophie au 06 27 14 62 31');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer ma demande ✓';
+    }
   }
 
   // ── Reset ──────────────────────────────────────────
