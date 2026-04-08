@@ -282,13 +282,22 @@
     .service-card .s-icon { font-size: 2rem; margin-bottom: .85rem; }
     .service-card h3 { font-size: 1.12rem; color: var(--green); margin-bottom: .5rem; }
     .book-cta {
-      display: inline-block; margin-top: 1.1rem;
+      display: inline-block;
       background: transparent; border: 1.5px solid var(--green); color: var(--green);
       padding: .46rem 1.2rem; border-radius: 30px; font-size: .8rem; font-weight: 700;
       cursor: pointer; transition: background .2s, color .2s, transform .15s;
       font-family: 'Lato', sans-serif; letter-spacing: .4px;
     }
     .book-cta:hover { background: var(--green); color: white; transform: translateY(-1px); }
+    .service-card-actions {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      margin-top: 1.1rem;
+    }
+    .learn-more {
+      font-size: .78rem; color: var(--gold); font-weight: 700; letter-spacing: .3px;
+      transition: color .2s, transform .2s; display: inline-flex; align-items: center;
+    }
+    .learn-more:hover { color: var(--green); transform: translateX(2px); }
     .service-card .s-desc { font-size: .87rem; color: var(--stone); margin-bottom: 1rem; line-height: 1.55; }
     .price-list { list-style: none; }
     .price-list li {
@@ -1082,6 +1091,13 @@
   // ── Donnees des soins (fallback embarque + chargement GitHub) ──
   const SERVICES_URL = 'https://raw.githubusercontent.com/dg280/chez-sophie-massage/main/tarifs.json';
 
+  // Map des soins ayant une page detail SEO (key -> slug)
+  const SERVICE_PAGES = {
+    'tuina':    'massage-tuina',
+    'relaxant': 'massage-relaxant',
+    'moxa':     'moxibustion',
+  };
+
   const DEFAULT_SERVICES = [
     {key:'tuina',icon:'🌿',name:'Massage Tuina Corps',shortDesc:'Massage chinois traditionnel sur méridiens',description:'Le massage chinois traditionnel. Pratiqué habillé, il agit sur les méridiens pour libérer les tensions et rééquilibrer l\'énergie vitale.',note:'',rows:[{label:'30 minutes',price:'45 €'},{label:'1 heure',price:'80 €'},{label:'1h 30',price:'110 €'},{label:'2 heures',price:'148 €'}]},
     {key:'relaxant',icon:'💆',name:'Massage Relaxant Corps',shortDesc:'Détente musculaire profonde',description:'Un soin profond pour relâcher les tensions musculaires et retrouver un équilibre corps-esprit durable.',note:'',rows:[{label:'1 heure',price:'90 €'},{label:'1h 30',price:'128 €'},{label:'2 heures',price:'168 €'}]},
@@ -1101,7 +1117,10 @@
   function renderServiceCards(services) {
     const grid = document.getElementById('servicesGrid');
     const delays = ['reveal-delay-1','reveal-delay-2','reveal-delay-3'];
-    grid.innerHTML = services.map((svc, i) => `
+    grid.innerHTML = services.map((svc, i) => {
+      const slug = SERVICE_PAGES[svc.key];
+      const detailLink = slug ? `<a href="/soins/${slug}" class="learn-more">En savoir plus →</a>` : '';
+      return `
       <div class="service-card reveal ${delays[i % 3]}">
         <div class="s-icon">${svc.icon}</div>
         <h3>${escHtml(svc.name)}</h3>
@@ -1110,9 +1129,13 @@
           ${svc.rows.map(r => `<li><span>${escHtml(r.label)}</span><span class="price">${escHtml(r.price)}</span></li>`).join('')}
         </ul>
         ${svc.note ? `<p class="s-note">* ${escHtml(svc.note)}</p>` : ''}
-        <button class="book-cta" onclick="bookService('${svc.name.replace(/'/g,"\\'")}')">Réserver →</button>
+        <div class="service-card-actions">
+          <button class="book-cta" onclick="bookService('${svc.name.replace(/'/g,"\\'")}')">Réserver →</button>
+          ${detailLink}
+        </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
     grid.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   }
 
