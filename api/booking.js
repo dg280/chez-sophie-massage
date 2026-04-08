@@ -204,6 +204,61 @@ Liens valables 7 jours.`;
       return res.status(502).json({ error: 'Erreur d\'envoi de l\'email', details: err });
     }
 
+    // ── Email d'accuse de reception au client (si email fourni) ──
+    if (payload.em) {
+      const clientHtml = `
+<!DOCTYPE html><html><head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;background:#f6f1e9;color:#1c1c1c">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f6f1e9;padding:30px 20px"><tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:#fdfaf5;border-radius:14px;overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,.08)">
+<tr><td style="background:linear-gradient(135deg,#243d25,#3D5A3E);padding:32px;text-align:center">
+<div style="font-size:38px;margin-bottom:8px">🐼</div>
+<h1 style="margin:0;color:#FDFAF5;font-family:Georgia,serif;font-size:22px">J'ai bien recu votre demande</h1>
+</td></tr>
+<tr><td style="padding:32px">
+<p style="margin:0 0 20px;font-size:15px;color:#3a3a3a;line-height:1.7">Bonjour ${escHtml(payload.pr)},</p>
+<p style="margin:0 0 20px;font-size:15px;color:#3a3a3a;line-height:1.7">J'ai bien recu votre demande de rendez-vous pour un <strong>${escHtml(payload.s)}</strong> le <strong>${escHtml(dateFr)} a ${escHtml(payload.h)}</strong>.</p>
+<p style="margin:0 0 20px;font-size:15px;color:#3a3a3a;line-height:1.7">Je consulte mon planning et je vous confirme <strong>personnellement</strong> dans la journee.</p>
+<table width="100%" style="background:#f6f1e9;border-radius:10px;padding:20px;margin-bottom:24px">
+<tr><td colspan="2" style="padding-bottom:12px"><strong style="font-family:Georgia,serif;color:#3D5A3E;font-size:15px">📋 Recapitulatif de votre demande</strong></td></tr>
+<tr><td style="padding:6px 0;color:#8C7B6B;font-size:13px;width:120px">Soin</td><td style="padding:6px 0;color:#1c1c1c;font-size:14px">${escHtml(payload.s)}</td></tr>
+<tr><td style="padding:6px 0;color:#8C7B6B;font-size:13px">Duree</td><td style="padding:6px 0;color:#1c1c1c;font-size:14px">${escHtml(payload.d)}</td></tr>
+<tr><td style="padding:6px 0;color:#8C7B6B;font-size:13px">Date</td><td style="padding:6px 0;color:#1c1c1c;font-size:14px;font-weight:700">${escHtml(dateFr)}</td></tr>
+<tr><td style="padding:6px 0;color:#8C7B6B;font-size:13px">Heure</td><td style="padding:6px 0;color:#1c1c1c;font-size:14px;font-weight:700">${escHtml(payload.h)}</td></tr>
+<tr><td style="padding:6px 0;color:#8C7B6B;font-size:13px">Tarif</td><td style="padding:6px 0;color:#B8960C;font-size:14px;font-weight:700">${escHtml(payload.p)}</td></tr>
+</table>
+<p style="margin:0 0 16px;font-size:14px;color:#3a3a3a;line-height:1.7">Si c'est urgent ou si vous avez une question, n'hesitez pas a m'appeler directement :</p>
+<p style="text-align:center;margin:20px 0">
+<a href="tel:0627146231" style="display:inline-block;background:#3D5A3E;color:#FDFAF5;padding:12px 28px;border-radius:30px;font-weight:700;font-size:15px;text-decoration:none">📞 06 27 14 62 31</a>
+</p>
+<p style="margin:24px 0 0;font-size:14px;color:#3a3a3a;line-height:1.7">A tres vite,<br><strong>Sophie</strong></p>
+</td></tr>
+<tr><td style="background:#1c1c1c;padding:20px;text-align:center">
+<p style="margin:0 0 4px;color:rgba(255,255,255,.7);font-size:12px"><strong>Chez Sophie · Massage Tuina</strong></p>
+<p style="margin:0;color:rgba(255,255,255,.5);font-size:11px">14C Bd de Curepipe · 33260 La Teste-de-Buch · sophie-tuina.fr</p>
+</td></tr>
+</table>
+</td></tr></table>
+</body></html>`;
+
+      try {
+        await fetch('https://api.mailersend.com/v1/email', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+          body: JSON.stringify({
+            from: { email: fromEmail, name: fromName },
+            to: [{ email: payload.em, name: `${payload.pr} ${payload.nm}` }],
+            subject: `J'ai bien recu votre demande de RDV — Chez Sophie`,
+            html: clientHtml,
+          }),
+        });
+      } catch (e) { console.error('Client ack email error:', e); }
+    }
+
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Send error:', err);
