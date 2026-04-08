@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Massage Tuina Corps à La Teste-de-Buch · Chez Sophie</title>
+  <meta name="description" content="Le massage Tuina, c'est la pratique chinoise dans laquelle j'ai grandi. Pratiqué habillé, il travaille les méridiens et l'énergie. Sophie · Praticienne chinoise · La Teste-de-Buch." />
+  <meta name="keywords" content="massage tuina La Teste-de-Buch, massage chinois traditionnel Arcachon, massage des méridiens, médecine chinoise Bassin Arcachon, praticienne chinoise massage, Tuina authentique 33260" />
+  <meta property="og:title" content="Massage Tuina Corps · Chez Sophie · La Teste-de-Buch" />
+  <meta property="og:description" content="La pratique chinoise dans laquelle j'ai grandi. 25 ans d'expérience. À partir de 45 €." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://sophie-tuina.fr/soins/massage-tuina" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Massage Tuina Corps",
+    "name": "Massage Tuina Corps",
+    "description": "Massage chinois traditionnel pratiqué habillé. Travail des méridiens et des points d'énergie pour libérer les tensions profondes.",
+    "provider": {
+      "@type": "HealthAndBeautyBusiness",
+      "name": "Chez Sophie Massage Tuina",
+      "telephone": "0627146231",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "14C Boulevard de Curepipe Apt S",
+        "addressLocality": "La Teste-de-Buch",
+        "postalCode": "33260",
+        "addressCountry": "FR"
+      }
+    },
+    "areaServed": [
+      { "@type": "City", "name": "La Teste-de-Buch" },
+      { "@type": "City", "name": "Arcachon" },
+      { "@type": "City", "name": "Gujan-Mestras" },
+      { "@type": "City", "name": "Le Teich" }
+    ],
+    "offers": [
+      { "@type": "Offer", "name": "30 minutes", "price": "45", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "1 heure", "price": "80", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "1h30", "price": "110", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "2 heures", "price": "148", "priceCurrency": "EUR" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:#3D5A3E; --green2:#2E4A2F; --sage:#7A9E7E;
+      --gold:#B8960C; --gold2:#D4AF37;
+      --cream:#F6F1E9; --cream2:#EDE7DA; --stone:#8C7B6B;
+      --dark:#1C1C1C; --white:#FDFAF5; --r:12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Lato',sans-serif; background:var(--cream); color:var(--dark); line-height:1.75; overflow-x:hidden; }
+    h1,h2,h3,h4 { font-family:'Playfair Display',serif; }
+    a { text-decoration:none; color:inherit; }
+
+    /* Nav */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 5%; height:68px;
+      background:rgba(246,241,233,.94); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(61,90,62,.1); transition:box-shadow .3s;
+    }
+    nav.scrolled { box-shadow:0 2px 24px rgba(0,0,0,.08); }
+    .nav-logo { display:flex; align-items:center; gap:11px; }
+    .nav-logo-icon { width:40px; height:40px; border-radius:50%;
+      background:linear-gradient(135deg,var(--green2),var(--sage));
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; box-shadow:0 2px 12px rgba(61,90,62,.25); }
+    .nav-logo-text { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--green); line-height:1.2; }
+    .nav-logo-text span { display:block; font-family:'Lato',sans-serif; font-weight:300; font-size:.7rem; color:var(--stone); letter-spacing:1.5px; text-transform:uppercase; }
+    .nav-links { display:flex; gap:2.2rem; align-items:center; }
+    .nav-links a { font-size:.88rem; color:var(--stone); transition:color .2s; }
+    .nav-links a:hover { color:var(--green); }
+    .nav-cta { background:var(--green)!important; color:var(--white)!important;
+      padding:.55rem 1.4rem; border-radius:30px; font-size:.84rem!important; font-weight:700; }
+    .nav-cta:hover { background:var(--sage)!important; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--green); border-radius:2px; transition:.3s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    /* Hero */
+    .soin-hero {
+      min-height:60vh; padding:140px 5% 100px;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+      background:linear-gradient(160deg,#243d25 0%,var(--green2) 30%,var(--green) 60%,#4a6741 100%);
+      color:var(--white); text-align:center;
+    }
+    .soin-hero::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 50% at 80% 30%,rgba(212,175,55,.08) 0%,transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 90%,rgba(0,0,0,.15) 0%,transparent 55%);
+    }
+    .soin-hero-inner { position:relative; z-index:2; max-width:780px; animation:fadeUp 1s ease both; }
+    .soin-icon-big { font-size:3.5rem; margin-bottom:1.2rem; }
+    .soin-label { display:inline-block; font-size:.78rem; letter-spacing:3px; text-transform:uppercase;
+      color:var(--gold2); padding-bottom:.6rem; border-bottom:1px solid rgba(212,175,55,.4); margin-bottom:1.5rem; }
+    .soin-hero h1 { font-size:clamp(2.2rem,5vw,3.6rem); font-weight:600; line-height:1.15; margin-bottom:1.2rem; text-shadow:0 2px 24px rgba(0,0,0,.25); }
+    .soin-hero h1 em { font-style:italic; color:var(--gold2); }
+    .soin-tagline { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1.05rem,2vw,1.35rem); color:rgba(255,255,255,.88); max-width:580px; margin:0 auto 2rem; line-height:1.6; }
+    .hero-price-tag { display:inline-block; padding:.55rem 1.4rem; background:rgba(212,175,55,.15); border:1px solid rgba(212,175,55,.4); border-radius:30px; font-size:.86rem; color:var(--gold2); letter-spacing:.5px; }
+
+    /* Sections */
+    section.content { padding:80px 5%; }
+    .content-inner { max-width:780px; margin:0 auto; }
+    .content h2 { font-size:clamp(1.7rem,3.2vw,2.2rem); color:var(--green); line-height:1.25; margin-bottom:1.6rem; max-width:660px; }
+    .content h2 em { font-style:italic; color:var(--gold); }
+    .content h3 { font-size:1.25rem; color:var(--green); margin-top:2rem; margin-bottom:.8rem; }
+    .content p { font-size:1.05rem; color:#3a3a3a; margin-bottom:1.2rem; line-height:1.85; }
+    .content p strong { color:var(--green); font-weight:700; }
+    .content p em { color:var(--stone); font-style:italic; }
+    .content ul { margin:1rem 0 1.4rem 1.2rem; color:#3a3a3a; }
+    .content ul li { padding:.3rem 0; font-size:1rem; line-height:1.7; }
+    .content-1 { background:var(--white); }
+    .content-2 { background:var(--cream); }
+    .content-3 { background:var(--white); }
+    .content-4 { background:var(--cream); }
+
+    .pull-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:1.35rem;
+      color:var(--green); border-left:3px solid var(--gold2);
+      padding:.3rem 0 .3rem 1.4rem; margin:1.8rem 0; max-width:620px; }
+
+    /* Pricing card */
+    .pricing-card { background:var(--white); border:1px solid rgba(61,90,62,.1); border-radius:var(--r); padding:28px 30px; margin:1.6rem 0; box-shadow:0 4px 22px rgba(0,0,0,.05); }
+    .pricing-card h4 { font-size:1rem; color:var(--green); margin-bottom:1rem; }
+    .pricing-table { width:100%; }
+    .pricing-table tr td { padding:.75rem 0; border-bottom:1px dashed rgba(61,90,62,.12); font-size:.95rem; color:#484848; }
+    .pricing-table tr:last-child td { border-bottom:none; }
+    .pricing-table td:last-child { text-align:right; font-weight:700; color:var(--gold); font-size:1.05rem; }
+    .price-note { font-size:.82rem; color:var(--stone); font-style:italic; margin-top:.8rem; }
+
+    /* FAQ */
+    .faq-item { background:var(--white); border:1px solid rgba(61,90,62,.08); border-radius:10px; padding:20px 24px; margin-bottom:12px; transition:border-color .2s; }
+    .faq-item:hover { border-color:rgba(122,158,126,.4); }
+    .faq-q { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--green); margin-bottom:.6rem; font-weight:600; }
+    .faq-a { font-size:.95rem; color:#3a3a3a; line-height:1.75; margin:0; }
+
+    /* CTA bottom */
+    .soin-cta {
+      background:var(--green); color:var(--white);
+      padding:80px 5%; text-align:center; position:relative; overflow:hidden;
+    }
+    .soin-cta::before { content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 50% at 80% 20%,rgba(212,175,55,.08) 0%,transparent 60%),
+        radial-gradient(ellipse 50% 60% at 20% 90%,rgba(255,255,255,.05) 0%,transparent 55%); }
+    .soin-cta-inner { position:relative; z-index:2; max-width:680px; margin:0 auto; }
+    .soin-cta h2 { font-size:clamp(1.7rem,3.4vw,2.3rem); font-style:italic; line-height:1.3; margin-bottom:1.8rem; color:var(--white); }
+    .soin-cta h2 em { color:var(--gold2); font-style:italic; }
+    .soin-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .btn-gold { background:var(--gold2); color:var(--dark); padding:.95rem 2.3rem; border-radius:40px; font-weight:700; font-size:1rem; box-shadow:0 4px 22px rgba(212,175,55,.35); transition:transform .2s,box-shadow .2s; }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 7px 28px rgba(212,175,55,.5); }
+    .btn-outline-white { background:transparent; color:var(--white); border:2px solid rgba(255,255,255,.55); padding:.92rem 2.1rem; border-radius:40px; font-size:1rem; transition:background .2s,border-color .2s; }
+    .btn-outline-white:hover { background:rgba(255,255,255,.1); border-color:white; }
+    .soin-cta-info { font-size:.9rem; color:rgba(255,255,255,.65); }
+    .soin-cta-info a { color:var(--gold2); font-weight:700; }
+
+    /* Other soins */
+    .other-soins { padding:60px 5%; background:var(--cream2); }
+    .other-soins-inner { max-width:980px; margin:0 auto; }
+    .other-soins h3 { text-align:center; font-size:1.4rem; color:var(--green); margin-bottom:2rem; }
+    .other-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .other-card { background:var(--white); border:1px solid rgba(61,90,62,.08); border-radius:var(--r); padding:24px; transition:transform .2s,box-shadow .2s; display:block; }
+    .other-card:hover { transform:translateY(-3px); box-shadow:0 10px 32px rgba(0,0,0,.08); }
+    .other-card .oc-icon { font-size:1.8rem; margin-bottom:.6rem; }
+    .other-card h4 { font-size:1.05rem; color:var(--green); margin-bottom:.4rem; }
+    .other-card p { font-size:.85rem; color:var(--stone); margin:0; }
+    .other-card .oc-link { display:inline-block; margin-top:.8rem; font-size:.82rem; color:var(--gold); font-weight:700; }
+
+    /* Footer */
+    footer { background:var(--dark); color:rgba(255,255,255,.5); text-align:center; padding:2.2rem 5%; font-size:.82rem; line-height:1.9; }
+    footer strong { color:rgba(255,255,255,.85); }
+    footer a { color:var(--sage); transition:color .2s; }
+    footer a:hover { color:white; }
+    .footer-links { display:flex; gap:1.4rem; justify-content:center; flex-wrap:wrap; margin-bottom:.5rem; }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity .8s ease,transform .8s ease; }
+    .reveal.in { opacity:1; transform:none; }
+
+    @media (max-width:860px) {
+      .other-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:640px) {
+      nav { padding:0 4%; }
+      .nav-links { display:none; flex-direction:column; gap:1rem;
+        position:absolute; top:68px; left:0; right:0;
+        background:var(--white); padding:1.5rem 5%;
+        border-bottom:1px solid var(--cream2);
+        box-shadow:0 8px 24px rgba(0,0,0,.07); }
+      .nav-links.open { display:flex; }
+      .hamburger { display:flex; }
+      section.content { padding:60px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">🐼</div>
+    <div class="nav-logo-text">Chez Sophie<span>Massage Tuina</span></div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="/mon-histoire">Mon histoire</a>
+    <a href="/#services">Soins & Tarifs</a>
+    <a href="/#reviews">Avis</a>
+    <a href="/#contact">Contact</a>
+    <a href="/#booking" class="nav-cta">Réserver</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="soin-hero">
+  <div class="soin-hero-inner">
+    <div class="soin-icon-big">🌿</div>
+    <span class="soin-label">Massage Tuina Corps</span>
+    <h1>La pratique chinoise<br/>dans laquelle <em>j'ai grandi</em>.</h1>
+    <p class="soin-tagline">Massage traditionnel chinois · Travail des méridiens · Pratiqué habillé</p>
+    <span class="hero-price-tag">À partir de 45 € · de 30 min à 2 h</span>
+  </div>
+</section>
+
+<!-- 1. Le Tuina, ce n'est pas un massage de spa -->
+<section class="content content-1">
+  <div class="content-inner reveal">
+    <h2>Le Tuina, ce n'est pas <em>un massage de spa</em>.</h2>
+    <p>Quand quelqu'un me demande ce qu'est le Tuina, je commence presque toujours par dire ce qu'il <em>n'est pas</em>.</p>
+    <p>Ce n'est pas un soin pour s'endormir sous une musique douce. Ce n'est pas non plus une technique exotique apparue il y a dix ans dans les magazines de bien-être. Le Tuina existe depuis plus de 2 000 ans en Chine. Là où j'ai grandi, on s'en sert depuis toujours, comme on prend une tisane quand on est fatigué ou un thé chaud quand on a froid.</p>
+    <p>Le mot Tuina (<strong>推拿</strong>) veut dire "pousser" et "saisir". Voilà, c'est aussi simple que ça. Avec mes mains, je pousse, je saisis, j'appuie, je mobilise. Je travaille les muscles, oui, mais surtout ce qu'il y a en dessous : <strong>les méridiens</strong>, les points d'énergie, les zones où le corps a accumulé ce qu'il porte.</p>
+    <div class="pull-quote">
+      Le Tuina ne cherche pas à vous endormir. Il cherche à libérer ce qui s'est figé.
+    </div>
+  </div>
+</section>
+
+<!-- 2. Ce que je fais, concrètement -->
+<section class="content content-2">
+  <div class="content-inner reveal">
+    <h2>Ce que je fais, <em>concrètement</em>.</h2>
+    <p>Une séance de Tuina, ça commence toujours par une question. <em>« De quoi avez-vous besoin aujourd'hui ? »</em> Parce qu'un même corps ne raconte pas la même histoire d'une semaine sur l'autre. Quelqu'un qui vient pour des cervicales raides ne reçoit pas le même soin que quelqu'un qui vient parce qu'il dort mal depuis trois mois.</p>
+    <p>Vous restez <strong>habillé</strong>, idéalement avec des vêtements souples. Je n'utilise pas d'huile. Je m'adapte à votre confort — table ou futon — et je commence.</p>
+    <p>Pendant la séance, vous allez sentir des choses précises. Parfois une pression forte, qui surprend la première fois. Parfois un étirement doux. Souvent, à un moment, quelque chose se relâche — et vous sentez que quelque chose s'est passé, sans vraiment savoir quoi. <em>C'est ça, le Tuina.</em></p>
+
+    <h3>Pour qui ?</h3>
+    <p>J'accueille beaucoup de personnes qui ont mal. Au dos, à la nuque, aux épaules. Des gens qui passent leur journée devant un écran. D'autres qui ont eu un accident, comme moi à 25 ans. D'autres encore qui ont les jambes lourdes, qui dorment mal, qui se sentent fatigués <em>« sans raison »</em>.</p>
+    <p>Je reçois aussi des personnes qui n'ont aucune douleur particulière, mais qui sentent que leur corps a besoin d'être écouté. Et qui repartent en me disant : <em>« Je ne savais pas que j'avais autant de tensions là. »</em></p>
+    <p>Le Tuina est adapté à presque tout le monde — sauf si vous attendez un bébé (je propose alors d'autres techniques douces), si vous avez de la fièvre, ou en cas de blessure récente. Pour le reste, on s'adapte.</p>
+  </div>
+</section>
+
+<!-- 3. Tarifs -->
+<section class="content content-3">
+  <div class="content-inner reveal">
+    <h2>Combien de temps, <em>quel tarif</em>.</h2>
+    <p>J'ai plusieurs durées, parce que les besoins ne sont jamais les mêmes. Pour une zone précise qui coince, 30 minutes peuvent suffire. Pour un corps qui n'a pas pris soin de lui depuis longtemps, il vaut mieux compter 1 heure, voire plus.</p>
+
+    <div class="pricing-card">
+      <h4>🌿 Massage Tuina Corps — Tarifs</h4>
+      <table class="pricing-table">
+        <tr><td>30 minutes — pour une zone ciblée</td><td>45 €</td></tr>
+        <tr><td>1 heure — la durée la plus demandée</td><td>80 €</td></tr>
+        <tr><td>1 h 30 — pour les corps qui ont besoin de temps</td><td>110 €</td></tr>
+        <tr><td>2 heures — la séance complète, profonde</td><td>148 €</td></tr>
+      </table>
+      <p class="price-note">Mon conseil pour une première fois : 1 heure. C'est le bon format pour découvrir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FAQ -->
+<section class="content content-4">
+  <div class="content-inner reveal">
+    <h2>Vos questions, <em>mes réponses honnêtes</em>.</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Faut-il être nu ?</div>
+      <p class="faq-a">Non, vous restez habillé. Privilégiez des vêtements souples : un legging, un t-shirt, un pantalon de yoga. C'est tout.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Est-ce que ça fait mal ?</div>
+      <p class="faq-a">Le Tuina peut être intense, je suis honnête avec vous. Mais jamais agressif. Si une pression est trop forte, vous me le dites — je m'adapte immédiatement. Mon travail, ce n'est pas de vous faire souffrir, c'est de vous accompagner.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Combien de séances faut-il ?</div>
+      <p class="faq-a">Pour une douleur ponctuelle, parfois une seule séance suffit. Pour quelque chose d'installé depuis longtemps, on travaille en plusieurs fois. Je vous le dis honnêtement à la fin de la première séance.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Quelle est la différence avec un massage relaxant ?</div>
+      <p class="faq-a">Le Tuina travaille les méridiens et l'énergie, plus en profondeur. Le relaxant cherche d'abord à détendre les muscles. Les deux sont utiles — ce ne sont juste pas les mêmes outils. Beaucoup de mes clients alternent les deux selon leur état.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Et après la séance ?</div>
+      <p class="faq-a">Buvez de l'eau, beaucoup. Évitez les efforts intenses dans les heures qui suivent. Et surtout : écoutez ce que votre corps vous dit. C'est souvent là, dans les heures qui suivent un Tuina, qu'il se passe les choses les plus intéressantes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="soin-cta">
+  <div class="soin-cta-inner">
+    <h2>Si vous voulez <em>essayer</em>,<br/>je vous accueille avec plaisir.</h2>
+    <div class="soin-cta-btns">
+      <a href="/#booking" class="btn-gold">Réserver une séance →</a>
+      <a href="/mon-histoire" class="btn-outline-white">Lire mon histoire</a>
+    </div>
+    <p class="soin-cta-info">
+      14C Bd de Curepipe · 33260 La Teste-de-Buch · <a href="tel:0627146231">06 27 14 62 31</a>
+    </p>
+  </div>
+</section>
+
+<!-- Other soins -->
+<section class="other-soins">
+  <div class="other-soins-inner">
+    <h3>Découvrir mes autres soins</h3>
+    <div class="other-grid">
+      <a href="/soins/massage-relaxant" class="other-card">
+        <div class="oc-icon">💆</div>
+        <h4>Massage Relaxant Corps</h4>
+        <p>Le repos, mais en profondeur. À partir de 90 €.</p>
+        <span class="oc-link">Découvrir →</span>
+      </a>
+      <a href="/soins/moxibustion" class="other-card">
+        <div class="oc-icon">🔥</div>
+        <h4>Moxibustion</h4>
+        <p>Une chaleur qui soigne. Médecine chinoise ancestrale. 80 €.</p>
+        <span class="oc-link">Découvrir →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>🐼 Chez Sophie – Massage Tuina</strong></p>
+  <p>14C Bd de Curepipe Apt S · 33260 La Teste-de-Buch · <a href="tel:0627146231">06 27 14 62 31</a></p>
+  <div class="footer-links" style="margin-top:.6rem">
+    <a href="/mon-histoire">Mon histoire</a>
+    <a href="/#services">Soins & Tarifs</a>
+    <a href="/#booking">Réservation</a>
+    <a href="/#contact">Contact</a>
+    <a href="/admin.html">Admin</a>
+  </div>
+  <p style="margin-top:.8rem;font-size:.7rem;opacity:.3">© 2026 Chez Sophie Massage Tuina · Tous droits réservés</p>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 30));
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    });
+  });
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+</body>
+</html>
