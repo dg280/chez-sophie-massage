@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moxibustion à La Teste-de-Buch · Médecine chinoise · Chez Sophie</title>
+  <meta name="description" content="La moxibustion, c'est une chaleur qui soigne. Médecine chinoise vieille de 2000 ans, pratiquée par Sophie à La Teste-de-Buch. Douleurs chroniques, fatigue profonde, convalescence. 80 €." />
+  <meta name="keywords" content="moxibustion La Teste-de-Buch, moxibustion Arcachon, médecine chinoise traditionnelle, moxa douleurs chroniques, moxibustion Bassin Arcachon, praticienne chinoise moxa 33260" />
+  <meta property="og:title" content="Moxibustion · Médecine chinoise · Chez Sophie · La Teste-de-Buch" />
+  <meta property="og:description" content="Une chaleur qui soigne. Médecine chinoise ancestrale. 80 € la séance." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://sophie-tuina.fr/soins/moxibustion" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Moxibustion",
+    "name": "Moxibustion",
+    "description": "Technique de médecine traditionnelle chinoise utilisant la chaleur de l'armoise (moxa) sur des points d'acupuncture pour soulager douleurs chroniques, fatigue et déséquilibres.",
+    "provider": {
+      "@type": "HealthAndBeautyBusiness",
+      "name": "Chez Sophie Massage Tuina",
+      "telephone": "0627146231",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "14C Boulevard de Curepipe Apt S",
+        "addressLocality": "La Teste-de-Buch",
+        "postalCode": "33260",
+        "addressCountry": "FR"
+      }
+    },
+    "areaServed": [
+      { "@type": "City", "name": "La Teste-de-Buch" },
+      { "@type": "City", "name": "Arcachon" },
+      { "@type": "City", "name": "Gujan-Mestras" },
+      { "@type": "City", "name": "Le Teich" }
+    ],
+    "offers": [
+      { "@type": "Offer", "name": "La séance", "price": "80", "priceCurrency": "EUR" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:#3D5A3E; --green2:#2E4A2F; --sage:#7A9E7E;
+      --gold:#B8960C; --gold2:#D4AF37;
+      --cream:#F6F1E9; --cream2:#EDE7DA; --stone:#8C7B6B;
+      --dark:#1C1C1C; --white:#FDFAF5; --r:12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Lato',sans-serif; background:var(--cream); color:var(--dark); line-height:1.75; overflow-x:hidden; }
+    h1,h2,h3,h4 { font-family:'Playfair Display',serif; }
+    a { text-decoration:none; color:inherit; }
+
+    nav { position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 5%; height:68px;
+      background:rgba(246,241,233,.94); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(61,90,62,.1); transition:box-shadow .3s; }
+    nav.scrolled { box-shadow:0 2px 24px rgba(0,0,0,.08); }
+    .nav-logo { display:flex; align-items:center; gap:11px; }
+    .nav-logo-icon { width:40px; height:40px; border-radius:50%;
+      background:linear-gradient(135deg,var(--green2),var(--sage));
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; box-shadow:0 2px 12px rgba(61,90,62,.25); }
+    .nav-logo-text { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--green); line-height:1.2; }
+    .nav-logo-text span { display:block; font-family:'Lato',sans-serif; font-weight:300; font-size:.7rem; color:var(--stone); letter-spacing:1.5px; text-transform:uppercase; }
+    .nav-links { display:flex; gap:2.2rem; align-items:center; }
+    .nav-links a { font-size:.88rem; color:var(--stone); transition:color .2s; }
+    .nav-links a:hover { color:var(--green); }
+    .nav-cta { background:var(--green)!important; color:var(--white)!important;
+      padding:.55rem 1.4rem; border-radius:30px; font-size:.84rem!important; font-weight:700; }
+    .nav-cta:hover { background:var(--sage)!important; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--green); border-radius:2px; transition:.3s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    .soin-hero { min-height:60vh; padding:140px 5% 100px;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+      background:linear-gradient(160deg,#3a1d0d 0%,#5a2810 30%,#7a3818 60%,#a04b1f 100%);
+      color:var(--white); text-align:center; }
+    .soin-hero::before { content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 50% at 80% 30%,rgba(255,200,80,.12) 0%,transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 90%,rgba(0,0,0,.25) 0%,transparent 55%); }
+    .soin-hero-inner { position:relative; z-index:2; max-width:780px; animation:fadeUp 1s ease both; }
+    .soin-icon-big { font-size:3.5rem; margin-bottom:1.2rem; }
+    .soin-label { display:inline-block; font-size:.78rem; letter-spacing:3px; text-transform:uppercase;
+      color:#FFC85A; padding-bottom:.6rem; border-bottom:1px solid rgba(255,200,90,.4); margin-bottom:1.5rem; }
+    .soin-hero h1 { font-size:clamp(2.2rem,5vw,3.6rem); font-weight:600; line-height:1.15; margin-bottom:1.2rem; text-shadow:0 2px 24px rgba(0,0,0,.35); }
+    .soin-hero h1 em { font-style:italic; color:#FFC85A; }
+    .soin-tagline { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1.05rem,2vw,1.35rem); color:rgba(255,255,255,.88); max-width:580px; margin:0 auto 2rem; line-height:1.6; }
+    .hero-price-tag { display:inline-block; padding:.55rem 1.4rem; background:rgba(255,200,90,.15); border:1px solid rgba(255,200,90,.4); border-radius:30px; font-size:.86rem; color:#FFC85A; letter-spacing:.5px; }
+
+    section.content { padding:80px 5%; }
+    .content-inner { max-width:780px; margin:0 auto; }
+    .content h2 { font-size:clamp(1.7rem,3.2vw,2.2rem); color:var(--green); line-height:1.25; margin-bottom:1.6rem; max-width:660px; }
+    .content h2 em { font-style:italic; color:var(--gold); }
+    .content h3 { font-size:1.25rem; color:var(--green); margin-top:2rem; margin-bottom:.8rem; }
+    .content p { font-size:1.05rem; color:#3a3a3a; margin-bottom:1.2rem; line-height:1.85; }
+    .content p strong { color:var(--green); font-weight:700; }
+    .content p em { color:var(--stone); font-style:italic; }
+    .content ul { margin:1rem 0 1.4rem 1.2rem; color:#3a3a3a; }
+    .content ul li { padding:.3rem 0; font-size:1rem; line-height:1.7; }
+    .content-1 { background:var(--white); }
+    .content-2 { background:var(--cream); }
+    .content-3 { background:var(--white); }
+    .content-4 { background:var(--cream); }
+
+    .pull-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:1.35rem;
+      color:var(--green); border-left:3px solid var(--gold2);
+      padding:.3rem 0 .3rem 1.4rem; margin:1.8rem 0; max-width:620px; }
+
+    .pricing-card { background:var(--white); border:1px solid rgba(61,90,62,.1); border-radius:var(--r); padding:28px 30px; margin:1.6rem 0; box-shadow:0 4px 22px rgba(0,0,0,.05); }
+    .pricing-card h4 { font-size:1rem; color:var(--green); margin-bottom:1rem; }
+    .pricing-table { width:100%; }
+    .pricing-table tr td { padding:.75rem 0; border-bottom:1px dashed rgba(61,90,62,.12); font-size:.95rem; color:#484848; }
+    .pricing-table tr:last-child td { border-bottom:none; }
+    .pricing-table td:last-child { text-align:right; font-weight:700; color:var(--gold); font-size:1.05rem; }
+    .price-note { font-size:.82rem; color:var(--stone); font-style:italic; margin-top:.8rem; }
+
+    .warning-box { background:#fdf6e8; border-left:3px solid var(--gold2); border-radius:8px; padding:18px 22px; margin:1.6rem 0; }
+    .warning-box strong { color:var(--green); }
+    .warning-box ul { margin:.6rem 0 0 1.2rem; }
+
+    .faq-item { background:var(--white); border:1px solid rgba(61,90,62,.08); border-radius:10px; padding:20px 24px; margin-bottom:12px; transition:border-color .2s; }
+    .faq-item:hover { border-color:rgba(122,158,126,.4); }
+    .faq-q { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--green); margin-bottom:.6rem; font-weight:600; }
+    .faq-a { font-size:.95rem; color:#3a3a3a; line-height:1.75; margin:0; }
+
+    .soin-cta { background:var(--green); color:var(--white);
+      padding:80px 5%; text-align:center; position:relative; overflow:hidden; }
+    .soin-cta::before { content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 50% at 80% 20%,rgba(212,175,55,.08) 0%,transparent 60%),
+        radial-gradient(ellipse 50% 60% at 20% 90%,rgba(255,255,255,.05) 0%,transparent 55%); }
+    .soin-cta-inner { position:relative; z-index:2; max-width:680px; margin:0 auto; }
+    .soin-cta h2 { font-size:clamp(1.7rem,3.4vw,2.3rem); font-style:italic; line-height:1.3; margin-bottom:1.8rem; color:var(--white); }
+    .soin-cta h2 em { color:var(--gold2); font-style:italic; }
+    .soin-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .btn-gold { background:var(--gold2); color:var(--dark); padding:.95rem 2.3rem; border-radius:40px; font-weight:700; font-size:1rem; box-shadow:0 4px 22px rgba(212,175,55,.35); transition:transform .2s,box-shadow .2s; }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 7px 28px rgba(212,175,55,.5); }
+    .btn-outline-white { background:transparent; color:var(--white); border:2px solid rgba(255,255,255,.55); padding:.92rem 2.1rem; border-radius:40px; font-size:1rem; transition:background .2s,border-color .2s; }
+    .btn-outline-white:hover { background:rgba(255,255,255,.1); border-color:white; }
+    .soin-cta-info { font-size:.9rem; color:rgba(255,255,255,.65); }
+    .soin-cta-info a { color:var(--gold2); font-weight:700; }
+
+    .other-soins { padding:60px 5%; background:var(--cream2); }
+    .other-soins-inner { max-width:980px; margin:0 auto; }
+    .other-soins h3 { text-align:center; font-size:1.4rem; color:var(--green); margin-bottom:2rem; }
+    .other-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .other-card { background:var(--white); border:1px solid rgba(61,90,62,.08); border-radius:var(--r); padding:24px; transition:transform .2s,box-shadow .2s; display:block; }
+    .other-card:hover { transform:translateY(-3px); box-shadow:0 10px 32px rgba(0,0,0,.08); }
+    .other-card .oc-icon { font-size:1.8rem; margin-bottom:.6rem; }
+    .other-card h4 { font-size:1.05rem; color:var(--green); margin-bottom:.4rem; }
+    .other-card p { font-size:.85rem; color:var(--stone); margin:0; }
+    .other-card .oc-link { display:inline-block; margin-top:.8rem; font-size:.82rem; color:var(--gold); font-weight:700; }
+
+    footer { background:var(--dark); color:rgba(255,255,255,.5); text-align:center; padding:2.2rem 5%; font-size:.82rem; line-height:1.9; }
+    footer strong { color:rgba(255,255,255,.85); }
+    footer a { color:var(--sage); transition:color .2s; }
+    footer a:hover { color:white; }
+    .footer-links { display:flex; gap:1.4rem; justify-content:center; flex-wrap:wrap; margin-bottom:.5rem; }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity .8s ease,transform .8s ease; }
+    .reveal.in { opacity:1; transform:none; }
+
+    @media (max-width:860px) { .other-grid { grid-template-columns:1fr; } }
+    @media (max-width:640px) {
+      nav { padding:0 4%; }
+      .nav-links { display:none; flex-direction:column; gap:1rem;
+        position:absolute; top:68px; left:0; right:0;
+        background:var(--white); padding:1.5rem 5%;
+        border-bottom:1px solid var(--cream2);
+        box-shadow:0 8px 24px rgba(0,0,0,.07); }
+      .nav-links.open { display:flex; }
+      .hamburger { display:flex; }
+      section.content { padding:60px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">🐼</div>
+    <div class="nav-logo-text">Chez Sophie<span>Massage Tuina</span></div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="/mon-histoire">Mon histoire</a>
+    <a href="/#services">Soins & Tarifs</a>
+    <a href="/#reviews">Avis</a>
+    <a href="/#contact">Contact</a>
+    <a href="/#booking" class="nav-cta">Réserver</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="soin-hero">
+  <div class="soin-hero-inner">
+    <div class="soin-icon-big">🔥</div>
+    <span class="soin-label">Moxibustion</span>
+    <h1>Une chaleur<br/>qui <em>soigne</em>.</h1>
+    <p class="soin-tagline">Médecine chinoise vieille de plus de 2 000 ans · Pour les douleurs chroniques et la fatigue profonde</p>
+    <span class="hero-price-tag">80 € la séance · environ 1 heure</span>
+  </div>
+</section>
+
+<!-- 1. Une pratique qu'on connait peu en France -->
+<section class="content content-1">
+  <div class="content-inner reveal">
+    <h2>Une pratique <em>qu'on connaît peu</em> en France.</h2>
+    <p>La moxibustion, c'est l'autre grande médecine de la Chine ancienne. On en parle moins que l'acupuncture, mais en Chine, elles sont nées ensemble, et elles fonctionnent ensemble.</p>
+    <p>Le principe est simple : on chauffe certains points précis du corps — les mêmes que ceux qu'utilise l'acupuncture — en faisant brûler une plante appelée <strong>armoise</strong> (le moxa). Cette chaleur n'est pas une chaleur ordinaire. Elle pénètre le corps profondément, et elle réveille des choses que les massages seuls ne peuvent pas atteindre.</p>
+    <p>Je vous le dis honnêtement : la première fois, certaines personnes sont impressionnées. L'odeur du moxa est particulière. La sensation de chaleur est inhabituelle. Mais en quelques minutes, on s'installe, et souvent, <em>on ne voudrait plus en sortir</em>.</p>
+    <div class="pull-quote">
+      Là où le massage atteint le muscle, le moxa atteint l'énergie qui circule dessous.
+    </div>
+  </div>
+</section>
+
+<!-- 2. Pour quoi je l'utilise -->
+<section class="content content-2">
+  <div class="content-inner reveal">
+    <h2>Pour quoi <em>je l'utilise</em>.</h2>
+    <p>La moxibustion ne soigne pas tout. Mais elle est remarquable pour certaines choses précises :</p>
+    <ul>
+      <li>Les <strong>douleurs chroniques</strong> du dos, des articulations, des vieilles blessures</li>
+      <li>La <strong>fatigue profonde</strong> — celle qui ne part pas avec le sommeil</li>
+      <li>Les frilosités, les extrémités toujours froides</li>
+      <li>Les digestions difficiles, les ventres qui ne vont pas</li>
+      <li>Les périodes de <strong>convalescence</strong> ou de récupération</li>
+      <li>Les déséquilibres liés à un stress installé depuis longtemps</li>
+    </ul>
+    <p>J'utilise souvent le moxa <em>en complément d'un massage</em>. Mais il peut aussi être proposé seul, pour une séance vraiment ciblée sur quelque chose de précis.</p>
+  </div>
+</section>
+
+<!-- 3. La séance -->
+<section class="content content-3">
+  <div class="content-inner reveal">
+    <h2>Comment <em>se passe la séance</em>.</h2>
+    <p>Vous êtes allongé, confortablement installé, dans une pièce que je veille à bien ventiler. La séance dure environ <strong>45 minutes à 1 heure</strong>.</p>
+    <p>Selon votre cas, j'utilise différentes formes de moxa : des bâtons que je tiens près de la peau, des petits cônes que je pose, ou des techniques plus indirectes. Je m'adapte à votre sensibilité, à votre type de peau, à ce que je cherche à travailler.</p>
+    <p>Le but n'est <em>jamais</em> de brûler. Je m'arrête bien avant. Vous devez sentir une chaleur <strong>agréable</strong> qui pénètre — pas une douleur. Si à un moment c'est trop chaud, vous me le dites, je m'éloigne immédiatement.</p>
+    <p>L'odeur du moxa est forte mais pas désagréable — un peu végétale, un peu fumée. Elle reste un peu sur les vêtements quelques heures. Mon conseil : prévoyez une tenue que vous n'allez pas mettre en réunion juste après.</p>
+
+    <div class="pricing-card">
+      <h4>🔥 Moxibustion — Tarif</h4>
+      <table class="pricing-table">
+        <tr><td>La séance (environ 1 h)</td><td>80 €</td></tr>
+      </table>
+      <p class="price-note">C'est un soin que je propose <strong>sur indication</strong>, pas en routine. Si vous êtes intéressé, on en parle au téléphone ou en première séance, pour que je voie si c'est adapté à votre cas.</p>
+    </div>
+
+    <div class="warning-box">
+      <strong>⚠️ Bon à savoir — quand on évite la moxibustion</strong>
+      <ul>
+        <li>Si vous attendez un bébé (sauf situations très précises)</li>
+        <li>En cas de fièvre</li>
+        <li>Sur les zones de peau lésées ou irritées</li>
+        <li>Pour certaines maladies inflammatoires aiguës</li>
+      </ul>
+      <p style="margin-top:.6rem;font-size:.9rem">On en parle toujours avant. Je préfère décliner une séance plutôt que de prendre un risque inutile.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FAQ -->
+<section class="content content-4">
+  <div class="content-inner reveal">
+    <h2>Vos questions, <em>mes réponses</em>.</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Est-ce que ça brûle ?</div>
+      <p class="faq-a">Non. La chaleur doit toujours rester agréable. Si c'est trop chaud à un moment, je m'éloigne immédiatement. Mon travail, c'est de chauffer le point — pas de brûler la peau. Je le sais et je le maîtrise depuis 25 ans.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Combien de séances faut-il prévoir ?</div>
+      <p class="faq-a">Pour une fatigue chronique ou une douleur installée, je propose souvent un cycle de 3 à 5 séances espacées d'une semaine. On évalue après les premières — chaque corps répond à son rythme.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">L'odeur reste-t-elle longtemps ?</div>
+      <p class="faq-a">Quelques heures sur les vêtements. La pièce est ventilée pendant la séance, donc vous ne ressortez pas avec une odeur de feu de bois. Mais je reste honnête : ce n'est pas une odeur de bougie parfumée non plus.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Combien ça coûte exactement ?</div>
+      <p class="faq-a">80 € la séance complète. Si je l'utilise comme complément pendant un massage Tuina, c'est inclus dans le tarif du Tuina, sans supplément.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Est-ce qu'on peut être enceinte ?</div>
+      <p class="faq-a">Pas en routine. Il y a des cas très précis où la moxibustion est utilisée en fin de grossesse (notamment pour les bébés en siège), mais cela demande une indication et je préfère vous orienter vers un praticien spécialisé. On en parle si besoin.</p>
+    </div>
+  </div>
+</section>
+
+<section class="soin-cta">
+  <div class="soin-cta-inner">
+    <h2>Vous voulez <em>en savoir plus</em> ?<br/>Appelez-moi, on en parle.</h2>
+    <div class="soin-cta-btns">
+      <a href="tel:0627146231" class="btn-gold">📞 06 27 14 62 31</a>
+      <a href="/#booking" class="btn-outline-white">Réserver en ligne</a>
+    </div>
+    <p class="soin-cta-info">
+      14C Bd de Curepipe · 33260 La Teste-de-Buch
+    </p>
+  </div>
+</section>
+
+<section class="other-soins">
+  <div class="other-soins-inner">
+    <h3>Découvrir mes autres soins</h3>
+    <div class="other-grid">
+      <a href="/soins/massage-tuina" class="other-card">
+        <div class="oc-icon">🌿</div>
+        <h4>Massage Tuina Corps</h4>
+        <p>La pratique chinoise dans laquelle j'ai grandi. À partir de 45 €.</p>
+        <span class="oc-link">Découvrir →</span>
+      </a>
+      <a href="/soins/massage-relaxant" class="other-card">
+        <div class="oc-icon">💆</div>
+        <h4>Massage Relaxant Corps</h4>
+        <p>Le repos, mais en profondeur. À partir de 90 €.</p>
+        <span class="oc-link">Découvrir →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>🐼 Chez Sophie – Massage Tuina</strong></p>
+  <p>14C Bd de Curepipe Apt S · 33260 La Teste-de-Buch · <a href="tel:0627146231">06 27 14 62 31</a></p>
+  <div class="footer-links" style="margin-top:.6rem">
+    <a href="/mon-histoire">Mon histoire</a>
+    <a href="/#services">Soins & Tarifs</a>
+    <a href="/#booking">Réservation</a>
+    <a href="/#contact">Contact</a>
+    <a href="/admin.html">Admin</a>
+  </div>
+  <p style="margin-top:.8rem;font-size:.7rem;opacity:.3">© 2026 Chez Sophie Massage Tuina · Tous droits réservés</p>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 30));
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    });
+  });
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+</body>
+</html>
