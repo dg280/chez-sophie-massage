@@ -1,5 +1,11 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/google1d30d61c528bd629",
+      "destination": "/google1d30d61c528bd629.html"
+    }
+  ]
 }
