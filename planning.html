@@ -125,6 +125,12 @@
       pointer-events:none;
     }
     .toast.show { transform:translateY(0); opacity:1; }
+    .btn-lang {
+      padding:.4rem .8rem; border-radius:6px; font-size:.78rem; font-weight:700;
+      cursor:pointer; border:1px solid rgba(61,90,62,.2); background:var(--cream);
+      color:var(--green); transition:background .2s;
+    }
+    .btn-lang:hover { background:rgba(122,158,126,.15); }
 
     @media (max-width:640px) {
       .planning-main { padding:24px 4% 80px; }
@@ -139,82 +145,80 @@
   <div id="login-screen">
     <div class="login-box">
       <div class="panda">🐼</div>
-      <h1>Mon planning</h1>
+      <h1 data-i18n="loginTitle">Mon planning</h1>
       <p class="sub">Sophie · Chez Sophie Massage Tuina</p>
-      <input type="password" id="pwdInput" placeholder="Mot de passe" onkeydown="if(event.key==='Enter') login()" />
-      <button onclick="login()">Se connecter</button>
-      <p class="login-error" id="loginError">Mot de passe incorrect</p>
+      <input type="password" id="pwdInput" data-i18n-ph="pwdPlaceholder" placeholder="Mot de passe" onkeydown="if(event.key==='Enter') login()" />
+      <button onclick="login()" data-i18n="loginBtn">Se connecter</button>
+      <p class="login-error" id="loginError" data-i18n="loginError">Mot de passe incorrect</p>
+      <p style="text-align:center;margin-top:1rem"><button class="btn-lang" onclick="switchLang()">🇨🇳 中文</button></p>
     </div>
   </div>
 
   <!-- PLANNING -->
   <div id="planning-screen">
     <div class="top-bar">
-      <h1>📅 Mon planning</h1>
+      <h1>📅 <span data-i18n="title">Mon planning</span></h1>
       <div class="top-bar-btns">
-        <a href="/" class="btn-site">🌐 Voir le site</a>
-        <button class="btn-logout" onclick="logout()">Deconnexion</button>
+        <button class="btn-lang" onclick="switchLang()" id="langToggle">🇨🇳 中文</button>
+        <a href="/" class="btn-site" data-i18n="viewSite">🌐 Voir le site</a>
+        <button class="btn-logout" onclick="logout()" data-i18n="logout">Deconnexion</button>
       </div>
     </div>
 
     <div class="planning-main">
 
-      <!-- RDV confirmes (lecture seule) -->
-      <p class="section-label">Rendez-vous confirmes</p>
+      <p class="section-label" data-i18n="sectionRdv">Rendez-vous confirmes</p>
       <div class="card">
-        <h2>📋 Creneaux reserves par des clients</h2>
-        <p class="desc">Ces creneaux ont ete confirmes via email. Ils sont automatiquement bloques.</p>
+        <h2>📋 <span data-i18n="rdvTitle">Creneaux reserves par des clients</span></h2>
+        <p class="desc" data-i18n="rdvDesc">Ces creneaux ont ete confirmes via email. Ils sont automatiquement bloques.</p>
         <div id="rdvList"></div>
       </div>
 
-      <!-- Conges -->
-      <p class="section-label">Mes conges et absences</p>
+      <p class="section-label" data-i18n="sectionAbsence">Mes conges et absences</p>
       <div class="card">
-        <h2>🏖️ Periodes de conges</h2>
-        <p class="desc">Bloquez des periodes entieres. Les clients ne pourront pas reserver.</p>
+        <h2>🏖️ <span data-i18n="congesTitle">Periodes de conges</span></h2>
+        <p class="desc" data-i18n="congesDesc">Bloquez des periodes entieres. Les clients ne pourront pas reserver.</p>
         <div class="row">
           <div class="field">
-            <label>Du</label>
+            <label data-i18n="from">Du</label>
             <input type="date" id="congeDebut" />
           </div>
           <div class="field">
-            <label>Au</label>
+            <label data-i18n="to">Au</label>
             <input type="date" id="congeFin" />
           </div>
           <div class="field">
-            <label>Motif</label>
-            <input type="text" id="congeMotif" placeholder="ex: Vacances" style="width:160px" />
+            <label data-i18n="reason">Motif</label>
+            <input type="text" id="congeMotif" data-i18n-ph="reasonPh" placeholder="ex: Vacances" style="width:160px" />
           </div>
-          <button class="btn-add" onclick="addConge()">+ Ajouter</button>
+          <button class="btn-add" onclick="addConge()" data-i18n="addBtn">+ Ajouter</button>
         </div>
         <div id="congesList"></div>
       </div>
 
-      <!-- Jours fermes -->
       <div class="card">
-        <h2>🚫 Jours fermes</h2>
-        <p class="desc">Bloquez un jour particulier (ferie, absence ponctuelle).</p>
+        <h2>🚫 <span data-i18n="joursTitle">Jours fermes</span></h2>
+        <p class="desc" data-i18n="joursDesc">Bloquez un jour particulier (ferie, absence ponctuelle).</p>
         <div class="row">
           <div class="field">
-            <label>Date</label>
+            <label data-i18n="date">Date</label>
             <input type="date" id="jourFermeDate" />
           </div>
-          <button class="btn-add" onclick="addJourFerme()">+ Ajouter</button>
+          <button class="btn-add" onclick="addJourFerme()" data-i18n="addBtn">+ Ajouter</button>
         </div>
         <div id="joursFermesList"></div>
       </div>
 
-      <!-- Creneaux bloques -->
       <div class="card">
-        <h2>⏰ Creneaux bloques</h2>
-        <p class="desc">Bloquez un creneau precis sur un jour donne.</p>
+        <h2>⏰ <span data-i18n="blocsTitle">Creneaux bloques</span></h2>
+        <p class="desc" data-i18n="blocsDesc">Bloquez un creneau precis sur un jour donne.</p>
         <div class="row">
           <div class="field">
-            <label>Date</label>
+            <label data-i18n="date">Date</label>
             <input type="date" id="blocDate" />
           </div>
           <div class="field">
-            <label>Heure</label>
+            <label data-i18n="time">Heure</label>
             <select id="blocHeure">
               <option value="">—</option>
               <option>09:00</option><option>09:30</option>
@@ -230,13 +234,13 @@
               <option>19:00</option><option>19:30</option>
             </select>
           </div>
-          <button class="btn-add" onclick="addBloc()">+ Ajouter</button>
+          <button class="btn-add" onclick="addBloc()" data-i18n="addBtn">+ Ajouter</button>
         </div>
         <div id="blocsList"></div>
       </div>
 
       <div class="save-bar">
-        <button class="btn-save" onclick="savePlanning()">💾 Enregistrer mon planning</button>
+        <button class="btn-save" onclick="savePlanning()" data-i18n="saveBtn">💾 Enregistrer mon planning</button>
       </div>
 
     </div>
@@ -245,6 +249,127 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // ── i18n FR / 中文 ──
+    const I18N = {
+      fr: {
+        loginTitle: 'Mon planning',
+        pwdPlaceholder: 'Mot de passe',
+        loginBtn: 'Se connecter',
+        loginError: 'Mot de passe incorrect',
+        title: 'Mon planning',
+        viewSite: '🌐 Voir le site',
+        logout: 'Deconnexion',
+        sectionRdv: 'Rendez-vous confirmes',
+        rdvTitle: 'Creneaux reserves par des clients',
+        rdvDesc: 'Ces creneaux ont ete confirmes via email. Ils sont automatiquement bloques.',
+        sectionAbsence: 'Mes conges et absences',
+        congesTitle: 'Periodes de conges',
+        congesDesc: 'Bloquez des periodes entieres. Les clients ne pourront pas reserver.',
+        from: 'Du', to: 'Au', reason: 'Motif', reasonPh: 'ex: Vacances',
+        addBtn: '+ Ajouter',
+        joursTitle: 'Jours fermes',
+        joursDesc: 'Bloquez un jour particulier (ferie, absence ponctuelle).',
+        date: 'Date', time: 'Heure',
+        blocsTitle: 'Creneaux bloques',
+        blocsDesc: 'Bloquez un creneau precis sur un jour donne.',
+        saveBtn: '💾 Enregistrer mon planning',
+        del: 'Supprimer',
+        confirmed: 'Confirme',
+        emptyConges: 'Aucune periode de conges',
+        emptyJours: 'Aucun jour ferme',
+        emptyBlocs: 'Aucun creneau bloque',
+        emptyRdv: 'Aucun RDV a venir',
+        toastLoaded: 'Planning charge',
+        toastSaved: 'Planning enregistre !',
+        toastSaving: 'Enregistrement...',
+        toastAdded: 'Ajoute — pensez a enregistrer',
+        toastGhMissing: 'GitHub non configure — allez dans Admin > GitHub',
+        toastExpired: 'Session expiree',
+        toastError: 'Erreur : ',
+        toastDates: 'Choisissez les dates',
+        toastDateEnd: 'La fin doit etre apres le debut',
+        toastDate: 'Choisissez une date',
+        toastDateHour: 'Choisissez une date et un creneau',
+        toastAlready: 'Deja bloque',
+        toastLoadErr: 'Impossible de charger le planning',
+        langSwitch: '🇨🇳 中文',
+        at: 'a',
+      },
+      zh: {
+        loginTitle: '我的日程',
+        pwdPlaceholder: '密码',
+        loginBtn: '登录',
+        loginError: '密码错误',
+        title: '我的日程',
+        viewSite: '🌐 查看网站',
+        logout: '退出',
+        sectionRdv: '已确认的预约',
+        rdvTitle: '客户已预约的时段',
+        rdvDesc: '这些时段已通过邮件确认，自动锁定。',
+        sectionAbsence: '我的休假和缺勤',
+        congesTitle: '休假期间',
+        congesDesc: '锁定整个期间，客户将无法预约。',
+        from: '从', to: '到', reason: '原因', reasonPh: '例如：休假',
+        addBtn: '+ 添加',
+        joursTitle: '关闭日',
+        joursDesc: '锁定特定的一天（节假日、临时缺勤）。',
+        date: '日期', time: '时间',
+        blocsTitle: '已锁定时段',
+        blocsDesc: '锁定某一天的特定时段。',
+        saveBtn: '💾 保存我的日程',
+        del: '删除',
+        confirmed: '已确认',
+        emptyConges: '没有休假期间',
+        emptyJours: '没有关闭日',
+        emptyBlocs: '没有锁定的时段',
+        emptyRdv: '没有即将到来的预约',
+        toastLoaded: '日程已加载',
+        toastSaved: '日程已保存！',
+        toastSaving: '保存中...',
+        toastAdded: '已添加 — 请记得保存',
+        toastGhMissing: 'GitHub 未配置 — 请到管理 > GitHub',
+        toastExpired: '会话已过期',
+        toastError: '错误：',
+        toastDates: '请选择日期',
+        toastDateEnd: '结束日期必须在开始之后',
+        toastDate: '请选择日期',
+        toastDateHour: '请选择日期和时段',
+        toastAlready: '已锁定',
+        toastLoadErr: '无法加载日程',
+        langSwitch: '🇫🇷 Français',
+        at: '',
+      }
+    };
+
+    let _lang = localStorage.getItem('cs_planning_lang') || 'fr';
+
+    function t(key) { return I18N[_lang][key] || I18N.fr[key] || key; }
+
+    function applyLang() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (I18N[_lang][key]) el.textContent = I18N[_lang][key];
+      });
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.dataset.i18nPh;
+        if (I18N[_lang][key]) el.placeholder = I18N[_lang][key];
+      });
+      // Toggle button label
+      document.querySelectorAll('.btn-lang').forEach(btn => {
+        btn.textContent = t('langSwitch');
+      });
+    }
+
+    function switchLang() {
+      _lang = _lang === 'fr' ? 'zh' : 'fr';
+      localStorage.setItem('cs_planning_lang', _lang);
+      applyLang();
+      if (typeof render === 'function') render();
+    }
+
+    // Apply on load
+    document.addEventListener('DOMContentLoaded', applyLang);
+
     // ── Auth (meme systeme que admin.html) ──
     async function sha256(text) {
       const d = new TextEncoder().encode(text);
@@ -339,54 +464,55 @@
     }
 
     function render() {
+      const dl = t('del'), at = t('at');
       // Conges
       const cl = document.getElementById('congesList');
-      if (!_planning.conges.length) { cl.innerHTML = '<p class="empty">Aucune periode de conges</p>'; }
+      if (!_planning.conges.length) { cl.innerHTML = `<p class="empty">${t('emptyConges')}</p>`; }
       else { cl.innerHTML = _planning.conges.map((c,i) => `
         <div class="item">
           <span><span class="date">${fmtDate(c.debut)}</span> → <span class="date">${fmtDate(c.fin)}</span>${c.motif ? ` — ${c.motif}` : ''}</span>
-          <button class="btn-del" onclick="delConge(${i})">Supprimer</button>
+          <button class="btn-del" onclick="delConge(${i})">${dl}</button>
         </div>
       `).join(''); }
 
       // Jours fermes
       const jl = document.getElementById('joursFermesList');
       const jours = [..._planning.joursFermes].sort();
-      if (!jours.length) { jl.innerHTML = '<p class="empty">Aucun jour ferme</p>'; }
+      if (!jours.length) { jl.innerHTML = `<p class="empty">${t('emptyJours')}</p>`; }
       else { jl.innerHTML = jours.map((j,i) => `
         <div class="item">
           <span class="date">${fmtDate(j)}</span>
-          <button class="btn-del" onclick="delJour(${i})">Supprimer</button>
+          <button class="btn-del" onclick="delJour(${i})">${dl}</button>
         </div>
       `).join(''); }
 
       // Creneaux
       const bl = document.getElementById('blocsList');
       const dates = Object.keys(_planning.creneauxBloques).sort();
-      if (!dates.length) { bl.innerHTML = '<p class="empty">Aucun creneau bloque</p>'; }
+      if (!dates.length) { bl.innerHTML = `<p class="empty">${t('emptyBlocs')}</p>`; }
       else { bl.innerHTML = dates.flatMap(d =>
         _planning.creneauxBloques[d].sort().map(h => `
           <div class="item">
-            <span><span class="date">${fmtDate(d)}</span> a <strong>${h}</strong></span>
-            <button class="btn-del" onclick="delBloc('${d}','${h}')">Supprimer</button>
+            <span><span class="date">${fmtDate(d)}</span> ${at} <strong>${h}</strong></span>
+            <button class="btn-del" onclick="delBloc('${d}','${h}')">${dl}</button>
           </div>
         `)
       ).join(''); }
 
-      // RDV (creneaux bloques automatiquement via /api/confirm — en lecture seule)
+      // RDV
       const rl = document.getElementById('rdvList');
-      if (!dates.length) { rl.innerHTML = '<p class="empty">Aucun RDV confirme pour le moment</p>'; }
+      if (!dates.length) { rl.innerHTML = `<p class="empty">${t('emptyRdv')}</p>`; }
       else {
         const today = new Date().toISOString().split('T')[0];
         const futureSlots = dates.filter(d => d >= today).flatMap(d =>
           _planning.creneauxBloques[d].sort().map(h => `
             <div class="item">
-              <span><span class="date">${fmtDate(d)}</span> a <strong>${h}</strong></span>
-              <span style="font-size:.78rem;color:var(--sage)">Confirme</span>
+              <span><span class="date">${fmtDate(d)}</span> ${at} <strong>${h}</strong></span>
+              <span style="font-size:.78rem;color:var(--sage)">${t('confirmed')}</span>
             </div>
           `)
         );
-        rl.innerHTML = futureSlots.length ? futureSlots.join('') : '<p class="empty">Aucun RDV a venir</p>';
+        rl.innerHTML = futureSlots.length ? futureSlots.join('') : `<p class="empty">${t('emptyRdv')}</p>`;
       }
     }
 
@@ -394,26 +520,26 @@
       const debut = document.getElementById('congeDebut').value;
       const fin = document.getElementById('congeFin').value;
       const motif = document.getElementById('congeMotif').value.trim();
-      if (!debut || !fin) { showToast('Choisissez les dates'); return; }
-      if (fin < debut) { showToast('La fin doit etre apres le debut'); return; }
+      if (!debut || !fin) { showToast(t('toastDates')); return; }
+      if (fin < debut) { showToast(t('toastDateEnd')); return; }
       _planning.conges.push({ debut, fin, motif });
       document.getElementById('congeDebut').value = '';
       document.getElementById('congeFin').value = '';
       document.getElementById('congeMotif').value = '';
       render();
-      showToast('Periode ajoutee — pensez a enregistrer');
+      showToast(t('toastAdded'));
     }
 
     function delConge(i) { _planning.conges.splice(i,1); render(); }
 
     function addJourFerme() {
       const d = document.getElementById('jourFermeDate').value;
-      if (!d) { showToast('Choisissez une date'); return; }
-      if (_planning.joursFermes.includes(d)) { showToast('Deja bloque'); return; }
+      if (!d) { showToast(t('toastDate')); return; }
+      if (_planning.joursFermes.includes(d)) { showToast(t('toastAlready')); return; }
       _planning.joursFermes.push(d);
       document.getElementById('jourFermeDate').value = '';
       render();
-      showToast('Jour ajoute — pensez a enregistrer');
+      showToast(t('toastAdded'));
     }
 
     function delJour(i) {
@@ -425,13 +551,13 @@
     function addBloc() {
       const d = document.getElementById('blocDate').value;
       const h = document.getElementById('blocHeure').value;
-      if (!d || !h) { showToast('Choisissez une date et un creneau'); return; }
+      if (!d || !h) { showToast(t('toastDateHour')); return; }
       if (!_planning.creneauxBloques[d]) _planning.creneauxBloques[d] = [];
-      if (_planning.creneauxBloques[d].includes(h)) { showToast('Deja bloque'); return; }
+      if (_planning.creneauxBloques[d].includes(h)) { showToast(t('toastAlready')); return; }
       _planning.creneauxBloques[d].push(h);
       document.getElementById('blocHeure').value = '';
       render();
-      showToast('Creneau bloque — pensez a enregistrer');
+      showToast(t('toastAdded'));
     }
 
     function delBloc(d, h) {
@@ -451,7 +577,7 @@
     }
 
     async function loadPlanning() {
-      if (!ghOk()) { render(); showToast('GitHub non configure — allez dans Admin > GitHub'); return; }
+      if (!ghOk()) { render(); showToast(t('toastGhMissing')); return; }
       try {
         const { owner, repo } = ghConfig();
         const token = await getGhToken();
@@ -466,18 +592,18 @@
         _planning = { joursFermes: data.joursFermes||[], creneauxBloques: data.creneauxBloques||{}, conges: data.conges||[] };
         clean();
         render();
-        showToast('Planning charge');
-      } catch(e) { render(); showToast('Impossible de charger le planning'); }
+        showToast(t('toastLoaded'));
+      } catch(e) { render(); showToast(t('toastLoadErr')); }
     }
 
     async function savePlanning() {
-      if (!ghOk()) { showToast('GitHub non configure'); return; }
+      if (!ghOk()) { showToast(t('toastGhMissing')); return; }
       const token = await getGhToken();
-      if (!token) { showToast('Session expiree'); return; }
+      if (!token) { showToast(t('toastExpired')); return; }
       clean();
       const { owner, repo } = ghConfig();
       const content = btoa(unescape(encodeURIComponent(JSON.stringify(_planning, null, 2))));
-      showToast('Enregistrement...');
+      showToast(t('toastSaving'));
       try {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/planning.json`, {
           method: 'PUT',
@@ -487,8 +613,8 @@
         if (!res.ok) { const e = await res.json(); throw new Error(e.message); }
         const data = await res.json();
         _sha = data.content.sha;
-        showToast('Planning enregistre !');
-      } catch(e) { showToast('Erreur : ' + e.message); }
+        showToast(t('toastSaved'));
+      } catch(e) { showToast(t('toastError') + e.message); }
     }
   </script>
 </body>
