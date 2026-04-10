@@ -167,6 +167,18 @@
 
     <div class="planning-main">
 
+      <!-- Guide d'utilisation -->
+      <div class="card" id="helpCard" style="border-left:3px solid var(--gold);margin-bottom:24px">
+        <h2>💡 <span data-i18n="helpTitle">Comment ca marche ?</span></h2>
+        <div data-i18n-html="helpContent" style="font-size:.92rem;color:#3a3a3a;line-height:1.8">
+          <p>Cette page vous permet de gerer votre planning. Les clients ne pourront pas reserver les creneaux que vous bloquez ici.</p>
+          <p><strong>1.</strong> Quand un client reserve sur le site, vous recevez un <strong>email</strong> avec 2 boutons : <em>Confirmer</em> ou <em>Refuser</em>.</p>
+          <p><strong>2.</strong> Si vous confirmez, le creneau est <strong>automatiquement bloque</strong> — il apparait ici et n'est plus propose aux autres clients.</p>
+          <p><strong>3.</strong> Vous pouvez aussi <strong>bloquer manuellement</strong> des creneaux, des jours ou des periodes entieres (conges, absences).</p>
+          <p><strong>4.</strong> N'oubliez pas de cliquer <strong>« Enregistrer »</strong> en bas apres vos modifications.</p>
+        </div>
+      </div>
+
       <p class="section-label" data-i18n="sectionRdv">Rendez-vous confirmes</p>
       <div class="card">
         <h2>📋 <span data-i18n="rdvTitle">Creneaux reserves par des clients</span></h2>
@@ -294,6 +306,14 @@
         toastLoadErr: 'Impossible de charger le planning',
         langSwitch: '🇨🇳 中文',
         at: 'a',
+        helpTitle: 'Comment ca marche ?',
+        helpContent: `
+          <p>Cette page vous permet de gerer votre planning. Les clients ne pourront pas reserver les creneaux que vous bloquez ici.</p>
+          <p><strong>1.</strong> Quand un client reserve sur le site, vous recevez un <strong>email</strong> avec 2 boutons : <em>Confirmer</em> ou <em>Refuser</em>.</p>
+          <p><strong>2.</strong> Si vous confirmez, le creneau est <strong>automatiquement bloque</strong> — il apparait ici et n'est plus propose aux autres clients.</p>
+          <p><strong>3.</strong> Vous pouvez aussi <strong>bloquer manuellement</strong> des creneaux, des jours ou des periodes entieres (conges, absences).</p>
+          <p><strong>4.</strong> N'oubliez pas de cliquer <strong>« Enregistrer »</strong> en bas apres vos modifications.</p>
+        `,
       },
       zh: {
         loginTitle: '我的日程',
@@ -338,6 +358,25 @@
         toastLoadErr: '无法加载日程',
         langSwitch: '🇫🇷 Français',
         at: '',
+        helpTitle: '使用说明',
+        helpContent: `
+          <p>这个页面用来管理你的日程安排。你在这里锁定的时段，客户将无法预约。</p>
+          <p><strong>1.</strong> 当客户在网站上预约时，你会收到一封<strong>邮件</strong>，里面有两个按钮：<em>确认</em> 或 <em>拒绝</em>。</p>
+          <p><strong>2.</strong> 如果你点击确认，该时段会<strong>自动锁定</strong> — 它会显示在这里，其他客户将无法再预约这个时段。</p>
+          <p><strong>3.</strong> 你也可以<strong>手动锁定</strong>时段、某一天、或整个假期。</p>
+          <p><strong>4.</strong> 修改后别忘了点击底部的 <strong>「保存」</strong> 按钮。</p>
+          <p style="margin-top:1rem;padding-top:.8rem;border-top:1px dashed rgba(61,90,62,.15)">
+            <strong>📧 邮件操作说明：</strong><br>
+            收到预约邮件后 → 点击 <span style="color:var(--green);font-weight:700">✓ 确认</span> = 锁定时段 + 发确认邮件给客户<br>
+            点击 <span style="color:#C0392B;font-weight:700">✕ 拒绝</span> = 通知客户该时段不可用，时段保持空闲
+          </p>
+          <p style="margin-top:.8rem">
+            <strong>📅 手动管理说明：</strong><br>
+            「休假期间」→ 锁定连续几天（例如：回中国探亲）<br>
+            「关闭日」→ 锁定某一天（例如：节假日）<br>
+            「已锁定时段」→ 锁定某天的某个时间（例如：已有客户）
+          </p>
+        `,
       }
     };
 
@@ -354,7 +393,10 @@
         const key = el.dataset.i18nPh;
         if (I18N[_lang][key]) el.placeholder = I18N[_lang][key];
       });
-      // Toggle button label
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.dataset.i18nHtml;
+        if (I18N[_lang][key]) el.innerHTML = I18N[_lang][key];
+      });
       document.querySelectorAll('.btn-lang').forEach(btn => {
         btn.textContent = t('langSwitch');
       });
