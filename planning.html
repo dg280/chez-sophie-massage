@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon planning – Sophie</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --green:#3D5A3E; --sage:#7A9E7E; --gold:#D4AF37;
+      --cream:#F6F1E9; --cream2:#EDE7DA; --stone:#8C7B6B;
+      --dark:#1C1C1C; --white:#FDFAF5; --r:12px;
+    }
+    body { font-family:'Lato',sans-serif; background:var(--cream); color:var(--dark); min-height:100vh; line-height:1.7; }
+
+    /* ── Login ── */
+    #login-screen {
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg, var(--cream) 0%, var(--cream2) 100%);
+    }
+    .login-box {
+      background:var(--white); border:1px solid rgba(61,90,62,.12);
+      border-radius:16px; padding:48px 40px; width:100%; max-width:360px;
+      box-shadow:0 8px 40px rgba(0,0,0,.06);
+    }
+    .login-box .panda { font-size:3rem; text-align:center; margin-bottom:.5rem; }
+    .login-box h1 { font-family:'Playfair Display',serif; text-align:center; font-size:1.4rem; color:var(--green); margin-bottom:.3rem; }
+    .login-box .sub { text-align:center; font-size:.82rem; color:var(--stone); margin-bottom:2rem; }
+    .login-box input {
+      width:100%; padding:.75rem 1rem; border-radius:8px;
+      border:2px solid rgba(61,90,62,.15); background:var(--cream);
+      font-size:.95rem; outline:none; transition:border-color .2s;
+      margin-bottom:1rem; color:var(--dark);
+    }
+    .login-box input:focus { border-color:var(--green); background:var(--white); }
+    .login-box button {
+      width:100%; padding:.85rem; background:var(--green); color:white;
+      border:none; border-radius:8px; font-size:1rem; font-weight:700;
+      cursor:pointer; transition:background .2s;
+    }
+    .login-box button:hover { background:var(--sage); }
+    .login-error { color:#C0392B; font-size:.82rem; text-align:center; margin-top:.5rem; display:none; }
+
+    /* ── Planning layout ── */
+    #planning-screen { display:none; }
+    .top-bar {
+      position:sticky; top:0; z-index:100;
+      background:rgba(246,241,233,.95); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(61,90,62,.1);
+      padding:14px 5%; display:flex; align-items:center; justify-content:space-between;
+    }
+    .top-bar h1 { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--green); display:flex; align-items:center; gap:8px; }
+    .top-bar-btns { display:flex; gap:8px; }
+    .top-bar-btns a, .top-bar-btns button {
+      padding:.5rem 1rem; border-radius:8px; font-size:.82rem; font-weight:700;
+      cursor:pointer; border:none; transition:background .2s;
+    }
+    .btn-site { background:rgba(122,158,126,.15); color:var(--sage); text-decoration:none; }
+    .btn-site:hover { background:rgba(122,158,126,.3); }
+    .btn-logout { background:rgba(192,57,43,.08); color:#C0392B; }
+    .btn-logout:hover { background:rgba(192,57,43,.2); }
+
+    .planning-main { max-width:800px; margin:0 auto; padding:32px 5% 80px; }
+
+    /* ── Vue calendrier simplifie ── */
+    .section-label { font-size:.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--sage); margin-bottom:.8rem; margin-top:2rem; }
+    .section-label:first-child { margin-top:0; }
+
+    .card {
+      background:var(--white); border:1px solid rgba(61,90,62,.08);
+      border-radius:var(--r); padding:24px; margin-bottom:16px;
+      box-shadow:0 2px 14px rgba(0,0,0,.04);
+    }
+    .card h2 { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--green); margin-bottom:.4rem; display:flex; align-items:center; gap:.5rem; }
+    .card .desc { font-size:.85rem; color:var(--stone); margin-bottom:1rem; }
+
+    .row { display:flex; gap:10px; align-items:end; flex-wrap:wrap; margin-bottom:.8rem; }
+    .field label { display:block; font-size:.7rem; letter-spacing:1px; text-transform:uppercase; color:var(--stone); margin-bottom:.3rem; }
+    .field input, .field select {
+      padding:.55rem .8rem; border-radius:7px; border:2px solid rgba(61,90,62,.12);
+      background:var(--cream); font-size:.88rem; outline:none; color:var(--dark);
+      transition:border-color .2s;
+    }
+    .field input:focus, .field select:focus { border-color:var(--green); background:var(--white); }
+    .btn-add {
+      padding:.55rem 1.2rem; background:var(--green); color:white; border:none;
+      border-radius:7px; font-size:.85rem; font-weight:700; cursor:pointer;
+      transition:background .2s;
+    }
+    .btn-add:hover { background:var(--sage); }
+    .btn-del {
+      background:transparent; border:1px solid rgba(192,57,43,.3); color:#C0392B;
+      padding:.3rem .6rem; border-radius:5px; font-size:.78rem; cursor:pointer;
+      transition:background .2s;
+    }
+    .btn-del:hover { background:rgba(192,57,43,.08); }
+
+    .item {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.65rem .8rem; background:var(--cream); border-radius:8px; margin-bottom:8px;
+      font-size:.88rem; color:#3a3a3a;
+    }
+    .item .date { font-weight:700; color:var(--green); }
+    .empty { font-size:.85rem; color:var(--stone); font-style:italic; padding:.5rem 0; }
+
+    .save-bar {
+      position:sticky; bottom:20px;
+      display:flex; justify-content:center; gap:12px;
+      padding:16px 0; z-index:50;
+    }
+    .btn-save {
+      padding:.85rem 2.5rem; background:var(--green); color:white; border:none;
+      border-radius:30px; font-size:1rem; font-weight:700; cursor:pointer;
+      box-shadow:0 6px 22px rgba(61,90,62,.3); transition:background .2s, transform .15s;
+    }
+    .btn-save:hover { background:var(--sage); transform:translateY(-1px); }
+
+    .toast {
+      position:fixed; bottom:24px; right:24px; z-index:999;
+      background:var(--green); color:white; padding:.8rem 1.4rem;
+      border-radius:8px; font-size:.87rem; font-weight:700;
+      transform:translateY(60px); opacity:0; transition:all .3s;
+      pointer-events:none;
+    }
+    .toast.show { transform:translateY(0); opacity:1; }
+
+    @media (max-width:640px) {
+      .planning-main { padding:24px 4% 80px; }
+      .row { flex-direction:column; align-items:stretch; gap:6px; }
+      .field input, .field select { width:100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="login-screen">
+    <div class="login-box">
+      <div class="panda">🐼</div>
+      <h1>Mon planning</h1>
+      <p class="sub">Sophie · Chez Sophie Massage Tuina</p>
+      <input type="password" id="pwdInput" placeholder="Mot de passe" onkeydown="if(event.key==='Enter') login()" />
+      <button onclick="login()">Se connecter</button>
+      <p class="login-error" id="loginError">Mot de passe incorrect</p>
+    </div>
+  </div>
+
+  <!-- PLANNING -->
+  <div id="planning-screen">
+    <div class="top-bar">
+      <h1>📅 Mon planning</h1>
+      <div class="top-bar-btns">
+        <a href="/" class="btn-site">🌐 Voir le site</a>
+        <button class="btn-logout" onclick="logout()">Deconnexion</button>
+      </div>
+    </div>
+
+    <div class="planning-main">
+
+      <!-- RDV confirmes (lecture seule) -->
+      <p class="section-label">Rendez-vous confirmes</p>
+      <div class="card">
+        <h2>📋 Creneaux reserves par des clients</h2>
+        <p class="desc">Ces creneaux ont ete confirmes via email. Ils sont automatiquement bloques.</p>
+        <div id="rdvList"></div>
+      </div>
+
+      <!-- Conges -->
+      <p class="section-label">Mes conges et absences</p>
+      <div class="card">
+        <h2>🏖️ Periodes de conges</h2>
+        <p class="desc">Bloquez des periodes entieres. Les clients ne pourront pas reserver.</p>
+        <div class="row">
+          <div class="field">
+            <label>Du</label>
+            <input type="date" id="congeDebut" />
+          </div>
+          <div class="field">
+            <label>Au</label>
+            <input type="date" id="congeFin" />
+          </div>
+          <div class="field">
+            <label>Motif</label>
+            <input type="text" id="congeMotif" placeholder="ex: Vacances" style="width:160px" />
+          </div>
+          <button class="btn-add" onclick="addConge()">+ Ajouter</button>
+        </div>
+        <div id="congesList"></div>
+      </div>
+
+      <!-- Jours fermes -->
+      <div class="card">
+        <h2>🚫 Jours fermes</h2>
+        <p class="desc">Bloquez un jour particulier (ferie, absence ponctuelle).</p>
+        <div class="row">
+          <div class="field">
+            <label>Date</label>
+            <input type="date" id="jourFermeDate" />
+          </div>
+          <button class="btn-add" onclick="addJourFerme()">+ Ajouter</button>
+        </div>
+        <div id="joursFermesList"></div>
+      </div>
+
+      <!-- Creneaux bloques -->
+      <div class="card">
+        <h2>⏰ Creneaux bloques</h2>
+        <p class="desc">Bloquez un creneau precis sur un jour donne.</p>
+        <div class="row">
+          <div class="field">
+            <label>Date</label>
+            <input type="date" id="blocDate" />
+          </div>
+          <div class="field">
+            <label>Heure</label>
+            <select id="blocHeure">
+              <option value="">—</option>
+              <option>09:00</option><option>09:30</option>
+              <option>10:00</option><option>10:30</option>
+              <option>11:00</option><option>11:30</option>
+              <option>12:00</option><option>12:30</option>
+              <option>13:00</option><option>13:30</option>
+              <option>14:00</option><option>14:30</option>
+              <option>15:00</option><option>15:30</option>
+              <option>16:00</option><option>16:30</option>
+              <option>17:00</option><option>17:30</option>
+              <option>18:00</option><option>18:30</option>
+              <option>19:00</option><option>19:30</option>
+            </select>
+          </div>
+          <button class="btn-add" onclick="addBloc()">+ Ajouter</button>
+        </div>
+        <div id="blocsList"></div>
+      </div>
+
+      <div class="save-bar">
+        <button class="btn-save" onclick="savePlanning()">💾 Enregistrer mon planning</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Auth (meme systeme que admin.html) ──
+    async function sha256(text) {
+      const d = new TextEncoder().encode(text);
+      const h = await crypto.subtle.digest('SHA-256', d);
+      return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+
+    async function deriveKey(password) {
+      const enc = new TextEncoder().encode(password);
+      const km = await crypto.subtle.importKey('raw', enc, 'PBKDF2', false, ['deriveKey']);
+      return crypto.subtle.deriveKey(
+        { name:'PBKDF2', salt: new TextEncoder().encode('chez-sophie-salt-v1'), iterations:100000, hash:'SHA-256' },
+        km, { name:'AES-GCM', length:256 }, false, ['encrypt','decrypt']
+      );
+    }
+
+    async function decrypt(base64, password) {
+      try {
+        const combined = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+        const iv = combined.slice(0,12);
+        const ct = combined.slice(12);
+        const key = await deriveKey(password);
+        const dec = await crypto.subtle.decrypt({ name:'AES-GCM', iv }, key, ct);
+        return new TextDecoder().decode(dec);
+      } catch { return null; }
+    }
+
+    let _pwd = null;
+
+    async function login() {
+      const val = document.getElementById('pwdInput').value;
+      if (!val) return;
+      const hash = await sha256(val);
+      const stored = localStorage.getItem('cs_admin_hash');
+
+      let ok = false;
+      if (!stored) {
+        if (hash === await sha256('sophie2026')) {
+          localStorage.setItem('cs_admin_hash', hash);
+          ok = true;
+        }
+      } else {
+        ok = (hash === stored);
+      }
+
+      if (ok) {
+        _pwd = val;
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('planning-screen').style.display = 'block';
+        loadPlanning();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('pwdInput').value = '';
+      }
+    }
+
+    function logout() {
+      _pwd = null;
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('planning-screen').style.display = 'none';
+      document.getElementById('pwdInput').value = '';
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    // ── GitHub config (reutilise celle de admin.html via localStorage) ──
+    function ghConfig() {
+      return {
+        owner: localStorage.getItem('gh_owner') || '',
+        repo:  localStorage.getItem('gh_repo')  || '',
+      };
+    }
+    async function getGhToken() {
+      const enc = localStorage.getItem('gh_token_enc');
+      if (!enc || !_pwd) return '';
+      return await decrypt(enc, _pwd) || '';
+    }
+    function ghOk() {
+      return ghConfig().owner && ghConfig().repo && localStorage.getItem('gh_token_enc');
+    }
+
+    // ── Planning data ──
+    let _planning = { joursFermes:[], creneauxBloques:{}, conges:[] };
+    let _sha = null;
+
+    function fmtDate(d) {
+      return new Date(d+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
+    }
+
+    function render() {
+      // Conges
+      const cl = document.getElementById('congesList');
+      if (!_planning.conges.length) { cl.innerHTML = '<p class="empty">Aucune periode de conges</p>'; }
+      else { cl.innerHTML = _planning.conges.map((c,i) => `
+        <div class="item">
+          <span><span class="date">${fmtDate(c.debut)}</span> → <span class="date">${fmtDate(c.fin)}</span>${c.motif ? ` — ${c.motif}` : ''}</span>
+          <button class="btn-del" onclick="delConge(${i})">Supprimer</button>
+        </div>
+      `).join(''); }
+
+      // Jours fermes
+      const jl = document.getElementById('joursFermesList');
+      const jours = [..._planning.joursFermes].sort();
+      if (!jours.length) { jl.innerHTML = '<p class="empty">Aucun jour ferme</p>'; }
+      else { jl.innerHTML = jours.map((j,i) => `
+        <div class="item">
+          <span class="date">${fmtDate(j)}</span>
+          <button class="btn-del" onclick="delJour(${i})">Supprimer</button>
+        </div>
+      `).join(''); }
+
+      // Creneaux
+      const bl = document.getElementById('blocsList');
+      const dates = Object.keys(_planning.creneauxBloques).sort();
+      if (!dates.length) { bl.innerHTML = '<p class="empty">Aucun creneau bloque</p>'; }
+      else { bl.innerHTML = dates.flatMap(d =>
+        _planning.creneauxBloques[d].sort().map(h => `
+          <div class="item">
+            <span><span class="date">${fmtDate(d)}</span> a <strong>${h}</strong></span>
+            <button class="btn-del" onclick="delBloc('${d}','${h}')">Supprimer</button>
+          </div>
+        `)
+      ).join(''); }
+
+      // RDV (creneaux bloques automatiquement via /api/confirm — en lecture seule)
+      const rl = document.getElementById('rdvList');
+      if (!dates.length) { rl.innerHTML = '<p class="empty">Aucun RDV confirme pour le moment</p>'; }
+      else {
+        const today = new Date().toISOString().split('T')[0];
+        const futureSlots = dates.filter(d => d >= today).flatMap(d =>
+          _planning.creneauxBloques[d].sort().map(h => `
+            <div class="item">
+              <span><span class="date">${fmtDate(d)}</span> a <strong>${h}</strong></span>
+              <span style="font-size:.78rem;color:var(--sage)">Confirme</span>
+            </div>
+          `)
+        );
+        rl.innerHTML = futureSlots.length ? futureSlots.join('') : '<p class="empty">Aucun RDV a venir</p>';
+      }
+    }
+
+    function addConge() {
+      const debut = document.getElementById('congeDebut').value;
+      const fin = document.getElementById('congeFin').value;
+      const motif = document.getElementById('congeMotif').value.trim();
+      if (!debut || !fin) { showToast('Choisissez les dates'); return; }
+      if (fin < debut) { showToast('La fin doit etre apres le debut'); return; }
+      _planning.conges.push({ debut, fin, motif });
+      document.getElementById('congeDebut').value = '';
+      document.getElementById('congeFin').value = '';
+      document.getElementById('congeMotif').value = '';
+      render();
+      showToast('Periode ajoutee — pensez a enregistrer');
+    }
+
+    function delConge(i) { _planning.conges.splice(i,1); render(); }
+
+    function addJourFerme() {
+      const d = document.getElementById('jourFermeDate').value;
+      if (!d) { showToast('Choisissez une date'); return; }
+      if (_planning.joursFermes.includes(d)) { showToast('Deja bloque'); return; }
+      _planning.joursFermes.push(d);
+      document.getElementById('jourFermeDate').value = '';
+      render();
+      showToast('Jour ajoute — pensez a enregistrer');
+    }
+
+    function delJour(i) {
+      const sorted = [..._planning.joursFermes].sort();
+      _planning.joursFermes = _planning.joursFermes.filter(j => j !== sorted[i]);
+      render();
+    }
+
+    function addBloc() {
+      const d = document.getElementById('blocDate').value;
+      const h = document.getElementById('blocHeure').value;
+      if (!d || !h) { showToast('Choisissez une date et un creneau'); return; }
+      if (!_planning.creneauxBloques[d]) _planning.creneauxBloques[d] = [];
+      if (_planning.creneauxBloques[d].includes(h)) { showToast('Deja bloque'); return; }
+      _planning.creneauxBloques[d].push(h);
+      document.getElementById('blocHeure').value = '';
+      render();
+      showToast('Creneau bloque — pensez a enregistrer');
+    }
+
+    function delBloc(d, h) {
+      if (_planning.creneauxBloques[d]) {
+        _planning.creneauxBloques[d] = _planning.creneauxBloques[d].filter(x => x !== h);
+        if (!_planning.creneauxBloques[d].length) delete _planning.creneauxBloques[d];
+      }
+      render();
+    }
+
+    // Nettoyer les dates passees
+    function clean() {
+      const today = new Date().toISOString().split('T')[0];
+      _planning.joursFermes = _planning.joursFermes.filter(j => j >= today);
+      _planning.conges = _planning.conges.filter(c => c.fin >= today);
+      Object.keys(_planning.creneauxBloques).forEach(d => { if (d < today) delete _planning.creneauxBloques[d]; });
+    }
+
+    async function loadPlanning() {
+      if (!ghOk()) { render(); showToast('GitHub non configure — allez dans Admin > GitHub'); return; }
+      try {
+        const { owner, repo } = ghConfig();
+        const token = await getGhToken();
+        if (!token) { render(); return; }
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/planning.json`, {
+          headers: { Authorization:`Bearer ${token}`, Accept:'application/vnd.github+json' }
+        });
+        if (!res.ok) throw new Error('API ' + res.status);
+        const file = await res.json();
+        _sha = file.sha;
+        const data = JSON.parse(atob(file.content.replace(/\n/g,'')));
+        _planning = { joursFermes: data.joursFermes||[], creneauxBloques: data.creneauxBloques||{}, conges: data.conges||[] };
+        clean();
+        render();
+        showToast('Planning charge');
+      } catch(e) { render(); showToast('Impossible de charger le planning'); }
+    }
+
+    async function savePlanning() {
+      if (!ghOk()) { showToast('GitHub non configure'); return; }
+      const token = await getGhToken();
+      if (!token) { showToast('Session expiree'); return; }
+      clean();
+      const { owner, repo } = ghConfig();
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(_planning, null, 2))));
+      showToast('Enregistrement...');
+      try {
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/planning.json`, {
+          method: 'PUT',
+          headers: { Authorization:`Bearer ${token}`, 'Content-Type':'application/json', Accept:'application/vnd.github+json' },
+          body: JSON.stringify({ message:'Planning mis a jour via Sophie', content, ...(_sha ? {sha:_sha} : {}) })
+        });
+        if (!res.ok) { const e = await res.json(); throw new Error(e.message); }
+        const data = await res.json();
+        _sha = data.content.sha;
+        showToast('Planning enregistre !');
+      } catch(e) { showToast('Erreur : ' + e.message); }
+    }
+  </script>
+</body>
+</html>
