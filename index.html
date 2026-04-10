@@ -620,7 +620,7 @@
       <div class="about-stats">
         <div class="stat"><div class="num" id="aboutReviewCount">205</div><div class="lbl">Avis Google</div></div>
         <div class="stat"><div class="num" id="aboutRating">5,0</div><div class="lbl">Note ★</div></div>
-        <div class="stat"><div class="num">7j/7</div><div class="lbl">9h – 20h</div></div>
+        <div class="stat"><div class="num">7j/7</div><div class="lbl">9h&nbsp;–&nbsp;20h</div></div>
       </div>
       <div class="about-tags">
         <span class="tag">Massage Tuina</span>
@@ -700,7 +700,7 @@
       <p class="section-label">Prendre rendez-vous</p>
       <h2 class="section-title">Réservez votre séance</h2>
       <div class="section-line center"></div>
-      <p style="color:var(--stone);margin-bottom:2rem;font-size:.95rem;">Ouvert 7j/7 · 9h00–20h00 · Sophie vous confirme par téléphone</p>
+      <p style="color:var(--stone);margin-bottom:2rem;font-size:.95rem;">Ouvert 7j/7 · 9h00&nbsp;–&nbsp;20h00 · Sophie vous confirme par téléphone</p>
     </div>
 
     <!-- Progress steps -->
@@ -814,7 +814,7 @@
         <div class="success-icon">🐼</div>
         <h3>Demande envoyée !</h3>
         <p>Sophie a bien reçu votre demande de réservation. Elle vous rappellera sous <strong>24h</strong> pour confirmer votre créneau.</p>
-        <p class="phone-big">📞 06 27 14 62 31</p>
+        <p class="phone-big">📞 06&nbsp;27&nbsp;14&nbsp;62&nbsp;31</p>
         <p style="font-size:.82rem;margin-top:.5rem;">Vous pouvez aussi l'appeler directement.</p>
         <button class="btn-next" style="margin:1.5rem auto 0;display:block;" onclick="resetBooking()">Faire une nouvelle réservation</button>
       </div>
@@ -841,14 +841,14 @@
         <span class="c-icon">📞</span>
         <div class="c-info">
           <h4>Téléphone</h4>
-          <p><a href="tel:0627146231">06 27 14 62 31</a></p>
+          <p><a href="tel:0627146231">06&nbsp;27&nbsp;14&nbsp;62&nbsp;31</a></p>
         </div>
       </div>
       <div class="contact-item">
         <span class="c-icon">🕘</span>
         <div class="c-info">
           <h4>Horaires</h4>
-          <p>Lundi – Dimanche · 9h00 – 20h00<br/><em style="font-size:.85rem;color:var(--stone)">Uniquement sur rendez-vous</em></p>
+          <p>Lundi – Dimanche · 9h00&nbsp;–&nbsp;20h00<br/><em style="font-size:.85rem;color:var(--stone)">Uniquement sur rendez-vous</em></p>
         </div>
       </div>
       <div class="contact-item">
@@ -872,7 +872,7 @@
 <!-- ══ FOOTER ═══════════════════════════════════════════ -->
 <footer>
   <p><strong>🐼 Chez Sophie – Massage Tuina</strong></p>
-  <p>14C Bd de Curepipe Apt S · 33260 La Teste-de-Buch · <a href="tel:0627146231">06 27 14 62 31</a></p>
+  <p>14C Bd de Curepipe Apt S · 33260 La Teste-de-Buch · <a href="tel:0627146231">06&nbsp;27&nbsp;14&nbsp;62&nbsp;31</a></p>
   <div class="footer-links" style="margin-top:.6rem">
     <a href="/mon-histoire">Mon histoire</a>
     <a href="/tarifs">Tarifs</a>
@@ -1084,7 +1084,7 @@
       document.getElementById('panelSuccess').classList.add('active');
       document.querySelectorAll('.booking-steps').forEach(s => s.style.display = 'none');
     } catch (e) {
-      alert('❌ ' + e.message + '\n\nVous pouvez aussi appeler Sophie au 06 27 14 62 31');
+      alert('❌ ' + e.message + '\n\nVous pouvez aussi appeler Sophie au 06&nbsp;27&nbsp;14&nbsp;62&nbsp;31');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Envoyer ma demande ✓';
     }
@@ -1116,15 +1116,15 @@
   };
 
   const DEFAULT_SERVICES = [
-    {key:'tuina',icon:'🌿',name:'Massage Tuina Corps',shortDesc:'Massage chinois traditionnel sur méridiens',description:'Le massage chinois traditionnel. Pratiqué habillé, il agit sur les méridiens pour libérer les tensions et rééquilibrer l\'énergie vitale.',note:'',rows:[{label:'30 minutes',price:'45 €'},{label:'1 heure',price:'80 €'},{label:'1h 30',price:'110 €'},{label:'2 heures',price:'148 €'}]},
-    {key:'relaxant',icon:'💆',name:'Massage Relaxant Corps',shortDesc:'Détente musculaire profonde',description:'Un soin profond pour relâcher les tensions musculaires et retrouver un équilibre corps-esprit durable.',note:'',rows:[{label:'1 heure',price:'90 €'},{label:'1h 30',price:'128 €'},{label:'2 heures',price:'168 €'}]},
-    {key:'tete',icon:'✨',name:'Massage Relaxant Tête',shortDesc:'Soin ciblé tête & nuque',description:'Soin localisé pour une détente précise de la tête et de la nuque.',note:'',rows:[{label:'30 min',price:'35 €'}]},
-    {key:'pieds',icon:'🦶',name:'Massage Relaxant Pieds',shortDesc:'Soin ciblé réflexologie',description:'Soin localisé pour une détente précise des pieds par réflexologie plantaire.',note:'',rows:[{label:'30 min',price:'40 €'}]},
-    {key:'ceinture',icon:'🎀',name:'Ceinture',shortDesc:'Soin ciblé zone lombaire',description:'Soin ciblé sur la zone lombaire pour soulager les douleurs du dos.',note:'Éviter la douche pendant 2h après la séance.',rows:[{label:'30 min',price:'50 €'}]},
-    {key:'moxa',icon:'🔥',name:'Moxibustion',shortDesc:'Chaleur thérapeutique sur méridiens',description:'Technique ancestrale consistant à chauffer des points d\'acupuncture avec du moxa pour tonifier l\'énergie et soulager les douleurs profondes.',note:'',rows:[{label:'La séance',price:'80 €'}]},
-    {key:'compresse',icon:'🌡️',name:'Compresse Chaude Médicinale',shortDesc:'Plantes chinoises chaudes',description:'Application de compresses à base de plantes médicinales chinoises. Favorise la détente musculaire profonde et la circulation.',note:'',rows:[{label:'30 min – 1h',price:'40 €'}]},
-    {key:'bainpieds',icon:'🛁',name:'Bain de Pieds',shortDesc:'Rituel détente & purification',description:'Rituel de détente et purification pour une relaxation totale des pieds.',note:'',rows:[{label:'30 min',price:'35 €'},{label:'Cure 10 séances',price:'300 €'}]},
-    {key:'bain',icon:'🚿',name:'Bain',shortDesc:'Soin bain complet relaxant',description:'Soin bain complet pour une relaxation totale du corps.',note:'',rows:[{label:'25–40 min',price:'85 €'}]},
+    {key:'tuina',icon:'🌿',name:'Massage Tuina Corps',shortDesc:'Massage chinois traditionnel sur méridiens',description:'Le massage chinois traditionnel. Pratiqué habillé, il agit sur les méridiens pour libérer les tensions et rééquilibrer l\'énergie vitale.',note:'',rows:[{label:'30 minutes',price:'45&nbsp;€'},{label:'1 heure',price:'80&nbsp;€'},{label:'1h 30',price:'110&nbsp;€'},{label:'2 heures',price:'148&nbsp;€'}]},
+    {key:'relaxant',icon:'💆',name:'Massage Relaxant Corps',shortDesc:'Détente musculaire profonde',description:'Un soin profond pour relâcher les tensions musculaires et retrouver un équilibre corps-esprit durable.',note:'',rows:[{label:'1 heure',price:'90&nbsp;€'},{label:'1h 30',price:'128&nbsp;€'},{label:'2 heures',price:'168&nbsp;€'}]},
+    {key:'tete',icon:'✨',name:'Massage Relaxant Tête',shortDesc:'Soin ciblé tête & nuque',description:'Soin localisé pour une détente précise de la tête et de la nuque.',note:'',rows:[{label:'30 min',price:'35&nbsp;€'}]},
+    {key:'pieds',icon:'🦶',name:'Massage Relaxant Pieds',shortDesc:'Soin ciblé réflexologie',description:'Soin localisé pour une détente précise des pieds par réflexologie plantaire.',note:'',rows:[{label:'30 min',price:'40&nbsp;€'}]},
+    {key:'ceinture',icon:'🎀',name:'Ceinture',shortDesc:'Soin ciblé zone lombaire',description:'Soin ciblé sur la zone lombaire pour soulager les douleurs du dos.',note:'Éviter la douche pendant 2h après la séance.',rows:[{label:'30 min',price:'50&nbsp;€'}]},
+    {key:'moxa',icon:'🔥',name:'Moxibustion',shortDesc:'Chaleur thérapeutique sur méridiens',description:'Technique ancestrale consistant à chauffer des points d\'acupuncture avec du moxa pour tonifier l\'énergie et soulager les douleurs profondes.',note:'',rows:[{label:'La séance',price:'80&nbsp;€'}]},
+    {key:'compresse',icon:'🌡️',name:'Compresse Chaude Médicinale',shortDesc:'Plantes chinoises chaudes',description:'Application de compresses à base de plantes médicinales chinoises. Favorise la détente musculaire profonde et la circulation.',note:'',rows:[{label:'30 min – 1h',price:'40&nbsp;€'}]},
+    {key:'bainpieds',icon:'🛁',name:'Bain de Pieds',shortDesc:'Rituel détente & purification',description:'Rituel de détente et purification pour une relaxation totale des pieds.',note:'',rows:[{label:'30 min',price:'35&nbsp;€'},{label:'Cure 10 séances',price:'300&nbsp;€'}]},
+    {key:'bain',icon:'🚿',name:'Bain',shortDesc:'Soin bain complet relaxant',description:'Soin bain complet pour une relaxation totale du corps.',note:'',rows:[{label:'25–40 min',price:'85&nbsp;€'}]},
   ];
 
   function escHtml(s) {
