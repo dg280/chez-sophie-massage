@@ -98,6 +98,14 @@ export default async function handler(req, res) {
   }
 
   // Send confirmation email to client (if email provided)
+  let emailStatus = '';
+  if (!payload.em) {
+    emailStatus = 'no-email';
+  } else if (!process.env.MAILERSEND_API_KEY || !process.env.FROM_EMAIL) {
+    emailStatus = 'not-configured';
+    console.error('MailerSend not configured:', { hasKey: !!process.env.MAILERSEND_API_KEY, hasFrom: !!process.env.FROM_EMAIL });
+  }
+
   if (payload.em && process.env.MAILERSEND_API_KEY && process.env.FROM_EMAIL) {
     const dateFr = new Date(payload.dt + 'T12:00:00').toLocaleDateString('fr-FR', {
       weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
@@ -136,7 +144,7 @@ export default async function handler(req, res) {
 </body></html>`;
 
     try {
-      await fetch('https://api.mailersend.com/v1/email', {
+      const emailRes = await fetch('https://api.mailersend.com/v1/email', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${process.env.MAILERSEND_API_KEY}`,
@@ -150,7 +158,17 @@ export default async function handler(req, res) {
           html,
         }),
       });
-    } catch (e) { console.error('Client email error:', e); }
+      if (emailRes.ok || emailRes.status === 202) {
+        emailStatus = 'sent';
+      } else {
+        const errText = await emailRes.text();
+        console.error('MailerSend confirm error:', emailRes.status, errText);
+        emailStatus = 'error:' + emailRes.status;
+      }
+    } catch (e) {
+      console.error('Client email error:', e);
+      emailStatus = 'error:exception';
+    }
   }
 
   // Return success page to Sophie
@@ -165,7 +183,13 @@ export default async function handler(req, res) {
       <p style="margin:0 0 8px">💆 ${escHtml(payload.s)} (${escHtml(payload.d)})</p>
       <p style="margin:0">📞 ${escHtml(payload.tl)}</p>
     </div>
-    <p style="font-size:14px;color:#8C7B6B;margin:0">✓ Le creneau a ete bloque automatiquement.<br>${payload.em ? 'Un email de confirmation a ete envoye au client.' : ''}</p>
+    <p style="font-size:14px;color:#8C7B6B;margin:0">✓ Le creneau a ete bloque automatiquement.</p>
+    <p style="font-size:13px;margin:8px 0 0;color:${emailStatus === 'sent' ? '#27ae60' : emailStatus === 'no-email' ? '#8C7B6B' : '#C0392B'}">
+      ${emailStatus === 'sent' ? '✓ Email de confirmation envoye a ' + escHtml(payload.em)
+        : emailStatus === 'no-email' ? '⚠️ Le client n\'a pas fourni d\'email. Pensez a l\'appeler au ' + escHtml(payload.tl)
+        : emailStatus === 'not-configured' ? '❌ Service email non configure (verifier MAILERSEND_API_KEY et FROM_EMAIL sur Vercel)'
+        : '❌ Erreur d\'envoi email (' + escHtml(emailStatus) + '). Appelez le client au ' + escHtml(payload.tl)}
+    </p>
   `));
 }
 

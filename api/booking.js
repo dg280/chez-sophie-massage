@@ -242,7 +242,7 @@ Liens valables 7 jours.`;
 </body></html>`;
 
       try {
-        await fetch('https://api.mailersend.com/v1/email', {
+        const ackRes = await fetch('https://api.mailersend.com/v1/email', {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${apiKey}`,
@@ -256,6 +256,10 @@ Liens valables 7 jours.`;
             html: clientHtml,
           }),
         });
+        if (!ackRes.ok && ackRes.status !== 202) {
+          const errText = await ackRes.text();
+          console.error('Client ack email error:', ackRes.status, errText);
+        }
       } catch (e) { console.error('Client ack email error:', e); }
     }
 
