@@ -1,5 +1,9 @@
 {
   "joursFermes": [],
-  "creneauxBloques": {},
+  "creneauxBloques": {
+    "2026-04-13": [
+      "14:00"
+    ]
+  },
   "conges": []
 }
