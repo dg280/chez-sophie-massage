@@ -11,6 +11,17 @@
     ],
     "2026-04-20": [
       "10:00"
+    ],
+    "2026-04-14": [
+      {
+        "h": "14:00",
+        "client": "Didier GENEVOIS",
+        "soin": "Massage Tuina Corps",
+        "duree": "30 minutes",
+        "prix": "45 €",
+        "tel": "0684606360",
+        "email": "dg@xinus.net"
+      }
     ]
   },
   "conges": []
