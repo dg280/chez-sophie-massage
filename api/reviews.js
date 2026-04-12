@@ -10,13 +10,10 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
-  if (!apiKey) {
-    return res.status(500).json({ error: 'GOOGLE_PLACES_API_KEY not configured' });
-  }
-
   const placeId = process.env.GOOGLE_PLACE_ID || '';
-  if (!placeId) {
-    return res.status(500).json({ error: 'GOOGLE_PLACE_ID not configured' });
+  if (!apiKey || !placeId) {
+    // Not configured yet — return empty response silently (no error in logs)
+    return res.status(204).end();
   }
 
   try {
