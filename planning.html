@@ -528,31 +528,55 @@
         </div>
       `).join(''); }
 
-      // Creneaux
+      // Helper : extraire l'heure d'un slot (string ou objet)
+      function slotH(s) { return typeof s === 'string' ? s : s.h; }
+      function slotSort(a, b) { return slotH(a).localeCompare(slotH(b)); }
+
+      // Creneaux manuels (strings uniquement)
       const bl = document.getElementById('blocsList');
       const dates = Object.keys(_planning.creneauxBloques).sort();
-      if (!dates.length) { bl.innerHTML = `<p class="empty">${t('emptyBlocs')}</p>`; }
-      else { bl.innerHTML = dates.flatMap(d =>
-        _planning.creneauxBloques[d].sort().map(h => `
-          <div class="item">
-            <span><span class="date">${fmtDate(d)}</span> ${at} <strong>${h}</strong></span>
-            <button class="btn-del" onclick="delBloc('${d}','${h}')">${dl}</button>
-          </div>
-        `)
-      ).join(''); }
+      const manualSlots = dates.flatMap(d =>
+        _planning.creneauxBloques[d].filter(s => typeof s === 'string').sort().map(h => ({ d, h }))
+      );
+      if (!manualSlots.length) { bl.innerHTML = `<p class="empty">${t('emptyBlocs')}</p>`; }
+      else { bl.innerHTML = manualSlots.map(({ d, h }) => `
+        <div class="item">
+          <span><span class="date">${fmtDate(d)}</span> ${at} <strong>${h}</strong></span>
+          <button class="btn-del" onclick="delBloc('${d}','${h}')">${dl}</button>
+        </div>
+      `).join(''); }
 
-      // RDV
+      // RDV confirmes (objets avec details client)
       const rl = document.getElementById('rdvList');
-      if (!dates.length) { rl.innerHTML = `<p class="empty">${t('emptyRdv')}</p>`; }
-      else {
-        const today = new Date().toISOString().split('T')[0];
-        const futureSlots = dates.filter(d => d >= today).flatMap(d =>
-          _planning.creneauxBloques[d].sort().map(h => `
-            <div class="item">
-              <span><span class="date">${fmtDate(d)}</span> ${at} <strong>${h}</strong></span>
-              <span style="font-size:.78rem;color:var(--sage)">${t('confirmed')}</span>
-            </div>
-          `)
+      const today = new Date().toISOString().split('T')[0];
+      const rdvSlots = dates.filter(d => d >= today).flatMap(d =>
+        _planning.creneauxBloques[d]
+          .filter(s => typeof s === 'object')
+          .sort(slotSort)
+          .map(s => ({ d, ...s }))
+      );
+      // Aussi inclure les anciens strings comme RDV (pour la retrocompat)
+      const oldSlots = dates.filter(d => d >= today).flatMap(d =>
+        _planning.creneauxBloques[d]
+          .filter(s => typeof s === 'string')
+          .sort()
+          .map(h => ({ d, h, client: '', soin: '' }))
+      );
+      const allRdv = [...rdvSlots, ...oldSlots];
+      if (!allRdv.length) { rl.innerHTML = `<p class="empty">${t('emptyRdv')}</p>`; }
+      else { rl.innerHTML = allRdv.sort((a,b) => (a.d+a.h).localeCompare(b.d+b.h)).map(s => `
+        <div class="item" style="flex-direction:column;align-items:stretch;gap:4px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span><span class="date">${fmtDate(s.d)}</span> ${at} <strong>${s.h}</strong></span>
+            <span style="font-size:.78rem;color:var(--sage)">${t('confirmed')}</span>
+          </div>
+          ${s.client ? `<div style="font-size:.82rem;color:#3a3a3a;padding:6px 10px;background:rgba(61,90,62,.05);border-radius:6px;margin-top:2px">
+            <strong>${s.client}</strong>${s.soin ? ` — ${s.soin}` : ''}${s.duree ? ` (${s.duree})` : ''}${s.prix ? ` · <span style="color:var(--gold);font-weight:700">${s.prix}</span>` : ''}
+            ${s.tel ? `<br><a href="tel:${s.tel}" style="color:var(--green);font-size:.8rem">${s.tel}</a>` : ''}
+            ${s.email ? ` · <a href="mailto:${s.email}" style="color:var(--green);font-size:.8rem">${s.email}</a>` : ''}
+          </div>` : ''}
+        </div>
+      `).join(''); }
         );
         rl.innerHTML = futureSlots.length ? futureSlots.join('') : `<p class="empty">${t('emptyRdv')}</p>`;
       }
@@ -604,7 +628,9 @@
 
     function delBloc(d, h) {
       if (_planning.creneauxBloques[d]) {
-        _planning.creneauxBloques[d] = _planning.creneauxBloques[d].filter(x => x !== h);
+        _planning.creneauxBloques[d] = _planning.creneauxBloques[d].filter(s =>
+          (typeof s === 'string' ? s : s.h) !== h
+        );
         if (!_planning.creneauxBloques[d].length) delete _planning.creneauxBloques[d];
       }
       render();

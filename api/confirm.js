@@ -65,10 +65,19 @@ export default async function handler(req, res) {
     if (!planning.creneauxBloques) planning.creneauxBloques = {};
     if (!planning.creneauxBloques[payload.dt]) planning.creneauxBloques[payload.dt] = [];
 
-    // Check if already blocked (safe re-clic)
-    const alreadyBlocked = planning.creneauxBloques[payload.dt].includes(payload.h);
+    // Check if already blocked (compatible ancien format string + nouveau format objet)
+    const slots = planning.creneauxBloques[payload.dt];
+    const alreadyBlocked = slots.some(s => (typeof s === 'string' ? s : s.h) === payload.h);
     if (!alreadyBlocked) {
-      planning.creneauxBloques[payload.dt].push(payload.h);
+      slots.push({
+        h: payload.h,
+        client: `${payload.pr} ${payload.nm}`,
+        soin: payload.s,
+        duree: payload.d,
+        prix: payload.p,
+        tel: payload.tl,
+        email: payload.em || '',
+      });
 
       // Save back
       const newContent = Buffer.from(JSON.stringify(planning, null, 2)).toString('base64');

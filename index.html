@@ -1294,7 +1294,8 @@
 
   function getBlockedSlots(dateStr) {
     if (!dateStr || !_planning.creneauxBloques) return [];
-    return _planning.creneauxBloques[dateStr] || [];
+    const slots = _planning.creneauxBloques[dateStr] || [];
+    return slots.map(s => typeof s === 'string' ? s : s.h);
   }
 
   function onDateChange() {

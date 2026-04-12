@@ -148,7 +148,12 @@ describe('GET /api/confirm', () => {
     const body = JSON.parse(putCall.opts.body);
     const content = JSON.parse(Buffer.from(body.content, 'base64').toString());
     assert.ok(content.creneauxBloques[payload.dt]);
-    assert.ok(content.creneauxBloques[payload.dt].includes(payload.h));
+    const slot = content.creneauxBloques[payload.dt].find(s => (typeof s === 'string' ? s : s.h) === payload.h);
+    assert.ok(slot, 'Le creneau doit etre present');
+    if (typeof slot === 'object') {
+      assert.equal(slot.client, `${payload.pr} ${payload.nm}`);
+      assert.equal(slot.soin, payload.s);
+    }
   });
 
   it('ajoute le creneau a un planning existant', async () => {
@@ -184,7 +189,8 @@ describe('GET /api/confirm', () => {
     assert.ok(content.joursFermes.includes('2026-04-30'));
     assert.ok(content.creneauxBloques['2026-05-01'].includes('10:00'));
     // Et ajouter le nouveau creneau
-    assert.ok(content.creneauxBloques[payload.dt].includes(payload.h));
+    const newSlot = content.creneauxBloques[payload.dt].find(s => (typeof s === 'string' ? s : s.h) === payload.h);
+    assert.ok(newSlot, 'Le nouveau creneau doit etre present');
   });
 
   it('ne double pas un creneau deja bloque (idempotent)', async () => {
