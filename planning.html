@@ -306,6 +306,11 @@
         toastLoadErr: 'Impossible de charger le planning',
         langSwitch: '🇨🇳 中文',
         at: 'a',
+        blockedManual: 'Bloque',
+        sendConfirm: '📧 Envoyer confirmation',
+        confirmSent: 'Email de confirmation envoye !',
+        confirmFailed: 'Erreur d\'envoi',
+        confirmSending: 'Envoi en cours...',
         helpTitle: 'Comment ca marche ?',
         helpContent: `
           <p>Cette page vous permet de gerer votre planning. Les clients ne pourront pas reserver les creneaux que vous bloquez ici.</p>
@@ -358,6 +363,11 @@
         toastLoadErr: '无法加载日程',
         langSwitch: '🇫🇷 Français',
         at: '',
+        blockedManual: '手动锁定',
+        sendConfirm: '📧 发送确认邮件',
+        confirmSent: '确认邮件已发送！',
+        confirmFailed: '发送失败',
+        confirmSending: '发送中...',
         helpTitle: '使用说明',
         helpContent: `
           <p>这个页面用来管理你的日程安排。你在这里锁定的时段，客户将无法预约。</p>
@@ -528,14 +538,14 @@
         </div>
       `).join(''); }
 
-      // Helper : extraire l'heure d'un slot (string ou objet)
+      // Helper
       function slotH(s) { return typeof s === 'string' ? s : s.h; }
-      function slotSort(a, b) { return slotH(a).localeCompare(slotH(b)); }
 
-      // Creneaux manuels (strings uniquement)
+      // Creneaux manuels (section dediee, strings uniquement)
       const bl = document.getElementById('blocsList');
       const dates = Object.keys(_planning.creneauxBloques).sort();
-      const manualSlots = dates.flatMap(d =>
+      const today = new Date().toISOString().split('T')[0];
+      const manualSlots = dates.filter(d => d >= today).flatMap(d =>
         _planning.creneauxBloques[d].filter(s => typeof s === 'string').sort().map(h => ({ d, h }))
       );
       if (!manualSlots.length) { bl.innerHTML = `<p class="empty">${t('emptyBlocs')}</p>`; }
@@ -546,34 +556,31 @@
         </div>
       `).join(''); }
 
-      // RDV confirmes (objets avec details client)
+      // RDV (tous les creneaux, vue unifiee)
       const rl = document.getElementById('rdvList');
-      const today = new Date().toISOString().split('T')[0];
-      const rdvSlots = dates.filter(d => d >= today).flatMap(d =>
-        _planning.creneauxBloques[d]
-          .filter(s => typeof s === 'object')
-          .sort(slotSort)
-          .map(s => ({ d, ...s }))
-      );
-      // Aussi inclure les anciens strings comme RDV (pour la retrocompat)
-      const oldSlots = dates.filter(d => d >= today).flatMap(d =>
-        _planning.creneauxBloques[d]
-          .filter(s => typeof s === 'string')
-          .sort()
-          .map(h => ({ d, h, client: '', soin: '' }))
-      );
-      const allRdv = [...rdvSlots, ...oldSlots];
-      if (!allRdv.length) { rl.innerHTML = `<p class="empty">${t('emptyRdv')}</p>`; }
-      else { rl.innerHTML = allRdv.sort((a,b) => (a.d+a.h).localeCompare(b.d+b.h)).map(s => `
+      const allSlots = dates.filter(d => d >= today).flatMap(d =>
+        _planning.creneauxBloques[d].map(s =>
+          typeof s === 'string'
+            ? { d, h: s, client: '', soin: '', duree: '', prix: '', tel: '', email: '', type: 'manual' }
+            : { d, ...s, type: 'rdv' }
+        )
+      ).sort((a,b) => (a.d + a.h).localeCompare(b.d + b.h));
+
+      if (!allSlots.length) { rl.innerHTML = `<p class="empty">${t('emptyRdv')}</p>`; }
+      else { rl.innerHTML = allSlots.map(s => `
         <div class="item" style="flex-direction:column;align-items:stretch;gap:4px">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span><span class="date">${fmtDate(s.d)}</span> ${at} <strong>${s.h}</strong></span>
-            <span style="font-size:.78rem;color:var(--sage)">${t('confirmed')}</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span style="font-size:.72rem;padding:2px 8px;border-radius:4px;background:${s.type === 'rdv' ? 'rgba(61,90,62,.12);color:var(--green)' : 'rgba(140,123,107,.12);color:var(--stone)'}">${s.type === 'rdv' ? t('confirmed') : t('blockedManual')}</span>
+              <button class="btn-del" onclick="delBloc('${s.d}','${s.h}')" title="${dl}" style="font-size:.7rem;padding:2px 6px">✕</button>
+            </div>
           </div>
-          ${s.client ? `<div style="font-size:.82rem;color:#3a3a3a;padding:6px 10px;background:rgba(61,90,62,.05);border-radius:6px;margin-top:2px">
+          ${s.client ? `<div style="font-size:.82rem;color:#3a3a3a;padding:8px 10px;background:rgba(61,90,62,.05);border-radius:6px;margin-top:2px">
             <strong>${s.client}</strong>${s.soin ? ` — ${s.soin}` : ''}${s.duree ? ` (${s.duree})` : ''}${s.prix ? ` · <span style="color:var(--gold);font-weight:700">${s.prix}</span>` : ''}
             ${s.tel ? `<br><a href="tel:${s.tel}" style="color:var(--green);font-size:.8rem">${s.tel}</a>` : ''}
             ${s.email ? ` · <a href="mailto:${s.email}" style="color:var(--green);font-size:.8rem">${s.email}</a>` : ''}
+            ${s.email ? `<br><button class="btn-add" onclick="sendConfirmEmail('${s.d}','${s.h}')" style="margin-top:6px;font-size:.75rem;padding:4px 12px">${t('sendConfirm')}</button>` : ''}
           </div>` : ''}
         </div>
       `).join(''); }
@@ -623,6 +630,35 @@
       showToast(t('toastAdded'));
     }
 
+    async function sendConfirmEmail(date, heure) {
+      // Trouver le slot dans le planning
+      const slots = _planning.creneauxBloques[date] || [];
+      const slot = slots.find(s => typeof s === 'object' && s.h === heure);
+      if (!slot || !slot.email) { showToast(t('confirmFailed')); return; }
+
+      showToast(t('confirmSending'));
+      try {
+        const res = await fetch('/api/send-confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            date, heure: slot.h,
+            client: slot.client, soin: slot.soin,
+            duree: slot.duree, prix: slot.prix,
+            email: slot.email,
+          }),
+        });
+        if (res.ok) {
+          showToast(t('confirmSent'));
+        } else {
+          const err = await res.json().catch(() => ({}));
+          showToast(t('confirmFailed') + (err.error ? ' : ' + err.error : ''));
+        }
+      } catch(e) {
+        showToast(t('confirmFailed'));
+      }
+    }
+
     function delBloc(d, h) {
       if (_planning.creneauxBloques[d]) {
         _planning.creneauxBloques[d] = _planning.creneauxBloques[d].filter(s =>
@@ -653,7 +689,8 @@
         if (!res.ok) throw new Error('API ' + res.status);
         const file = await res.json();
         _sha = file.sha;
-        const data = JSON.parse(atob(file.content.replace(/\n/g,'')));
+        const raw = atob(file.content.replace(/\n/g,''));
+        const data = JSON.parse(decodeURIComponent(escape(raw)));
         _planning = { joursFermes: data.joursFermes||[], creneauxBloques: data.creneauxBloques||{}, conges: data.conges||[] };
         clean();
         render();
