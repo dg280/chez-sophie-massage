@@ -793,8 +793,9 @@
           <span class="form-error">Numéro invalide</span>
         </div>
         <div class="field-wrap" id="wrap-email">
-          <label>Email</label>
-          <input type="email" class="form-input" id="fieldEmail" placeholder="Optionnel" />
+          <label>Email *</label>
+          <input type="email" class="form-input" id="fieldEmail" placeholder="votre@email.com" oninput="validateContact()" />
+          <span class="form-error">Email invalide</span>
         </div>
         <div class="field-wrap full">
           <label>Message (optionnel)</label>
@@ -1030,8 +1031,10 @@
     const prenom = document.getElementById('fieldPrenom').value.trim();
     const nom    = document.getElementById('fieldNom').value.trim();
     const tel    = document.getElementById('fieldTel').value.trim();
+    const email  = document.getElementById('fieldEmail').value.trim();
     const telOk  = /^[\d\s\+\-\.]{8,}$/.test(tel);
-    document.getElementById('btn-submit').disabled = !(prenom && nom && telOk);
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    document.getElementById('btn-submit').disabled = !(prenom && nom && telOk && emailOk);
   }
 
   // ── Submit ─────────────────────────────────────────
@@ -1054,6 +1057,10 @@
     const telWrap = telEl.closest('.field-wrap');
     if (!/^[\d\s\+\-\.]{8,}$/.test(tel)) { telWrap.classList.add('has-error'); ok = false; }
     else telWrap.classList.remove('has-error');
+    const emailEl = document.getElementById('fieldEmail');
+    const emailWrap = emailEl.closest('.field-wrap');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { emailWrap.classList.add('has-error'); ok = false; }
+    else emailWrap.classList.remove('has-error');
     if (!ok) return;
 
     const submitBtn = document.getElementById('btn-submit');
@@ -1084,7 +1091,7 @@
       document.getElementById('panelSuccess').classList.add('active');
       document.querySelectorAll('.booking-steps').forEach(s => s.style.display = 'none');
     } catch (e) {
-      alert('❌ ' + e.message + '\n\nVous pouvez aussi appeler Sophie au 06&nbsp;27&nbsp;14&nbsp;62&nbsp;31');
+      alert('❌ ' + e.message + '\n\nVous pouvez aussi appeler Sophie au 06 27 14 62 31');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Envoyer ma demande ✓';
     }
