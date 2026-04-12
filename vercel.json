@@ -7,5 +7,15 @@
       "source": "/google1d30d61c528bd629",
       "destination": "/google1d30d61c528bd629.html"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron-reminder",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron-review",
+      "schedule": "0 8 * * *"
+    }
   ]
 }
