@@ -126,3 +126,38 @@ git push origin main && npx vercel --prod
 - Les pushes via l'admin (commits sur tarifs.json/planning.json) peuvent causer des conflits si tu codes en local — toujours `git pull --rebase` avant de push
 - Le `vercel.json` doit avoir `cleanUrls: true` pour les URLs sans `.html`
 - Sur l'admin, le token MailerSend n'est PAS le meme que le token GitHub — ne pas confondre
+
+## Roadmap — Pistes d'amelioration
+
+### Haute priorite (impact direct business)
+
+1. **Email de rappel J-1 automatique** — Cron Vercel qui scanne planning.json chaque matin et envoie un rappel 24h avant le RDV. Reduit les no-shows de 30-50%.
+2. **Synchro avis Google** — Le code /api/reviews est pret. Il manque GOOGLE_PLACES_API_KEY et GOOGLE_PLACE_ID sur Vercel. Une fois configure, le nombre d'avis et les 3 derniers s'affichent automatiquement.
+3. **Bouton "Ajouter au calendrier"** — Lien .ics dans l'email de confirmation pour que le client ajoute le RDV a Google Calendar / Apple Calendar.
+4. **Demande d'avis Google J+1** — Email automatique le lendemain du RDV avec lien direct vers la fiche Google. Levier SEO local #1.
+
+### Moyenne priorite (UX)
+
+5. **Page de confirmation amelioree** — Vraie page post-reservation avec recapitulatif et numero de reference au lieu du simple message.
+6. **Notifications SMS pour Sophie** — Via Twilio (gratuit petits volumes) quand une demande arrive. Plus reactif qu'un email.
+7. **PWA (Progressive Web App)** — manifest.json + service worker pour que Sophie installe /planning sur l'ecran d'accueil de son telephone.
+
+### Basse priorite (compliance + polish)
+
+8. **Page mentions legales / CGV** — Obligatoire en France pour un site pro.
+9. **Bandeau info cookies** — "Ce site ne collecte aucune donnee" comme signal de confiance.
+10. **Open Graph image** — Image 1200x630 pour preview Facebook/WhatsApp.
+11. **Schema.org enrichi** — Horaires par jour, paiements, langues parlees dans le LocalBusiness.
+12. **Version anglaise** — Pour les touristes du Bassin en ete.
+13. **Statistiques admin** — Nombre de RDV/mois, soin le plus demande, jour le plus charge.
+14. **Export planning PDF** — Sophie imprime son planning de la semaine.
+
+### Fait
+
+- ✅ Systeme de reservation avec confirmation par email
+- ✅ Planning admin bilingue FR/ZH
+- ✅ Details client dans planning.json
+- ✅ Envoi/renvoi confirmation depuis /planning
+- ✅ 16 pages SEO (3 soins, 4 articles, 3 city pages, FAQ, tarifs, journal, mon-histoire)
+- ✅ 40 tests de non-regression
+- ✅ Google Search Console + sitemap soumis
