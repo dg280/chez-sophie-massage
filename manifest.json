@@ -1,0 +1,16 @@
+{
+  "name": "Sophie Planning",
+  "short_name": "Planning",
+  "description": "Planning de Sophie — Massage Tuina",
+  "start_url": "/planning",
+  "display": "standalone",
+  "background_color": "#F6F1E9",
+  "theme_color": "#3D5A3E",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐼</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

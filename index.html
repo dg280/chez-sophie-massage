@@ -9,6 +9,11 @@
   <meta property="og:title" content="Chez Sophie – Massage Tuina | La Teste-de-Buch" />
   <meta property="og:description" content="★★★★★ 5,0 · 205 avis Google. Massage Tuina traditionnel à La Teste-de-Buch. Ouvert 7j/7 de 9h à 20h." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://sophie-tuina.fr/panda.webp" />
+  <meta property="og:image:width" content="470" />
+  <meta property="og:image:height" content="707" />
+  <meta property="og:url" content="https://sophie-tuina.fr/" />
+  <meta property="og:locale" content="fr_FR" />
   <link rel="canonical" href="https://sophie-tuina.fr/" />
 
   <script type="application/ld+json">
@@ -31,6 +36,28 @@
       "opens": "09:00", "closes": "20:00"
     }],
     "priceRange": "€€",
+    "image": "https://sophie-tuina.fr/panda.webp",
+    "url": "https://sophie-tuina.fr",
+    "description": "Cabinet de massage Tuina traditionnel chinois a La Teste-de-Buch. Praticienne chinoise, 25 ans d'experience. Massage Tuina, relaxant, moxibustion, bain de pieds.",
+    "paymentAccepted": "Cash, Credit Card, Check",
+    "currenciesAccepted": "EUR",
+    "knowsLanguage": ["fr", "zh"],
+    "founder": {
+      "@type": "Person",
+      "name": "Sophie",
+      "nationality": "Chinese",
+      "jobTitle": "Praticienne de massage Tuina"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Soins",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Massage Tuina Corps" }, "price": "45", "priceCurrency": "EUR", "description": "A partir de 45 EUR (30 min)" },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Massage Relaxant Corps" }, "price": "90", "priceCurrency": "EUR", "description": "A partir de 90 EUR (1 heure)" },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Moxibustion" }, "price": "80", "priceCurrency": "EUR", "description": "80 EUR la seance" },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bain de Pieds" }, "price": "35", "priceCurrency": "EUR", "description": "A partir de 35 EUR (30 min)" }
+      ]
+    },
     "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "205" },
     "sameAs": ["https://www.facebook.com/chez.sophie.777/"]
   }
@@ -814,9 +841,15 @@
       <div class="booking-success">
         <div class="success-icon">🐼</div>
         <h3>Demande envoyée !</h3>
-        <p>Sophie a bien reçu votre demande de réservation. Elle vous rappellera sous <strong>24h</strong> pour confirmer votre créneau.</p>
+        <div id="successRecap" class="booking-summary" style="text-align:left;margin:1.5rem auto;max-width:420px"></div>
+        <p style="font-size:.95rem;color:var(--green);font-weight:700;margin-bottom:.5rem">Que se passe-t-il maintenant ?</p>
+        <p style="font-size:.88rem;color:var(--stone);max-width:440px;margin:0 auto .5rem;line-height:1.7">
+          1. Vous allez recevoir un <strong>email de confirmation</strong> dans les secondes qui viennent.<br>
+          2. Sophie consulte son planning et vous <strong>confirme personnellement</strong> dans la journée.<br>
+          3. Vous recevrez un <strong>rappel la veille</strong> de votre RDV.
+        </p>
+        <p style="margin-top:1.2rem;font-size:.85rem;color:var(--stone)">Une question ? Appelez directement :</p>
         <p class="phone-big">📞 06&nbsp;27&nbsp;14&nbsp;62&nbsp;31</p>
-        <p style="font-size:.82rem;margin-top:.5rem;">Vous pouvez aussi l'appeler directement.</p>
         <button class="btn-next" style="margin:1.5rem auto 0;display:block;" onclick="resetBooking()">Faire une nouvelle réservation</button>
       </div>
     </div>
@@ -883,7 +916,7 @@
     <a href="#contact">Contact</a>
     <a href="/admin.html">Admin</a>
   </div>
-  <p style="margin-top:.8rem;font-size:.7rem;opacity:.3">© 2026 Chez Sophie Massage Tuina · Tous droits réservés</p>
+  <p style="margin-top:.8rem;font-size:.7rem;opacity:.3">© 2026 Chez Sophie Massage Tuina · <a href="/mentions-legales">Mentions legales</a> · Ce site ne collecte aucune donnee de navigation</p>
 </footer>
 
 <script>
@@ -1086,7 +1119,16 @@
         throw new Error(err.error || 'Erreur lors de l\'envoi');
       }
 
-      // Afficher le succes
+      // Afficher le succes avec recapitulatif
+      const dateStr = new Date(booking.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+      document.getElementById('successRecap').innerHTML = `
+        <h4>📋 Votre demande</h4>
+        <div class="summary-line"><span>Soin</span><span class="summary-val">${booking.service}</span></div>
+        <div class="summary-line"><span>Durée</span><span class="summary-val">${booking.duration}</span></div>
+        <div class="summary-line"><span>Date</span><span class="summary-val">${dateStr}</span></div>
+        <div class="summary-line"><span>Heure</span><span class="summary-val">${booking.time}</span></div>
+        <div class="summary-line"><span>Tarif</span><span class="summary-val">${booking.price}</span></div>
+      `;
       document.querySelectorAll('.booking-panel').forEach(p => p.classList.remove('active'));
       document.getElementById('panelSuccess').classList.add('active');
       document.querySelectorAll('.booking-steps').forEach(s => s.style.display = 'none');
