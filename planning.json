@@ -33,6 +33,17 @@
         "tel": "0631091782",
         "email": "sonia.pontet@gmail.com"
       }
+    ],
+    "2026-04-28": [
+      {
+        "h": "11:30",
+        "client": "Aliou Thiam",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1 heure",
+        "prix": "90 €",
+        "tel": "0780409769",
+        "email": "thiam_aliou1@icloud.com"
+      }
     ]
   },
   "conges": []
