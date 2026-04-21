@@ -3,28 +3,28 @@
 
   <!-- Pages principales -->
   <url>
-    <loc>https://sophie-tuina.fr/</loc>
+    <loc>https://www.sophie-tuina.fr/</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/mon-histoire</loc>
+    <loc>https://www.sophie-tuina.fr/mon-histoire</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/tarifs</loc>
+    <loc>https://www.sophie-tuina.fr/tarifs</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/faq</loc>
+    <loc>https://www.sophie-tuina.fr/faq</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -32,21 +32,21 @@
 
   <!-- Pages soins -->
   <url>
-    <loc>https://sophie-tuina.fr/soins/massage-tuina</loc>
+    <loc>https://www.sophie-tuina.fr/soins/massage-tuina</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/soins/massage-relaxant</loc>
+    <loc>https://www.sophie-tuina.fr/soins/massage-relaxant</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/soins/moxibustion</loc>
+    <loc>https://www.sophie-tuina.fr/soins/moxibustion</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -54,49 +54,49 @@
 
   <!-- Journal / blog -->
   <url>
-    <loc>https://sophie-tuina.fr/journal</loc>
+    <loc>https://www.sophie-tuina.fr/journal</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/journal/signes-dos-tuina</loc>
+    <loc>https://www.sophie-tuina.fr/journal/signes-dos-tuina</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/journal/tuina-vs-relaxant</loc>
+    <loc>https://www.sophie-tuina.fr/journal/tuina-vs-relaxant</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/journal/avant-apres-seance</loc>
+    <loc>https://www.sophie-tuina.fr/journal/avant-apres-seance</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/journal/tuina-sommeil</loc>
+    <loc>https://www.sophie-tuina.fr/journal/tuina-sommeil</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/journal/moxibustion-chaleur-qui-soigne</loc>
+    <loc>https://www.sophie-tuina.fr/journal/moxibustion-chaleur-qui-soigne</loc>
     <lastmod>2026-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/journal/bain-pieds-medecine-chinoise</loc>
+    <loc>https://www.sophie-tuina.fr/journal/bain-pieds-medecine-chinoise</loc>
     <lastmod>2026-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -104,21 +104,21 @@
 
   <!-- City pages (SEO local) -->
   <url>
-    <loc>https://sophie-tuina.fr/massage-tuina-arcachon</loc>
+    <loc>https://www.sophie-tuina.fr/massage-tuina-arcachon</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/massage-tuina-gujan-mestras</loc>
+    <loc>https://www.sophie-tuina.fr/massage-tuina-gujan-mestras</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://sophie-tuina.fr/massage-tuina-le-teich</loc>
+    <loc>https://www.sophie-tuina.fr/massage-tuina-le-teich</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
