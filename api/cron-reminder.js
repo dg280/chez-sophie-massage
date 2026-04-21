@@ -1,5 +1,6 @@
 // Cron job — runs daily at 8:00 AM Paris time
 // Sends reminder emails to clients with appointments tomorrow
+import { cancelUrl, cancelButton } from './_cancel.js';
 
 export const config = { maxDuration: 30 };
 
@@ -83,6 +84,7 @@ Arrivez quelques minutes en avance pour qu'on puisse commencer sereinement.</p>
 <p style="text-align:center;margin:20px 0">
 <a href="tel:0627146231" style="display:inline-block;background:#3D5A3E;color:#FDFAF5;padding:12px 28px;border-radius:30px;font-weight:700;font-size:15px;text-decoration:none">📞 06 27 14 62 31</a>
 </p>
+${process.env.BOOKING_SECRET ? cancelButton(cancelUrl('https://www.sophie-tuina.fr', { date: tomorrowStr, heure: slot.h, client: slot.client, email: slot.email, soin: slot.soin }, process.env.BOOKING_SECRET)) : ''}
 <p style="margin:24px 0 0;font-size:14px;color:#3a3a3a">A demain,<br><strong>Sophie</strong></p>
 </td></tr>
 <tr><td style="background:#1c1c1c;padding:20px;text-align:center">

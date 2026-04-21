@@ -2,6 +2,7 @@
 // Verifies HMAC, blocks the slot in planning.json, sends confirmation to client
 import crypto from 'crypto';
 import { calendarLink, calendarButton } from './_calendar.js';
+import { cancelUrl, cancelButton } from './_cancel.js';
 
 export default async function handler(req, res) {
   const { token } = req.query;
@@ -145,6 +146,7 @@ export default async function handler(req, res) {
 <p style="margin:0 0 20px;font-size:14px;color:#3a3a3a;line-height:1.6">14C Boulevard de Curepipe, Apt S<br>33260 La Teste-de-Buch<br>Tel : <a href="tel:0627146231" style="color:#3D5A3E">06 27 14 62 31</a></p>
 <p style="margin:24px 0 0;font-size:14px;color:#3a3a3a;font-style:italic">Si vous avez le moindre empechement, n'hesitez pas a me prevenir au plus tot.</p>
 ${calendarButton(calendarLink({ date: payload.dt, heure: payload.h, soin: payload.s, duree: payload.d }))}
+${cancelButton(cancelUrl(`https://${req.headers.host || 'www.sophie-tuina.fr'}`, { date: payload.dt, heure: payload.h, client: `${payload.pr} ${payload.nm}`.trim(), email: payload.em, soin: payload.s }, process.env.BOOKING_SECRET))}
 <p style="margin:16px 0 0;font-size:14px;color:#3a3a3a">A tres bientot,<br><strong>Sophie</strong></p>
 </td></tr>
 <tr><td style="background:#1c1c1c;padding:20px;text-align:center">
