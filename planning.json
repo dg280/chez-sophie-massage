@@ -44,6 +44,17 @@
         "tel": "0780409769",
         "email": "thiam_aliou1@icloud.com"
       }
+    ],
+    "2026-04-25": [
+      {
+        "h": "18:00",
+        "client": "Jérôme jerome parra",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1h 30",
+        "prix": "128 €",
+        "tel": "0659835850",
+        "email": "bon-jo@live.fr"
+      }
     ]
   },
   "conges": []
