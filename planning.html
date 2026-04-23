@@ -686,24 +686,42 @@
     }
 
     async function loadPlanning() {
-      if (!ghOk()) { render(); showToast(t('toastGhMissing')); return; }
+      // Lecture publique (pas besoin de token) — le fichier planning.json est public sur GitHub raw
+      const owner = ghConfig().owner || 'dg280';
+      const repo = ghConfig().repo || 'chez-sophie-massage';
+      const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/planning.json?t=${Date.now()}`;
+
+      try {
+        const rawRes = await fetch(rawUrl);
+        if (rawRes.ok) {
+          const data = await rawRes.json();
+          _planning = { joursFermes: data.joursFermes||[], creneauxBloques: data.creneauxBloques||{}, conges: data.conges||[] };
+          clean();
+          render();
+          showToast(t('toastLoaded'));
+        } else {
+          render();
+          showToast(t('toastLoadErr'));
+        }
+      } catch(e) {
+        render();
+        showToast(t('toastLoadErr'));
+      }
+
+      // Si GitHub est configure, on charge aussi via l'API pour recuperer le SHA
+      // (necessaire pour sauvegarder ensuite)
+      if (!ghOk()) return;
       try {
         const { owner, repo } = ghConfig();
         const token = await getGhToken();
-        if (!token) { render(); return; }
+        if (!token) return;
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/planning.json`, {
           headers: { Authorization:`Bearer ${token}`, Accept:'application/vnd.github+json' }
         });
-        if (!res.ok) throw new Error('API ' + res.status);
+        if (!res.ok) return;
         const file = await res.json();
         _sha = file.sha;
-        const raw = atob(file.content.replace(/\n/g,''));
-        const data = JSON.parse(decodeURIComponent(escape(raw)));
-        _planning = { joursFermes: data.joursFermes||[], creneauxBloques: data.creneauxBloques||{}, conges: data.conges||[] };
-        clean();
-        render();
-        showToast(t('toastLoaded'));
-      } catch(e) { render(); showToast(t('toastLoadErr')); }
+      } catch(e) { /* silent */ }
     }
 
     async function savePlanning() {
