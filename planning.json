@@ -55,6 +55,17 @@
         "tel": "0659835850",
         "email": "bon-jo@live.fr"
       }
+    ],
+    "2026-05-05": [
+      {
+        "h": "19:30",
+        "client": "Nicolas Billoux",
+        "soin": "Bain",
+        "duree": "25–40 min",
+        "prix": "85 €",
+        "tel": "0757475788",
+        "email": "billouxnicolas7@gmail.com"
+      }
     ]
   },
   "conges": []
