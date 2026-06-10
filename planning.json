@@ -88,6 +88,17 @@
         "tel": "0785949332",
         "email": "gerald.guichon@actemium.com"
       }
+    ],
+    "2026-06-14": [
+      {
+        "h": "10:00",
+        "client": "Marie france Rosak",
+        "soin": "Massage Tuina Corps",
+        "duree": "1h 30",
+        "prix": "110 €",
+        "tel": "0603641625",
+        "email": "mariefrance.rosak@sfr.fr"
+      }
     ]
   },
   "conges": []
