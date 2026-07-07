@@ -99,6 +99,17 @@
         "tel": "0603641625",
         "email": "mariefrance.rosak@sfr.fr"
       }
+    ],
+    "2026-07-09": [
+      {
+        "h": "11:30",
+        "client": "Orane Laurent",
+        "soin": "Massage Relaxant Pieds",
+        "duree": "30 min",
+        "prix": "40 €",
+        "tel": "0611669838",
+        "email": "orane.laurent33@gmail.com"
+      }
     ]
   },
   "conges": []
