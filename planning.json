@@ -121,6 +121,17 @@
         "tel": "0613768912",
         "email": "maximeh25@gmail.com"
       }
+    ],
+    "2026-07-24": [
+      {
+        "h": "10:00",
+        "client": "Nicolas Billoux",
+        "soin": "Bain",
+        "duree": "25–40 min",
+        "prix": "85 €",
+        "tel": "0757475788",
+        "email": "billouxnicolas7@gmail.com"
+      }
     ]
   },
   "conges": []
