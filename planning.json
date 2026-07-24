@@ -131,6 +131,15 @@
         "prix": "85 €",
         "tel": "0757475788",
         "email": "billouxnicolas7@gmail.com"
+      },
+      {
+        "h": "15:00",
+        "client": "Chloe Gautier",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1 heure",
+        "prix": "90 €",
+        "tel": "0624467147",
+        "email": "chlogautier02@gmail.com"
       }
     ]
   },
