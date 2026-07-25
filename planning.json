@@ -152,6 +152,17 @@
         "tel": "0647044244",
         "email": "romainlalanne.bdx@gmail.com"
       }
+    ],
+    "2026-07-25": [
+      {
+        "h": "18:30",
+        "client": "Acile Sleiman",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1 heure",
+        "prix": "90 €",
+        "tel": "+96178788996",
+        "email": "acile.sleiman@gmail.com"
+      }
     ]
   },
   "conges": []
