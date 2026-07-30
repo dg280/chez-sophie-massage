@@ -163,6 +163,17 @@
         "tel": "+96178788996",
         "email": "acile.sleiman@gmail.com"
       }
+    ],
+    "2026-07-30": [
+      {
+        "h": "16:00",
+        "client": "Nicolas Duval",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1 heure",
+        "prix": "90 €",
+        "tel": "0647948871",
+        "email": "nicolas.duvalccm@gmail.com"
+      }
     ]
   },
   "conges": []
