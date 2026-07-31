@@ -174,6 +174,17 @@
         "tel": "0647948871",
         "email": "nicolas.duvalccm@gmail.com"
       }
+    ],
+    "2026-08-01": [
+      {
+        "h": "13:00",
+        "client": "Camille Anne Liliane GABRY",
+        "soin": "Massage Tuina Corps",
+        "duree": "30 minutes",
+        "prix": "45 €",
+        "tel": "0789457657",
+        "email": "camille.gabry@hotmail.fr"
+      }
     ]
   },
   "conges": []
