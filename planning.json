@@ -185,6 +185,17 @@
         "tel": "0789457657",
         "email": "camille.gabry@hotmail.fr"
       }
+    ],
+    "2026-08-03": [
+      {
+        "h": "10:00",
+        "client": "Denis Marchand",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1 heure",
+        "prix": "90 €",
+        "tel": "0685474621",
+        "email": "denismarchand0106@gmail.com"
+      }
     ]
   },
   "conges": []
