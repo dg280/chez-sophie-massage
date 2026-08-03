@@ -215,6 +215,15 @@
         "prix": "50 €",
         "tel": "0788129767",
         "email": "bernard334@hotmail.fr"
+      },
+      {
+        "h": "15:30",
+        "client": "Bernard Lartigue",
+        "soin": "Compresse Chaude Médicinale",
+        "duree": "30 min – 1h",
+        "prix": "40 €",
+        "tel": "0788129767",
+        "email": "bernard334@hotmail.fr"
       }
     ]
   },
