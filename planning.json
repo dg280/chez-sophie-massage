@@ -225,6 +225,17 @@
         "tel": "0788129767",
         "email": "bernard334@hotmail.fr"
       }
+    ],
+    "2026-08-05": [
+      {
+        "h": "10:30",
+        "client": "Lamia Bouaziz",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1 heure",
+        "prix": "90 €",
+        "tel": "0618116015",
+        "email": "Lamia.boua@gmail.com"
+      }
     ]
   },
   "conges": []
