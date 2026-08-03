@@ -206,6 +206,15 @@
         "prix": "128 €",
         "tel": "0788129767",
         "email": "bernard334@hotmail.fr"
+      },
+      {
+        "h": "16:00",
+        "client": "Bernard Lartigue",
+        "soin": "Ceinture",
+        "duree": "30 min",
+        "prix": "50 €",
+        "tel": "0788129767",
+        "email": "bernard334@hotmail.fr"
       }
     ]
   },
