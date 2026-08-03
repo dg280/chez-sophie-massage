@@ -196,6 +196,17 @@
         "tel": "0685474621",
         "email": "denismarchand0106@gmail.com"
       }
+    ],
+    "2026-08-04": [
+      {
+        "h": "14:00",
+        "client": "Bernard Lartigue",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1h 30",
+        "prix": "128 €",
+        "tel": "0788129767",
+        "email": "bernard334@hotmail.fr"
+      }
     ]
   },
   "conges": []
