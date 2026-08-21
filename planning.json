@@ -258,6 +258,17 @@
         "tel": "0785492670",
         "email": "florence.assoum@gmail.com"
       }
+    ],
+    "2026-08-25": [
+      {
+        "h": "18:00",
+        "client": "Laurence Taxain",
+        "soin": "Massage Tuina Corps",
+        "duree": "1 heure",
+        "prix": "80 €",
+        "tel": "0610105476",
+        "email": "taxain.laurence@orange.fr"
+      }
     ]
   },
   "conges": []
