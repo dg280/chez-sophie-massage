@@ -269,6 +269,17 @@
         "tel": "0610105476",
         "email": "taxain.laurence@orange.fr"
       }
+    ],
+    "2026-09-04": [
+      {
+        "h": "11:00",
+        "client": "Peggy Bodar",
+        "soin": "Massage Tuina Corps",
+        "duree": "1 heure",
+        "prix": "80 €",
+        "tel": "0686434664",
+        "email": "peggybodar@gmail.com"
+      }
     ]
   },
   "conges": []
