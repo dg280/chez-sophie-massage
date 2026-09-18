@@ -291,6 +291,17 @@
         "tel": "0762412402",
         "email": "tekin-macon@hotmail.fr"
       }
+    ],
+    "2026-09-19": [
+      {
+        "h": "10:00",
+        "client": "bruno subervie",
+        "soin": "Massage Tuina Corps",
+        "duree": "1 heure",
+        "prix": "80 €",
+        "tel": "0672636760",
+        "email": "bsub@hotmail.fr"
+      }
     ]
   },
   "conges": []
