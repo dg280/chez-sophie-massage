@@ -324,6 +324,17 @@
         "tel": "620643240",
         "email": "francis.gallesio@gmail.com"
       }
+    ],
+    "2026-09-25": [
+      {
+        "h": "14:30",
+        "client": "pierre brunet",
+        "soin": "Massage Tuina Corps",
+        "duree": "1 heure",
+        "prix": "80 €",
+        "tel": "0611078857",
+        "email": "brunet-pierre@hotmail.fr"
+      }
     ]
   },
   "conges": []
