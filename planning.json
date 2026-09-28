@@ -335,6 +335,17 @@
         "tel": "0611078857",
         "email": "brunet-pierre@hotmail.fr"
       }
+    ],
+    "2026-10-02": [
+      {
+        "h": "18:00",
+        "client": "CHRISTINE GONZALEZ",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1 heure",
+        "prix": "90 €",
+        "tel": "0687240938",
+        "email": "Gonzalez.marjo@wanadoo.fr"
+      }
     ]
   },
   "conges": []
