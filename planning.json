@@ -357,6 +357,17 @@
         "tel": "0686434664",
         "email": "peggybodar@gmail.com"
       }
+    ],
+    "2026-10-13": [
+      {
+        "h": "14:00",
+        "client": "Marie Cayre",
+        "soin": "Massage Relaxant Pieds",
+        "duree": "30 min",
+        "prix": "40 €",
+        "tel": "0680233707",
+        "email": "marie-dominique.cayre@wanadoo.fr"
+      }
     ]
   },
   "conges": []
