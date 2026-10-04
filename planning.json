@@ -388,6 +388,17 @@
         "tel": "0686434664",
         "email": "peggybodar@gmail.com"
       }
+    ],
+    "2026-10-04": [
+      {
+        "h": "17:00",
+        "client": "Xavier Guilbaud",
+        "soin": "Massage Tuina Corps",
+        "duree": "1h 30",
+        "prix": "110 €",
+        "tel": "0652810324",
+        "email": "x.guilbaud@icloud.com"
+      }
     ]
   },
   "conges": []
