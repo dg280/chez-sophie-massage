@@ -399,6 +399,17 @@
         "tel": "0652810324",
         "email": "x.guilbaud@icloud.com"
       }
+    ],
+    "2026-10-10": [
+      {
+        "h": "18:00",
+        "client": "Déborah Cella",
+        "soin": "Massage Tuina Corps",
+        "duree": "1h 30",
+        "prix": "110 €",
+        "tel": "0770020255",
+        "email": "cella.deborah@outlook.fr"
+      }
     ]
   },
   "conges": []
