@@ -410,6 +410,17 @@
         "tel": "0770020255",
         "email": "cella.deborah@outlook.fr"
       }
+    ],
+    "2026-10-12": [
+      {
+        "h": "10:00",
+        "client": "Peggy Serge",
+        "soin": "Massage Tuina Corps",
+        "duree": "1 heure",
+        "prix": "80 €",
+        "tel": "0686434664",
+        "email": "peggybodar@gmail.com"
+      }
     ]
   },
   "conges": []
