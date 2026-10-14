@@ -421,6 +421,17 @@
         "tel": "0686434664",
         "email": "peggybodar@gmail.com"
       }
+    ],
+    "2026-10-14": [
+      {
+        "h": "17:30",
+        "client": "Clément Schmitt",
+        "soin": "Massage Tuina Corps",
+        "duree": "1 heure",
+        "prix": "80 €",
+        "tel": "0602068936",
+        "email": "schmitt.clement@gmail.com"
+      }
     ]
   },
   "conges": []
