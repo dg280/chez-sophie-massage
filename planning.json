@@ -431,6 +431,15 @@
         "prix": "80 €",
         "tel": "0602068936",
         "email": "schmitt.clement@gmail.com"
+      },
+      {
+        "h": "18:30",
+        "client": "Peggy Bodar",
+        "soin": "Massage Tuina Corps",
+        "duree": "1 heure",
+        "prix": "80 €",
+        "tel": "0686434664",
+        "email": "peggybodar@gmail.com"
       }
     ]
   },
