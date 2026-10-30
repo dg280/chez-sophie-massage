@@ -452,6 +452,17 @@
         "tel": "0761668457",
         "email": "lorelaye33@hotmail.com"
       }
+    ],
+    "2026-10-30": [
+      {
+        "h": "15:00",
+        "client": "Alexis Sainte-Beuve",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1 heure",
+        "prix": "90 €",
+        "tel": "0620233737",
+        "email": "asaintebeuve@gmail.com"
+      }
     ]
   },
   "conges": []
