@@ -485,6 +485,17 @@
         "tel": "0767871051",
         "email": "caldasdav@yahoo.fr"
       }
+    ],
+    "2026-11-10": [
+      {
+        "h": "17:00",
+        "client": "Christine LE YONDRE",
+        "soin": "Ceinture",
+        "duree": "30 min",
+        "prix": "50 €",
+        "tel": "0618128465",
+        "email": "plantey.christine@neuf.fr"
+      }
     ]
   },
   "conges": []
