@@ -496,6 +496,17 @@
         "tel": "0618128465",
         "email": "plantey.christine@neuf.fr"
       }
+    ],
+    "2026-11-14": [
+      {
+        "h": "14:00",
+        "client": "Romain LALANNE",
+        "soin": "Massage Relaxant Corps",
+        "duree": "1h 30",
+        "prix": "128 €",
+        "tel": "0647044244",
+        "email": "romainlalanne.bdx@gmail.com"
+      }
     ]
   },
   "conges": []
